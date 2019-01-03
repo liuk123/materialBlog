@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar></div>
+    <mat-card-title>{{article.title}}</mat-card-title>
+    <mat-card-subtitle>{{article.meta.updateAt}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    {{article.content}}
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-icon-button color="primary">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+  <mat-divider></mat-divider>
+  <mat-card-footer>
+    <mat-grid-list cols="4" rowHeight="50px">
+      <mat-grid-tile>{{article?.category}}</mat-grid-tile>
+      <mat-grid-tile>{{article?.commentNum}}</mat-grid-tile>
+      <mat-grid-tile>{{article?.visitNum}}</mat-grid-tile>
+      <mat-grid-tile>{{article?.like.likeNum}}</mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-footer>
+</mat-card>

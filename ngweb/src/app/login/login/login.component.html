@@ -1,0 +1,31 @@
+<form class="form" [formGroup]="form" (ngSubmit)="onSubmit(form,$event)">
+  <mat-card class="card">
+    <mat-card-title>登录</mat-card-title>
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="用户名" formControlName="userName">
+        <mat-error>{{form.controls['userName'].errors | json}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="密码" formControlName="password">
+      </mat-form-field>
+      <button mat-button type="submit" [disabled]="!form.valid">登录</button>
+    </mat-card-content>
+    <mat-card-actions class="text-right">
+      <p>还没有账户？<span [routerLink]="['/register']">注册</span></p>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card class="card">
+    <mat-card-title>
+      每日佳句
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{(quote$ | async)?.cn}}
+    </mat-card-subtitle>
+    <img mat-card-image [src]="(quote$ | async)?.pic" [alt]="(quote$ | async)?.cn">
+    <mat-card-content>
+      {{(quote$ | async)?.en}}
+    </mat-card-content>
+  </mat-card>
+</form>

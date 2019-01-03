@@ -1,0 +1,25 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="openSidebar()">
+      <mat-icon>menu</mat-icon>
+      <!-- <mat-icon svgIcon="add"></mat-icon> -->
+  </button>
+  <span>123</span>
+  <span class="fill-remaining-space"></span>
+
+  <button 
+    mat-button
+    [routerLink]="['/homepage']">广场</button>
+  <button 
+    mat-button
+    [routerLink]="['/blog-home', {outlets: { primary: 'blog-list', aux: ['blog-user', '5c2c85fb2fb4032a3848e319']}}]">主页</button>
+  <span class="fill-remaining-space"></span>
+
+  <button mat-icon-button [matMenuTriggerFor]="userManage"><mat-icon>more_vert</mat-icon></button>
+  <mat-menu #userManage="matMenu">
+    <button mat-menu-item [routerLink]="['/login']"><mat-icon>dialpad</mat-icon>登录</button>
+    <button mat-menu-item [routerLink]="['/register']"><mat-icon>dialpad</mat-icon>注册</button>
+    <button mat-menu-item (click)="logout()"><mat-icon>dialpad</mat-icon>退出</button>    
+  </mat-menu>
+
+  <mat-slide-toggle (change)="onChange($event.checked)"></mat-slide-toggle>
+</mat-toolbar>
