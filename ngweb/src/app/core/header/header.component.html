@@ -12,6 +12,9 @@
   <button 
     mat-button
     [routerLink]="['/blog-home', {outlets: { primary: 'blog-list', aux: ['blog-user', '5c2c85fb2fb4032a3848e319']}}]">主页</button>
+  <button 
+    mat-button
+    [routerLink]="['/edit-article']">编辑</button>
   <span class="fill-remaining-space"></span>
 
   <button mat-icon-button [matMenuTriggerFor]="userManage"><mat-icon>more_vert</mat-icon></button>

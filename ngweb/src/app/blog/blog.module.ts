@@ -6,6 +6,7 @@ import { BlogHomeComponent } from './blog-home/blog-home.component';
 import { UserComponent } from './user/user.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
+import { EditArticleComponent } from './edit-article/edit-article.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
     UserComponent,
     ArticleListComponent,
     ArticleDetailComponent,
+    EditArticleComponent,
   ],
   imports: [
     CommonModule,

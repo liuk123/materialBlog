@@ -1,0 +1,39 @@
+
+
+<form class="form" [formGroup]="form" (ngSubmit)="onSubmit(form,$event)">
+  <mat-card class="card">
+    <mat-card-title>新建or编辑</mat-card-title>
+    <mat-card-content>
+      <div class="grid-list" style="max-width:30rem">
+        <div class="grid-tile">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="标题" formControlName="title">
+            </mat-form-field>
+        </div>
+        <div class="grid-tile">
+            <mat-form-field class="full-width">
+              <textarea matInput placeholder="简介" formControlName="abstract"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="grid-tile">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="分类">
+                <mat-option *ngFor="let category of categories" [value]="category">
+                  {{category}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="grid-tile">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="新建分类" formControlName="newCategory">
+            </mat-form-field>
+        </div>
+      </div>
+      <app-ckeditor></app-ckeditor>
+    </mat-card-content>
+    <mat-card-actions class="text-right">
+      <button mat-button>保存</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

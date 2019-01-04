@@ -28,6 +28,8 @@ import {
 } from "@angular/material";
 import { ImageListSelectComponent } from './image-list-select/image-list-select.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { CkeditorComponent } from './ckeditor/ckeditor.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   imports: [
@@ -56,6 +58,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatButtonToggleModule,
     MatBadgeModule,
     MatPaginatorModule,
+
+    CKEditorModule,
 
   ],
   exports: [
@@ -86,10 +90,13 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatPaginatorModule,
 
     ImageListSelectComponent,
+    CKEditorModule,
+    CkeditorComponent
   ],
   declarations: [
     ImageListSelectComponent,
     ConfirmDialogComponent,
+    CkeditorComponent,
   ],
   entryComponents:[ConfirmDialogComponent]
 })
