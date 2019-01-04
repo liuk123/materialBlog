@@ -4,7 +4,7 @@ const CommentModel = require('../../models/comment')
 
 class ArticleController {
     // 获取自己的文章列表
-    static async list(ctx){
+    static async get_list(ctx){
         const { category, current=0, pageSize=10 } = ctx.query
 
         const skip = (Number(current)-1)*Number(pageSize)
@@ -49,7 +49,7 @@ class ArticleController {
         return ctx.success({ msg:'新建成功!' })
     }
 
-    // 更新 -分类有问题
+    // 更新 -分类待优化
     static async update(ctx){
         const data = ctx.request.body
         if(!data) return ctx.error({ msg: '发送数据失败!' })

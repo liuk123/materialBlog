@@ -14,6 +14,7 @@ router
     .post('/api/article/update',ArticleController.update)                                //编辑文章
     .delete('/api/article/delete',ArticleController.delete)                              //删除文章
     .post('/api/article/like',ArticleController.like)                                    //点赞
+    .get('/api/article/get_list',ArticleController.get_list)
     .get('/api/article/get_detail',ArticleController.get_detail)                         // 获取详情
     .post('/api/article/create_comment',ArticleController.create_comment)                // 发表评论
 

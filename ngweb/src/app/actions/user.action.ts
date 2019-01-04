@@ -31,7 +31,7 @@ export class UserCardFailAction implements Action {
 export class UserCenterAction implements Action {
     readonly type = ActionTypes.USERCENTER;
 
-    constructor(public payload: null) { }
+    constructor(public payload: string) { }
 }
 export class UserCenterSuccessAction implements Action {
     readonly type = ActionTypes.USERCENTER_SCCESS;

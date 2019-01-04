@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { QuoteService } from './quote.service';
 import { AuthService } from './auth.service';
 import { UserService } from './user.service';
+import { ArticleService } from './article.service';
 
 @NgModule()
 export class ServicesModule {
@@ -12,6 +13,7 @@ export class ServicesModule {
         QuoteService,
         AuthService,
         UserService,
+        ArticleService
       ]
     }
   }
