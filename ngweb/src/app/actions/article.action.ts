@@ -23,9 +23,9 @@ export enum ActionTypes {
     ARTICLE_LIST_SCCESS = '[Article] Article list success',
     ARTICLE_LIST_FAIL = '[Article] Article list fail',
     //获取详情
-    ARTICLE_DETAIL = '[Article] Article list',
-    ARTICLE_DETAIL_SCCESS = '[Article] Article list success',
-    ARTICLE_DETAIL_FAIL = '[Article] Article list fail',
+    ARTICLE_DETAIL = '[Article] Article detail',
+    ARTICLE_DETAIL_SCCESS = '[Article] Article detail success',
+    ARTICLE_DETAIL_FAIL = '[Article] Article detail fail',
 
 };
 

@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from 'src/app/domain';
 
+import * as fromRoot from '../../reducers';
+import * as actions from '../../actions/article.action';
+import { Store, select } from '@ngrx/store';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-article-detail',
   templateUrl: './article-detail.component.html',
@@ -24,10 +31,23 @@ export class ArticleDetailComponent implements OnInit {
       updateAt:new Date()
     }
   }
+  article$: Observable<Article>
+  id: string
 
-  constructor() { }
+  constructor(private store$: Store<fromRoot.State>, private routInfo: ActivatedRoute) {
+    
+  }
 
   ngOnInit() {
+    this.id = this.routInfo.snapshot.queryParamMap.get('authId')
+    this.store$.dispatch(new actions.ArticleDetailAction('id'))
+    this.article$ = this.store$.pipe(
+      select(fromRoot.getArticleState),
+      map(v=>{
+        console.log(v);
+        return v
+      })
+    )
   }
 
 }

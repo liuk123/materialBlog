@@ -5,9 +5,7 @@ export interface State {
     
 };
 
-export const initialState: State = {
-    
-};
+export const initialState: State = [];
 
 export function reducer(state = initialState, action: actions.Actions ): State {
     switch (action.type) {
@@ -17,7 +15,7 @@ export function reducer(state = initialState, action: actions.Actions ): State {
         case actions.ActionTypes.ARTICLE_LIST_SCCESS:
         case actions.ActionTypes.ARTICLE_DETAIL_SCCESS:
         case actions.ActionTypes.LIKE_SCCESS: {
-            return {...<Article>action.payload};
+            return <Article>action.payload;
         }
         case actions.ActionTypes.EDITE_ARTICLE_FAIL:
         case actions.ActionTypes.CREATE_ARTICLE_FAIL:

@@ -14,28 +14,26 @@ import { map } from 'rxjs/operators';
 })
 export class UserComponent implements OnInit {
 
-  user:User={
-    userName:'liu',
-    role:1,
-  }
   user$: Observable<User>;
+  authId: string
 
   constructor(
     private store$: Store<fromRoot.State>,
     private routInfo: ActivatedRoute
-    ) {
-      this.routInfo.paramMap.subscribe(m=>
-        this.store$.dispatch(new actions.UserCardAction(m.get('authId'))))
-      this.user$ = this.store$.pipe(
-        select(fromRoot.getUserState),
-        map(v=>{
-          console.log(v);
-          return v
-        })
-      )
-  }
+    ) {}
 
   ngOnInit() {
+    this.routInfo.paramMap.subscribe(m=>{
+      this.authId = m.get('authId');
+      this.store$.dispatch(new actions.UserCardAction(this.authId))
+    })
+    this.user$ = this.store$.pipe(
+      select(fromRoot.getUserState),
+      map(v=>{
+        console.log(v);
+        return v
+      })
+    )
   }
 
 }

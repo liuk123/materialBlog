@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from 'src/app/domain';
 
+import * as fromRoot from '../../reducers';
+import * as actions from '../../actions/article.action';
+import { Store, select } from '@ngrx/store';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-article-list',
   templateUrl: './article-list.component.html',
@@ -8,50 +14,19 @@ import { Article } from 'src/app/domain';
 })
 export class ArticleListComponent implements OnInit {
 
-  articles:Article[]=[
-    {
-      title:'angular路由1',
-      abstract:'这是一个剑姬',
-      author:'liu',
-      category: 'angular',
-      like:{
-        likeNum:3,
-        likeUser:[]
-      },
-      commentNum:0,
-      visitNum:0,
-      content:'123内容',
-      label:[],
-      meta:{
-        createAt:new Date(),
-        updateAt:new Date()
-      }
-    
-  
-    },
-    {
-      title:'angular路由2',
-      abstract:'这是一个剑姬',
-      author:'liu',
-      category: 'angular',
-      like:{
-        likeNum:3,
-        likeUser:[]
-      },
-      commentNum:0,
-      visitNum:0,
-      content:'123内容',
-      label:[],
-      meta:{
-        createAt:new Date(),
-        updateAt:new Date()
-      }
-      
-  
-    }  
-  ]
+  articles$: Observable<Article>
 
-  constructor() { }
+  constructor(private store$: Store<fromRoot.State>) {
+    
+    this.store$.dispatch(new actions.ArticleListAction('5c2c85fb2fb4032a3848e319'))
+    this.articles$ = this.store$.pipe(
+      select(fromRoot.getArticleState),
+      // map(v=>{
+      //   console.log(v);
+      //   return v
+      // })
+    )
+  }
 
   ngOnInit() {
   }

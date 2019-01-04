@@ -17,10 +17,10 @@ export class EditArticleComponent implements OnInit {
 
   form:FormGroup
   categories:string[]
-  Article$: Observable<Article>
+  article$: Observable<Article>
 
   constructor(private fb: FormBuilder, private store$: Store<fromRoot.State>,) {
-    this.Article$ = this.store$.pipe(
+    this.article$ = this.store$.pipe(
       select(fromRoot.getArticleState),
       map(v=>{
         console.log(v);

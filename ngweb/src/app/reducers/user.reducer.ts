@@ -5,19 +5,15 @@ export interface State {
     
 };
 
-export const initialState: State = {
-    
-};
-
-export function reducer(state = initialState, action: actions.Actions ): State {
+export function reducer(state, action: actions.Actions ): State {
     switch (action.type) {
         case actions.ActionTypes.USERCARD_SCCESS:
         case actions.ActionTypes.USERCENTER_SCCESS:{
-            return {...<User>action.payload};
+            return <User>action.payload;
         }
         case actions.ActionTypes.USERCARD_FAIL:
         case actions.ActionTypes.USERCENTER_FAIL: {
-            return initialState
+            return {};
         }
         default: {
             return state;

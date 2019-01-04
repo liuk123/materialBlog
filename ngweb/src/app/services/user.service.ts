@@ -9,7 +9,7 @@ export class UserService {
 
     userCard(id){
         const uri=`${this.config.uri}/${this.domain}/user_card`;
-        let params = new HttpParams().append('id',id);
+        const params = new HttpParams().append('id',id);
         return this.http.get<Result<User>>(uri, {params: params});
     }
 }

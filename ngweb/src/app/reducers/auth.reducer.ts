@@ -13,7 +13,7 @@ export function reducer(state = initialState, action: actions.Actions ): State {
     switch (action.type) {
         case actions.ActionTypes.REGISTER_SCCESS:
         case actions.ActionTypes.LOGIN_SCCESS:{
-            return {...<User>action.payload};
+            return <User>action.payload;
         }
         case actions.ActionTypes.REGISTER_FAIL:
         case actions.ActionTypes.LOGIN_FAIL: {

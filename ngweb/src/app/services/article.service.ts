@@ -19,7 +19,7 @@ export class ArticleService {
 
     delete(id){
         const uri=`${this.config.uri}/${this.domain}/delete`;
-        let params = new HttpParams().append('id',id)
+        const params = new HttpParams().append('id',id)
         return this.http.delete<Result<null>>(uri, { params: params });
     }
 
@@ -30,12 +30,12 @@ export class ArticleService {
 
     get_list(id){
         const uri=`${this.config.uri}/${this.domain}/get_list`;
-        let params = new HttpParams().append('id',id)
+        const params = new HttpParams().append('id',id)
         return this.http.get<Result<Article[]>>(uri, { params: params });
     }
     get_detail(id){
         const uri=`${this.config.uri}/${this.domain}/get_detail`;
-        let params = new HttpParams().append('id',id)
+        const params = new HttpParams().append('id',id)
         return this.http.get<Result<Article>>(uri, { params: params });
     }
 }

@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { User, Result } from '../domain'
+import { User } from '../domain'
 
 export enum ActionTypes {
 

@@ -18,7 +18,7 @@ export interface State {
     article: Article;
 };
 
-const reducers= {
+const reducers = {
     quote: fromQuote.reducer,
     auth: fromAuth.reducer,
     user: fromUser.reducer,

@@ -5,21 +5,23 @@ const CommentModel = require('../../models/comment')
 class ArticleController {
     // 获取自己的文章列表
     static async get_list(ctx){
-        const { category, current=0, pageSize=10 } = ctx.query
+        const { id, category='', current=0, pageSize=10 } = ctx.query
 
-        const skip = (Number(current)-1)*Number(pageSize)
-
+        const skip = Number(current)*Number(pageSize)
+        let condition = { author: id }
+        
+        if( category !== '' ){
+            condition.category = category
+        }
+        
         const result = await ArticleModel
-                        .find({ category: category, _id: ctx.session.user._id })
+                        .find(condition)
                         .sort({ createdAt: '-1' })
                         .skip(skip)
                         .limit(Number(pageSize))
                         .select('-content')
-                        
-        const count = await ArticleModel.where({ category: category, _id: ctx.session.user._id })
-                        .countDocuments()
         
-        return ctx.success({ msg:'获取成功', data: {result,count} });
+        return ctx.success({ msg:'获取成功', data: result });
     }
     // 新建
     static async create(ctx){

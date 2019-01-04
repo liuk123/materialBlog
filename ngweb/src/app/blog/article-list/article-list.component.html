@@ -1,7 +1,8 @@
 <mat-card 
   class="mb-3"
-  *ngFor="let article of articles"
-  [routerLink]="['/blog-home', {outlets: { primary: 'blog-detail', aux: ['blog-user','5c2c85fb2fb4032a3848e319']}}]">
+  *ngFor="let article of articles$ | async"
+  [routerLink]="['/blog-home', {outlets: { primary: 'blog-detail', aux: ['blog-user', article?.author]}}]"
+  [queryParams]="{id: article?._id, authId: article?.author}">
   <mat-card-header>
     <div mat-card-avatar></div>
     <mat-card-title>{{article?.title}}</mat-card-title>
