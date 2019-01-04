@@ -30,7 +30,8 @@ export class CkeditorComponent implements ControlValueAccessor {
   //ckeditor配置
   public Editor = DecoupledEditor;
   public config = {
-    language: 'zh-cn'
+    language: 'zh-cn',
+    // extraPlugins: [ MyUploadAdapterPlugin ],
   };
 
   constructor() { }
@@ -57,11 +58,47 @@ export class CkeditorComponent implements ControlValueAccessor {
         editor.ui.view.toolbar.element,
         editor.ui.view.editable.element
     );
+    editor.plugins.get( 'FileRepository' ).createUploadAdapter = function( loader ) {
+      return new FileUploadAdapter(loader);
+    };
   }
   onChange( { editor }: ChangeEvent ){
     this.data = editor.getData();
-    console.log(this.data)
     this.propageteChange(this.data)
   }
 
+}
+
+
+
+class FileUploadAdapter {
+	
+	constructor(private loader) {
+	}
+	
+	upload() {
+		return new Promise((resolve, reject) => {
+			const data = new FormData();
+			data.append('file', this.loader.file);
+      
+			var xhr = new XMLHttpRequest();
+			// xhr.setRequestHeader("Content-type","multipart/form-data");
+			xhr.open('post', '/api/uploadpic' );
+			xhr.send(data);
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					let data=JSON.parse(xhr.responseText);
+					if(data.fileName){
+						resolve({
+							default:'/api'+data.fileName
+						});
+					}else {
+						reject(data.msg);
+					}
+				} 
+			};
+		});
+	}
+	abort() {
+	}
 }
