@@ -20,6 +20,8 @@ export interface State {
     article: Article;
     articleDetail: articleDetail;
     articleList: Article[];
+    like: number,
+    delete_article: string
 };
 
 const reducers = {
@@ -29,7 +31,8 @@ const reducers = {
     article: fromArticle.reducer,
     articleList: fromArticleList.reducer,
     articleDetail: fromArticleDetail.reducer,
-    
+    like: fromArticle.reducer,
+    delete_article: fromArticle.reducer
 }
 
 export const getQuoteState = (state: State) => state.quote;
@@ -38,6 +41,8 @@ export const getUserState = (state: State) => state.user;
 export const getArticleState = (state: State) => state.article;
 export const getArticleListState = (state: State) => state.articleList;
 export const getArticleDetailState = (state: State) => state.articleDetail;
+export const getLikeState = (state: State) => state.like;
+export const getDeleteArticleState = (state: State) => state.delete_article;
 
 export const getQuote = createSelector(getQuoteState, fromQuote.getQuote);
 

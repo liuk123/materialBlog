@@ -15,21 +15,30 @@ import { Observable } from 'rxjs';
 })
 export class ArticleDetailComponent implements OnInit {
 
-  article$: Observable<Article>
-  comment$: Observable<any>
-  like$: Observable<boolean>
+  article: Article
+  comment: any
+  liked: number = 0
   id: string //articleId
 
   constructor(private store$: Store<fromRoot.State>, private routInfo: ActivatedRoute) {
     this.id = this.routInfo.snapshot.queryParamMap.get('id')
     this.store$.dispatch(new actions.ArticleDetailAction(this.id));
-    this.article$ = this.store$.pipe(select(state => state.articleDetail.articleResult))
-    this.comment$ = this.store$.pipe(select(state => state.articleDetail.commentResult))
-    this.like$ = this.store$.pipe(select(state => state.articleDetail.like))
+    this.store$.pipe(select(fromRoot.getArticleDetailState)).subscribe(v => {
+      this.article = v.articleResult
+      this.comment = v.commentResult
+      this.liked = v.liked
+    })
+    this.store$.pipe(select(fromRoot.getLikeState)).subscribe(v => {
+      this.liked = v
+
+      console.log(this.liked)
+    })
   }
 
   ngOnInit() {
-    
   }
 
+  like(titleId){
+    this.store$.dispatch(new actions.LikeAction({id: titleId, liked: this.liked}))
+  }
 }

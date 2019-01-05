@@ -17,15 +17,15 @@ export class ArticleService {
         return this.http.post<Result<null>>(uri, data );
     }
 
-    delete(id){
+    delete({id, category}){
         const uri=`${this.config.uri}/${this.domain}/delete`;
-        const params = new HttpParams().append('id', id)
+        const params = new HttpParams().append('id', id).append('category',category)
         return this.http.delete<Result<null>>(uri, { params: params });
     }
 
-    like(id){
+    like(data){
         const uri=`${this.config.uri}/${this.domain}/like`;
-        return this.http.post<Result<null>>(uri, { id } );
+        return this.http.post<Result<null>>(uri, data );
     }
 
     get_list({id , category}){

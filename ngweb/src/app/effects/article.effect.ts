@@ -41,7 +41,7 @@ export class ArticleEffects {
     like$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.LIKE),
         mergeMap((u:actions.LikeAction) => this.service$.like(u.payload).pipe(
-            map(v => new actions.LikeSuccessAction(null)),
+            map(v => new actions.LikeSuccessAction(v.data)),
             catchError(err => of(new actions.LikeFailAction(err)))
         ))
     )

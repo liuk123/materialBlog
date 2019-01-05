@@ -9,9 +9,6 @@ class ArticleController {
 
         const skip = Number(current)*Number(pageSize)
         let condition = { author: (id || ctx.session.user._id) }
-        console.log(category)
-        console.log('id ： '+ id)
-        console.log(ctx.session.user._id)
         if( category !== 'all' ){
             condition.category = category
         }
@@ -101,9 +98,8 @@ class ArticleController {
 
     // 点赞
     static async like(ctx){
-        const { titleId, liked } = ctx.request.body
+        const { id, liked } = ctx.request.body
         const { userName, _id } = ctx.session.user
-        if(!_id) return ctx.error({ msg: '你还没有登录哦!' });
 
         let condition={}
         if(liked==1){
@@ -117,20 +113,21 @@ class ArticleController {
                 $inc: { 'like.likeNum': +1 }
             }
         }
-        const result = await ArticleModel.updateOne({ _id: titleId },condition)
-        return ctx.success({ msg:'点赞成功!' })
+        const result = await ArticleModel.updateOne({ _id: id },condition)
+        
+        return ctx.success({ msg:'点赞成功!', data: (liked == 1 ? 0:1) })
         
     }
 
     // 获取
     static async get_detail(ctx){
         const { id } = ctx.query
-        let liked = false
+        let liked = 0
         const articleResult = await ArticleModel.findById(id).select('title content category like commentNum visitNum')
         if( articleResult &&
             articleResult.like &&
             articleResult.like.likeUser &&
-            articleResult.like.likeUser.find(v=>v == ctx.session.user._id)) liked = true
+            articleResult.like.likeUser.find(v=>v == ctx.session.user._id)) liked = 1
 
         const commentResult = await CommentModel.find({ title: id})
                                                 .populate({path:'from',select:{_id:1,userName:1}})

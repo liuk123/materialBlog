@@ -1,7 +1,7 @@
 import { Meta } from "./user";
 
 export interface Article {
-  id?: string;
+  _id?: string;
   title: string;
   abstract?: string;
   author: string;
@@ -23,5 +23,5 @@ export interface Like {
 export interface articleDetail {
   articleResult: Article
   commentResult: any
-  like: boolean
+  liked: number
 }

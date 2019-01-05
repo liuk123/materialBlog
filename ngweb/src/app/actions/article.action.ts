@@ -96,7 +96,7 @@ export class CreateArticleFailAction implements Action {
 export class DeleteArticleAction implements Action {
     readonly type = ActionTypes.DELETE_ARTICLE;
 
-    constructor(public payload: string) { }
+    constructor(public payload: {id: string, category: string}) { }
 }
 export class DeleteArticleSuccessAction implements Action {
     readonly type = ActionTypes.DELETE_ARTICLE_SCCESS;
@@ -112,12 +112,12 @@ export class DeleteArticleFailAction implements Action {
 export class LikeAction implements Action {
     readonly type = ActionTypes.LIKE;
 
-    constructor(public payload: string) { }
+    constructor(public payload: { id: string, liked: number}) { }
 }
 export class LikeSuccessAction implements Action {
     readonly type = ActionTypes.LIKE_SCCESS;
 
-    constructor(public payload: null) { }
+    constructor(public payload: number) { }
 }
 export class LikeFailAction implements Action {
     readonly type = ActionTypes.LIKE_FAIL;

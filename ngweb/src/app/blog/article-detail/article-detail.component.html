@@ -1,27 +1,26 @@
 <mat-card>
   <mat-card-header>
     <div mat-card-avatar></div>
-    <mat-card-title>{{(article$ | async)?.title}}</mat-card-title>
-    <mat-card-subtitle>{{(article$ | async)?.meta?.updateAt}}</mat-card-subtitle>
+    <mat-card-title>{{article?.title}}</mat-card-title>
+    <mat-card-subtitle>{{article?.meta?.updateAt}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    {{(article$ | async)?.content}}
+    {{article?.content}}
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-icon-button color="primary">
+    <button mat-icon-button [color]="liked==1?'primary':''" (click)="like(article?._id)">
       <mat-icon>favorite</mat-icon>
-    </button>
+    </button>{{liked}}
     <button mat-button>SHARE</button>
   </mat-card-actions>
   <mat-divider></mat-divider>
   <mat-card-footer>
     <mat-grid-list cols="4" rowHeight="50px">
-      <mat-grid-tile>{{(article$ | async)?.category}}</mat-grid-tile>
-      <mat-grid-tile>{{(article$ | async)?.commentNum}}</mat-grid-tile>
-      <mat-grid-tile>{{(article$ | async)?.visitNum}}</mat-grid-tile>
-      <mat-grid-tile>{{(article$ | async)?.like.likeNum}}</mat-grid-tile>
+      <mat-grid-tile>{{article?.category}}</mat-grid-tile>
+      <mat-grid-tile>{{article?.commentNum}}</mat-grid-tile>
+      <mat-grid-tile>{{article?.visitNum}}</mat-grid-tile>
+      <mat-grid-tile>{{article?.like.likeNum}}</mat-grid-tile>
     </mat-grid-list>
   </mat-card-footer>
 </mat-card>
-{{(article$ | async)}}

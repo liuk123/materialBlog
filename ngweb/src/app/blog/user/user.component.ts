@@ -14,7 +14,7 @@ import { map } from 'rxjs/operators';
 })
 export class UserComponent implements OnInit {
 
-  user$: Observable<User>;
+  user$: Observable<User>
   authId: string
 
   constructor(

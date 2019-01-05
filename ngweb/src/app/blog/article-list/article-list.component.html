@@ -1,25 +1,29 @@
-<mat-card 
-  class="mb-3"
-  *ngFor="let article of articles$ | async"
-  [routerLink]="['/blog-home', {outlets: { primary: 'blog-detail', aux: ['blog-user', article?.author]}}]"
-  [queryParams]="{id: article?._id, authId: article?.author}">
-  <mat-card-header>
+<mat-card class="mb-3" *ngFor="let article of articles$ | async">
+  <mat-card-header
+    [routerLink]="['/blog-home', {outlets: { primary: 'blog-detail', aux: ['blog-user', article?.author]}}]"
+    [queryParams]="{id: article?._id, authId: article?.author}">
+
     <div mat-card-avatar></div>
     <mat-card-title>{{article?.title}}</mat-card-title>
     <mat-card-subtitle>{{article?.author}}-{{article?.meta.updateAt | date:'yyyy-MM-dd'}}</mat-card-subtitle>
+
   </mat-card-header>
   <mat-card-content>
     <p>
-      {{article?.content}}
+      {{article?.abstract}}
     </p>
   </mat-card-content>
   <mat-divider></mat-divider>
+  <!-- <mat-card-actions>
+    
+  </mat-card-actions> -->
   <mat-card-footer>
-    <mat-grid-list cols="4" rowHeight="50px">
-      <mat-grid-tile>{{article?.category}}</mat-grid-tile>
-      <mat-grid-tile>{{article?.commentNum}}</mat-grid-tile>
-      <mat-grid-tile>{{article?.visitNum}}</mat-grid-tile>
-      <mat-grid-tile>{{article?.like.likeNum}}</mat-grid-tile>
+    <mat-grid-list cols="5" rowHeight="3rem">
+      <mat-grid-tile>分类：{{article?.category}}</mat-grid-tile>
+      <mat-grid-tile>评论：{{article?.commentNum}}</mat-grid-tile>
+      <mat-grid-tile>访问：{{article?.visitNum}}</mat-grid-tile>
+      <mat-grid-tile>喜欢：{{article?.like.likeNum}}</mat-grid-tile>
+      <mat-grid-tile><button mat-button (click)="delete(article?._id, article?.category)">删除</button></mat-grid-tile>
     </mat-grid-list>
   </mat-card-footer>
 </mat-card>
