@@ -11,8 +11,8 @@
     [routerLink]="['/homepage']">广场</button>
   <button 
     mat-button
-    [routerLink]="['/blog-home', {outlets: { primary: 'blog-list', aux: ['blog-user', '5c2c85fb2fb4032a3848e319']}}]"
-    [queryParams]="{category:'all'}">主页</button>
+    [routerLink]="['/blog-home', {outlets: { primary: 'blog-list', aux: ['blog-user', '']}}]"
+    [queryParams]="{category:'all', authId:''}">主页</button>
   <button 
     mat-button
     [routerLink]="['/edit-article']">编辑</button>

@@ -29,10 +29,6 @@ export class UserComponent implements OnInit {
     })
     this.user$ = this.store$.pipe(
       select(fromRoot.getUserState),
-      map(v=>{
-        console.log(v);
-        return v
-      })
     )
   }
 

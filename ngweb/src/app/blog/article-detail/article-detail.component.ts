@@ -5,8 +5,8 @@ import * as fromRoot from '../../reducers';
 import * as actions from '../../actions/article.action';
 import { Store, select } from '@ngrx/store';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-article-detail',
@@ -15,39 +15,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ArticleDetailComponent implements OnInit {
 
-  article:Article={
-    title:'angular路由',
-    author:'liu',
-    category:'angular',
-    like:{
-      likeNum:10,
-      likeUser:['liu2']
-    },
-    commentNum:12,
-    visitNum:20,
-    content:'dsakjdkashdkjahsdjkahskj',
-    meta:{
-      createAt:new Date(),
-      updateAt:new Date()
-    }
-  }
   article$: Observable<Article>
-  id: string
+  comment$: Observable<any>
+  like$: Observable<boolean>
+  id: string //articleId
 
   constructor(private store$: Store<fromRoot.State>, private routInfo: ActivatedRoute) {
-    
+    this.id = this.routInfo.snapshot.queryParamMap.get('id')
+    this.store$.dispatch(new actions.ArticleDetailAction(this.id));
+    this.article$ = this.store$.pipe(select(state => state.articleDetail.articleResult))
+    this.comment$ = this.store$.pipe(select(state => state.articleDetail.commentResult))
+    this.like$ = this.store$.pipe(select(state => state.articleDetail.like))
   }
 
   ngOnInit() {
-    this.id = this.routInfo.snapshot.queryParamMap.get('authId')
-    this.store$.dispatch(new actions.ArticleDetailAction('id'))
-    this.article$ = this.store$.pipe(
-      select(fromRoot.getArticleState),
-      map(v=>{
-        console.log(v);
-        return v
-      })
-    )
+    
   }
 
 }

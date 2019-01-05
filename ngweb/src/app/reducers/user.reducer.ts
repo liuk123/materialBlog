@@ -13,7 +13,7 @@ export function reducer(state, action: actions.Actions ): State {
         }
         case actions.ActionTypes.USERCARD_FAIL:
         case actions.ActionTypes.USERCENTER_FAIL: {
-            return {};
+            return state;
         }
         default: {
             return state;

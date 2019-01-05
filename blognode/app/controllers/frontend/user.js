@@ -63,10 +63,10 @@ class UserController {
 
     // 用户信息
     static async user_card(ctx) {
-        const data = ctx.request.query;
-        if(!data.id) return ctx.error({ msg: '用户id不存在!' });
+        const { id } = ctx.request.query;
+        if(id) return ctx.error({ msg: '用户id不存在!' });
 
-        const result = await UserModel.findById(data.id);
+        const result = await UserModel.findById( id || ctx.session.user._id);
         if(!result) return ctx.error({ msg: '更新失败!' });
         return ctx.success({ msg:'获取成功',data: result });
     }

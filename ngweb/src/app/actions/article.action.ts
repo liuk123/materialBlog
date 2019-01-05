@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { Article, Result } from '../domain'
+import { Article, Result, articleDetail } from '../domain'
 
 export enum ActionTypes {
     //编辑
@@ -48,7 +48,7 @@ export class EditeArticleFailAction implements Action {
 export class ArticleListAction implements Action {
     readonly type = ActionTypes.ARTICLE_LIST;
 
-    constructor(public payload: string) { }
+    constructor(public payload: {id: string, category: string}) { }
 }
 export class ArticleListSuccessAction implements Action {
     readonly type = ActionTypes.ARTICLE_LIST_SCCESS;
@@ -69,7 +69,7 @@ export class ArticleDetailAction implements Action {
 export class ArticleDetailSuccessAction implements Action {
     readonly type = ActionTypes.ARTICLE_DETAIL_SCCESS;
 
-    constructor(public payload: Article) { }
+    constructor(public payload: articleDetail) { }
 }
 export class ArticleDetailFailAction implements Action {
     readonly type = ActionTypes.ARTICLE_DETAIL_FAIL;

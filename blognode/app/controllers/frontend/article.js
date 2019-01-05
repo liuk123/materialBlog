@@ -5,12 +5,14 @@ const CommentModel = require('../../models/comment')
 class ArticleController {
     // 获取自己的文章列表
     static async get_list(ctx){
-        const { id, category='', current=0, pageSize=10 } = ctx.query
+        const { id='', category='', current=0, pageSize=10 } = ctx.query
 
         const skip = Number(current)*Number(pageSize)
-        let condition = { author: id }
-        
-        if( category !== '' ){
+        let condition = { author: (id || ctx.session.user._id) }
+        console.log(category)
+        console.log('id ： '+ id)
+        console.log(ctx.session.user._id)
+        if( category !== 'all' ){
             condition.category = category
         }
         
