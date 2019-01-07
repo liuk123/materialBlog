@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { IndexHomeComponent } from './index-home/index-home.component';
 
 const routes: Routes = [
-    { path: 'homepage', redirectTo: '/login',},
-    // { path: 'register', component: RegisterComponent }
+    // { path: 'homepage', redirectTo: '/login',},
+    { path: 'index-home', component: IndexHomeComponent }
 ];
 
 @NgModule({
