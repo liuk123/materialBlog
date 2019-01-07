@@ -1,0 +1,11 @@
+
+<form>
+    <h2 mat-dialog-title>{{title}}</h2>
+    <div class="mat-dialog-content">
+        <app-ckeditor #replycontent></app-ckeditor>
+    </div>
+    <div mat-dialog-actions>
+        <button type="button" mat-raised-button color="primaty" (click)="onClick(replycontent)">确定</button>
+        <button type="button" mat-button mat-dialog-close>取消</button>
+    </div>
+</form>

@@ -18,12 +18,11 @@
     
   </mat-card-actions> -->
   <mat-card-footer>
-    <mat-grid-list cols="5" rowHeight="3rem">
+    <mat-grid-list cols="4" rowHeight="3rem">
       <mat-grid-tile>分类：{{article?.category}}</mat-grid-tile>
       <mat-grid-tile>评论：{{article?.commentNum}}</mat-grid-tile>
       <mat-grid-tile>访问：{{article?.visitNum}}</mat-grid-tile>
       <mat-grid-tile>喜欢：{{article?.like.likeNum}}</mat-grid-tile>
-      <mat-grid-tile><button mat-button (click)="delete(article?._id, article?.category)">删除</button></mat-grid-tile>
     </mat-grid-list>
   </mat-card-footer>
 </mat-card>

@@ -16,7 +16,7 @@ router
     .post('/api/article/like',ArticleController.like)                                    //点赞
     .get('/api/article/get_list',ArticleController.get_list)
     .get('/api/article/get_detail',ArticleController.get_detail)                         // 获取详情
-    .post('/api/article/create_comment',ArticleController.create_comment)                // 发表评论
+    .post('/api/article/comment',ArticleController.comment)                // 发表评论
 
     // 用户
     .get('/api/user/logout',UserController.logout)                                       // 用户退出

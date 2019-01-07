@@ -20,6 +20,6 @@ import { EditArticleComponent } from './edit-article/edit-article.component';
     CommonModule,
     blogRoutingModule,
     SharedModule,
-  ]
+  ],
 })
 export class BlogModule { }

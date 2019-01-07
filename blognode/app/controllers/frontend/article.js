@@ -92,7 +92,7 @@ class ArticleController {
             { _id: ctx.session.user._id, 'categories.title': category },
             { $inc: {'categories.$.number': -1} } )
 
-        const commentResult = await CommentModel.deleteOne({ 'title': id })
+        const commentResult = await CommentModel.delete({ 'title': id })
         return ctx.success({ msg:'删除成功!' })
     }
 
@@ -141,7 +141,7 @@ class ArticleController {
     }
 
     // 新建评论
-    static async create_comment(ctx){
+    static async comment(ctx){
         const _comment = ctx.request.body
         const { userName, _id } = ctx.session.user
         if(_comment.cid){
@@ -155,7 +155,7 @@ class ArticleController {
             await ArticleModel.updateOne({_id:_comment.title},{$inc:{commentNum:+1}})
             return ctx.success({ msg:'评论成功!' })
         }else{
-            const result = await Comment.create({content:_comment.content, title:_comment.title, from:_id})
+            const result = await CommentModel.create({content:_comment.content, title:_comment.title, from:_id})
             if(!result)
                 return ctx.error({ msg: '评论失败!' })
 

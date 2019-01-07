@@ -65,5 +65,14 @@ export class ArticleEffects {
             catchError(err => of(new actions.ArticleDetailFailAction(err)))
         ))
     )
+    
+    @Effect()
+    comment$: Observable<Action> = this.actions$.pipe(
+        ofType(actions.ActionTypes.COMMENT),
+        mergeMap((u:actions.CommentAction) => this.service$.reply(u.payload).pipe(
+            map(v => new actions.CommentSuccessAction(v.data)),
+            catchError(err => of(new actions.CommentFailAction(err)))
+        ))
+    )
     constructor(private actions$: Actions, private service$: ArticleService){}
 }

@@ -30,6 +30,7 @@ import { ImageListSelectComponent } from './image-list-select/image-list-select.
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { CkeditorComponent } from './ckeditor/ckeditor.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { ReplayDialogComponent } from './replay-dialog/replay-dialog.component';
 
 @NgModule({
   imports: [
@@ -97,7 +98,11 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     ImageListSelectComponent,
     ConfirmDialogComponent,
     CkeditorComponent,
+    ReplayDialogComponent,
   ],
-  entryComponents:[ConfirmDialogComponent]
+  entryComponents:[
+    ConfirmDialogComponent,
+    ReplayDialogComponent
+  ]
 })
 export class SharedModule { }

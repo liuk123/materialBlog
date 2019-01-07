@@ -6,30 +6,24 @@
   </mat-card-header>
 </mat-card>
 
-<mat-list>
-  <mat-list-item
-    [routerLink]="['/blog-home', { outlets: { primary: 'blog-list', aux: ['blog-user', '']} }]"
-    [queryParams]="{category:'all',authId:''}">
-    <div matRipple>
+<mat-action-list>
+    <button
+      mat-list-item
+      [routerLink]="['/blog-home', { outlets: { primary: 'blog-list', aux: ['blog-user', '']} }]"
+      [queryParams]="{category:'all',authId:''}">
       <span matBadge="4" matBadgeOverlap="false">全部分类</span>
-    </div>
-     <mat-divider></mat-divider>
-  </mat-list-item>
-  <mat-list-item 
-    *ngFor="let category of (user$ | async)?.categories"
-    [routerLink]="['/blog-home', { outlets: { primary: 'blog-list', aux: ['blog-user', '']} }]"
-    [queryParams]="{category:category.title, authId:''}">
-    <div matRipple>
+    </button>
+    <button
+      mat-list-item
+      *ngFor="let category of (user$ | async)?.categories"
+      [routerLink]="['/blog-home', { outlets: { primary: 'blog-list', aux: ['blog-user', '']} }]"
+      [queryParams]="{category:category.title, authId:''}">
       <span [matBadge]="category.number" matBadgeOverlap="false">{{category.title}}</span>
-    </div>
-    <mat-divider></mat-divider>
-  </mat-list-item>
-  <mat-list-item
-  [routerLink]="['/blog-home', { outlets: { primary: 'blog-list', aux: ['blog-user', '']} }]"
-  [queryParams]="{category:'', authId:''}">
-    <div matRipple>
+    </button>
+    <button
+      mat-list-item
+      [routerLink]="['/blog-home', { outlets: { primary: 'blog-list', aux: ['blog-user', '']} }]"
+      [queryParams]="{category:'', authId:''}">
       <span matBadge="4" matBadgeOverlap="false">未分组</span>
-    </div>
-    <mat-divider></mat-divider>
-  </mat-list-item>
-</mat-list>
+    </button>
+</mat-action-list>

@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { Article, Result, articleDetail } from '../domain'
+import { Article, Result, articleDetail, Comment } from '../domain'
 
 export enum ActionTypes {
     //编辑
@@ -26,6 +26,10 @@ export enum ActionTypes {
     ARTICLE_DETAIL = '[Article] Article detail',
     ARTICLE_DETAIL_SCCESS = '[Article] Article detail success',
     ARTICLE_DETAIL_FAIL = '[Article] Article detail fail',
+    //评论
+    COMMENT = '[Comment] Comment',
+    COMMENT_SCCESS = '[Comment] Comment success',
+    COMMENT_FAIL = '[Comment] Comment fail',
 
 };
 
@@ -125,6 +129,22 @@ export class LikeFailAction implements Action {
     constructor(public payload: null) { }
 }
 
+export class CommentAction implements Action {
+    readonly type = ActionTypes.COMMENT;
+
+    constructor(public payload: string) { }
+}
+export class CommentSuccessAction implements Action {
+    readonly type = ActionTypes.COMMENT_SCCESS;
+
+    constructor(public payload: Comment) { }
+}
+export class CommentFailAction implements Action {
+    readonly type = ActionTypes.COMMENT_FAIL;
+
+    constructor(public payload: null) { }
+}
+
 export type Actions
     = EditeArticleAction
     | EditeArticleSuccessAction
@@ -149,3 +169,7 @@ export type Actions
     | LikeAction
     | LikeSuccessAction
     | LikeFailAction
+
+    | CommentAction
+    | CommentSuccessAction
+    | CommentFailAction

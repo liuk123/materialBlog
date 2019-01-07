@@ -1,16 +1,20 @@
 import { Meta } from "./user";
 
 export interface Comment {
-  id?: string;
-  title: string;
-  from: string;
-  reply: Reply;
-  content: string;
-  meta: Meta;
+  _id?: string;
+  title?: string;
+  from?: User;
+  reply?: Reply;
+  content?: string;
+  meta?: Meta;
 }
 
 export interface Reply {
-  from: string;
-  to: string;
+  from: User;
+  to: User;
   content: string;
+}
+interface User {
+  userName?: string,
+  _id: string
 }

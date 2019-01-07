@@ -22,14 +22,10 @@ export class ArticleListComponent implements OnInit {
       this.store$.dispatch(new actions.ArticleListAction({id: v.get('authId'), category: v.get('category')}))
       this.articles$ = this.store$.pipe(select(fromRoot.getArticleListState))
     })
-    this.store$.pipe(select(fromRoot.getDeleteArticleState)).subscribe(res =>
-      console.log(res)//删除文章
-    )
+    
   }
 
   ngOnInit() {
   }
-  delete(id, category){
-    this.store$.dispatch(new actions.DeleteArticleAction({id, category}))
-  }
+ 
 }

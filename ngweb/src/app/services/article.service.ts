@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Result, Article, articleDetail } from '../domain';
+import { Result, Article, articleDetail, Comment } from '../domain';
 
 @Injectable()
 export class ArticleService {
@@ -37,6 +37,11 @@ export class ArticleService {
         const uri=`${this.config.uri}/${this.domain}/get_detail`;
         const params = new HttpParams().append('id', id)
         return this.http.get<Result<articleDetail>>(uri, { params: params });
+    }
+
+    reply(data){
+        const uri=`${this.config.uri}/${this.domain}/comment`;
+        return this.http.post<Result<Comment>>(uri,data)
     }
 }
 

@@ -9,9 +9,10 @@ import * as fromUser from './user.reducer';
 import * as fromArticle from './article.reducer';
 import * as fromArticleDetail from './article-detail.reducer';
 import * as fromArticleList from './article-list.reducer';
+import * as fromCommentList from './comment.reducer';
 //添加缓存
 import { createSelector } from 'reselect';
-import { User, Article, articleDetail } from '../domain';
+import { User, Article, articleDetail, Comment } from '../domain';
 
 export interface State {
     quote: fromQuote.State;
@@ -21,7 +22,8 @@ export interface State {
     articleDetail: articleDetail;
     articleList: Article[];
     like: number,
-    delete_article: string
+    delete_article: string,
+    comment: Comment
 };
 
 const reducers = {
@@ -32,7 +34,8 @@ const reducers = {
     articleList: fromArticleList.reducer,
     articleDetail: fromArticleDetail.reducer,
     like: fromArticle.reducer,
-    delete_article: fromArticle.reducer
+    delete_article: fromArticle.reducer,
+    comment: fromCommentList.reducer,
 }
 
 export const getQuoteState = (state: State) => state.quote;
@@ -43,6 +46,7 @@ export const getArticleListState = (state: State) => state.articleList;
 export const getArticleDetailState = (state: State) => state.articleDetail;
 export const getLikeState = (state: State) => state.like;
 export const getDeleteArticleState = (state: State) => state.delete_article;
+export const getCommentState = (state: State) => state.comment;
 
 export const getQuote = createSelector(getQuoteState, fromQuote.getQuote);
 
