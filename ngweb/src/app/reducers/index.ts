@@ -11,7 +11,7 @@ import * as fromArticleDetail from './article-detail.reducer';
 import * as fromArticleList from './article-list.reducer';
 import * as fromCommentList from './comment.reducer';
 //添加缓存
-import { createSelector } from 'reselect';
+import { createSelector } from '@ngrx/store';
 import { User, Article, articleDetail, Comment } from '../domain';
 
 export interface State {
