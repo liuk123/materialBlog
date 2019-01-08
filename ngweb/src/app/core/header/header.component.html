@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <button mat-icon-button (click)="openSidebar()">
-      <mat-icon>menu</mat-icon>
+      <mat-icon svgIcon="menu"></mat-icon>
   </button>
   <span>天才笔记</span>
   <span class="fill-remaining-space"></span>
@@ -17,12 +17,12 @@
     [routerLink]="['/edit-article']">编写</button>
   <span class="fill-remaining-space"></span>
 
-  <button mat-icon-button [matMenuTriggerFor]="userManage"><mat-icon>more_vert</mat-icon></button>
+  <button mat-icon-button [matMenuTriggerFor]="userManage"><mat-icon svgIcon="ellipsis"></mat-icon></button>
   <mat-menu #userManage="matMenu">
-      <button mat-menu-item [routerLink]="['/person']"><mat-icon>dialpad</mat-icon>个人</button>
-    <button mat-menu-item [routerLink]="['/login']"><mat-icon>dialpad</mat-icon>登录</button>
-    <button mat-menu-item [routerLink]="['/register']"><mat-icon>dialpad</mat-icon>注册</button>
-    <button mat-menu-item (click)="logout()"><mat-icon>dialpad</mat-icon>退出</button>
+    <button mat-menu-item [routerLink]="['/person']"><mat-icon svgIcon="genius"></mat-icon>个人</button>
+    <button mat-menu-item [routerLink]="['/login']"><mat-icon svgIcon="genius"></mat-icon>登录</button>
+    <button mat-menu-item [routerLink]="['/register']"><mat-icon svgIcon="genius"></mat-icon>注册</button>
+    <button mat-menu-item (click)="logout()"><mat-icon svgIcon="genius"></mat-icon>退出</button>
   </mat-menu>
 
   <mat-slide-toggle (change)="onChange($event.checked)"></mat-slide-toggle>
