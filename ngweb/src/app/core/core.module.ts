@@ -8,16 +8,18 @@ import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { loadSvgResources } from '../utils/svg.util'
 import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from '../app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { ServicesModule } from '../services/services.module';
 import { AppStoreModule } from '../reducers';
 import { AppEffectsModule } from '../effects';
+import { PageNotFoundComponent } from './page-not-found';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
-    SidebarComponent
+    SidebarComponent,
+    PageNotFoundComponent
   ],
   imports: [
     SharedModule,
@@ -32,7 +34,8 @@ import { AppEffectsModule } from '../effects';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
-    AppRoutingModule
+    AppRoutingModule,
+    PageNotFoundComponent
   ],
   providers: [
     {
