@@ -15,7 +15,7 @@ export class AuthEffects {
     login$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.LOGIN),
         mergeMap((u:actions.LoginAction) => this.service$.login(u.payload).pipe(
-            map(auth => new actions.LoginSuccessAction(auth)),
+            map(auth => new actions.LoginSuccessAction(auth.data)),
             catchError(err => of(new actions.LoginFailAction(err)))
         ))
     )
@@ -24,7 +24,7 @@ export class AuthEffects {
     register$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.REGISTER),
         mergeMap((u:actions.LoginAction) => this.service$.register(u.payload).pipe(
-            map(auth => new actions.RegisterSuccessAction(auth)),
+            map(auth => new actions.RegisterSuccessAction(auth.data)),
             catchError(err => of(new actions.RegisterFailAction(err)))
         ))
     )

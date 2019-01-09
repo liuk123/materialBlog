@@ -41,7 +41,7 @@ class UserController {
         ctx.cookies.set('userid', id, { maxAge: keep_user,httpOnly: false });
         ctx.cookies.set('username', userName, { maxAge: keep_user,httpOnly: false });
         ctx.cookies.set('avatar', avatar, { maxAge: keep_user,httpOnly: false });
-        ctx.success({ msg:'登录成功' });
+        ctx.success({ msg:'登录成功', data});
     }
 
     //退出

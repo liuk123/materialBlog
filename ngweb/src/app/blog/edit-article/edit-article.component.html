@@ -17,9 +17,9 @@
         </div>
         <div class="grid-tile">
             <mat-form-field class="full-width">
-              <mat-select placeholder="分类">
-                <mat-option *ngFor="let category of categories" [value]="category">
-                  {{category}}
+              <mat-select placeholder="分类" formControlName="category">
+                <mat-option *ngFor="let category of categories$ | async" [value]="category.title">
+                  {{category.title}}
                 </mat-option>
               </mat-select>
             </mat-form-field>

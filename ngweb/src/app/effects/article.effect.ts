@@ -61,7 +61,7 @@ export class ArticleEffects {
     get_detail$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.ARTICLE_DETAIL),
         mergeMap((u:actions.ArticleDetailAction) => this.service$.get_detail(u.payload).pipe(
-            map(v => new actions.ArticleDetailSuccessAction(v.data)),
+            map(v => new actions.ArticleDetailSuccessAction(v.data.articleResult)),
             catchError(err => of(new actions.ArticleDetailFailAction(err)))
         ))
     )

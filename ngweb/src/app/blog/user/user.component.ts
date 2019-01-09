@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/domain';
 import { Store, select } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
-import * as actions from '../../actions/user.action';
+import * as actions from '../../actions/auth.action';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';

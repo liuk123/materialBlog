@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Article } from 'src/app/domain';
+import { Article, Category } from 'src/app/domain';
 import { Observable } from 'rxjs';
 
 import * as fromRoot from '../../reducers';
@@ -16,17 +16,15 @@ import { map } from 'rxjs/operators';
 export class EditArticleComponent implements OnInit {
 
   form:FormGroup
-  categories:string[]
+  categories$: Observable<Category[]>
   article$: Observable<Article>
 
   constructor(private fb: FormBuilder, private store$: Store<fromRoot.State>,) {
-    this.article$ = this.store$.pipe(
-      select(fromRoot.getArticleState),
-      map(v=>{
-        console.log(v);
-        return v
-      })
-    )
+    // this.article$ = this.store$.pipe(select(fromRoot.getArticleState))
+    // this.categories$ = this.store$.pipe(
+    //   select(fromRoot.getUserState),
+    //   map(v => v.categories)
+    // )
   }
 
   ngOnInit() {

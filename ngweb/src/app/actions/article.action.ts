@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { Article, Result, articleDetail, Comment } from '../domain'
+import { Article, Comment } from '../domain'
 
 export enum ActionTypes {
     //编辑
@@ -14,6 +14,10 @@ export enum ActionTypes {
     DELETE_ARTICLE = '[Article] delete article',
     DELETE_ARTICLE_SCCESS = '[Article] delete article success',
     DELETE_ARTICLE_FAIL = '[Article] delete article fail',
+    //评论
+    COMMENT = '[Comment] Comment',
+    COMMENT_SCCESS = '[Comment] Comment success',
+    COMMENT_FAIL = '[Comment] Comment fail',
     //喜欢
     LIKE = '[Article] Like',
     LIKE_SCCESS = '[Article] Like success',
@@ -26,29 +30,15 @@ export enum ActionTypes {
     ARTICLE_DETAIL = '[Article] Article detail',
     ARTICLE_DETAIL_SCCESS = '[Article] Article detail success',
     ARTICLE_DETAIL_FAIL = '[Article] Article detail fail',
-    //评论
-    COMMENT = '[Comment] Comment',
-    COMMENT_SCCESS = '[Comment] Comment success',
-    COMMENT_FAIL = '[Comment] Comment fail',
+    //获取评论
+    COMMENT_LIST = '[Comment] Comment',
+    COMMENT_LIST_SCCESS = '[Comment] Comment success',
+    COMMENT_LIST_FAIL = '[Comment] Comment fail',
+   
 
 };
 
-export class EditeArticleAction implements Action {
-    readonly type = ActionTypes.EDITE_ARTICLE;
-
-    constructor(public payload: Article) { }
-}
-export class EditeArticleSuccessAction implements Action {
-    readonly type = ActionTypes.EDITE_ARTICLE_SCCESS;
-
-    constructor(public payload: null) { }
-}
-export class EditeArticleFailAction implements Action {
-    readonly type = ActionTypes.EDITE_ARTICLE_FAIL;
-
-    constructor(public payload: null) { }
-}
-
+//获取列表
 export class ArticleListAction implements Action {
     readonly type = ActionTypes.ARTICLE_LIST;
 
@@ -64,7 +54,7 @@ export class ArticleListFailAction implements Action {
 
     constructor(public payload: null) { }
 }
-
+//获取详情请
 export class ArticleDetailAction implements Action {
     readonly type = ActionTypes.ARTICLE_DETAIL;
 
@@ -73,14 +63,14 @@ export class ArticleDetailAction implements Action {
 export class ArticleDetailSuccessAction implements Action {
     readonly type = ActionTypes.ARTICLE_DETAIL_SCCESS;
 
-    constructor(public payload: articleDetail) { }
+    constructor(public payload: Article) { }
 }
 export class ArticleDetailFailAction implements Action {
     readonly type = ActionTypes.ARTICLE_DETAIL_FAIL;
 
     constructor(public payload: null) { }
 }
-
+//新建
 export class CreateArticleAction implements Action {
     readonly type = ActionTypes.CREATE_ARTICLE;
 
@@ -96,7 +86,23 @@ export class CreateArticleFailAction implements Action {
 
     constructor(public payload: null) { }
 }
+//编辑
+export class EditeArticleAction implements Action {
+    readonly type = ActionTypes.EDITE_ARTICLE;
 
+    constructor(public payload: Article) { }
+}
+export class EditeArticleSuccessAction implements Action {
+    readonly type = ActionTypes.EDITE_ARTICLE_SCCESS;
+
+    constructor(public payload: null) { }
+}
+export class EditeArticleFailAction implements Action {
+    readonly type = ActionTypes.EDITE_ARTICLE_FAIL;
+
+    constructor(public payload: null) { }
+}
+//删除
 export class DeleteArticleAction implements Action {
     readonly type = ActionTypes.DELETE_ARTICLE;
 
@@ -112,7 +118,7 @@ export class DeleteArticleFailAction implements Action {
 
     constructor(public payload: null) { }
 }
-
+//喜欢
 export class LikeAction implements Action {
     readonly type = ActionTypes.LIKE;
 
@@ -128,11 +134,11 @@ export class LikeFailAction implements Action {
 
     constructor(public payload: null) { }
 }
-
+//发表评论
 export class CommentAction implements Action {
     readonly type = ActionTypes.COMMENT;
 
-    constructor(public payload: string) { }
+    constructor(public payload: Comment) { }
 }
 export class CommentSuccessAction implements Action {
     readonly type = ActionTypes.COMMENT_SCCESS;
@@ -144,6 +150,23 @@ export class CommentFailAction implements Action {
 
     constructor(public payload: null) { }
 }
+//获取评论
+export class CommentListAction implements Action {
+    readonly type = ActionTypes.COMMENT;
+
+    constructor(public payload: string) { }
+}
+export class CommentListSuccessAction implements Action {
+    readonly type = ActionTypes.COMMENT_SCCESS;
+
+    constructor(public payload: Comment[]) { }
+}
+export class CommentListFailAction implements Action {
+    readonly type = ActionTypes.COMMENT_FAIL;
+
+    constructor(public payload: null) { }
+}
+
 
 export type Actions
     = EditeArticleAction
@@ -173,3 +196,7 @@ export type Actions
     | CommentAction
     | CommentSuccessAction
     | CommentFailAction
+
+    | CommentListAction
+    | CommentListSuccessAction
+    | CommentListFailAction

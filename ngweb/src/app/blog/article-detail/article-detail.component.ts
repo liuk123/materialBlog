@@ -36,15 +36,16 @@ export class ArticleDetailComponent implements OnInit {
       this.article = v.articleResult
       this.comments = v.commentResult
       this.liked = v.liked
+      console.log(JSON.stringify(v))
     })
 
     //喜欢
-    this.store$.pipe(select(fromRoot.getLikeState)).subscribe(v => this.liked = v)
+    // this.store$.pipe(select(fromRoot.getLikeState)).subscribe(v => this.liked = v)
 
     //删除
-    this.store$.pipe(select(fromRoot.getDeleteArticleState)).subscribe(res =>
-      console.log(res)//删除文章
-    )
+    // this.store$.pipe(select(fromRoot.getDeleteArticleState)).subscribe(res =>
+    //   console.log(res)//删除文章
+    // )
   }
 
   ngOnInit() {
