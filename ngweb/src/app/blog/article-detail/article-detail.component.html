@@ -9,23 +9,21 @@
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-icon-button [color]="liked==1?'primary':''" (click)="like(article?._id)">
-      <mat-icon>favorite</mat-icon>
-    </button>{{liked}}
+    <button mat-button [color]="liked==1?'primary':''" (click)="like(article?._id)">喜欢</button>
     <button mat-button (click)="delete(article?._id, article?.category)">删除</button>
     <button mat-button (click)="openNewCommentDialog()">评论</button>
   </mat-card-actions>
   <mat-divider></mat-divider>
   <mat-card-footer>
     <mat-grid-list cols="4" rowHeight="50px">
-      <mat-grid-tile>分类：{{article?.category}}</mat-grid-tile>
-      <mat-grid-tile>评论：{{article?.commentNum}}</mat-grid-tile>
-      <mat-grid-tile>访问：{{article?.visitNum}}</mat-grid-tile>
-      <mat-grid-tile>喜欢：{{article?.like?.likeNum}}</mat-grid-tile>
+      <mat-grid-tile><mat-icon svgIcon="badge"></mat-icon>：{{article?.category}}</mat-grid-tile>
+      <mat-grid-tile><mat-icon svgIcon="edit"></mat-icon>：{{article?.commentNum}}</mat-grid-tile>
+      <mat-grid-tile><mat-icon svgIcon="eye"></mat-icon>：{{article?.visitNum}}</mat-grid-tile>
+      <mat-grid-tile><mat-icon svgIcon="heart"></mat-icon>：{{article?.like?.likeNum}}</mat-grid-tile>
     </mat-grid-list>
   </mat-card-footer>
 </mat-card>
-
+{{liked}}
 <mat-card class="mt-3">
   <mat-card-header>
     <mat-card-title>评论</mat-card-title>

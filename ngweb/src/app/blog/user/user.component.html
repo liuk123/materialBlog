@@ -7,22 +7,28 @@
 </mat-card>
 
 <mat-action-list>
-    <button
+    <!-- <button
       mat-list-item
       [routerLink]="['/blog-home', { outlets: { primary: 'blog-list', aux: ['blog-user', '']} }]"
+      [queryParams]="{category:'all',authId:''}">
+      <span matBadge="4" matBadgeOverlap="false">全部分类</span>
+    </button> -->
+    <button
+      mat-list-item
+      [routerLink]="['/blog-home', { outlets: { primary: 'blog-list'} }]"
       [queryParams]="{category:'all',authId:''}">
       <span matBadge="4" matBadgeOverlap="false">全部分类</span>
     </button>
     <button
       mat-list-item
       *ngFor="let category of (user$ | async)?.categories"
-      [routerLink]="['/blog-home', { outlets: { primary: 'blog-list', aux: ['blog-user', '']} }]"
+      [routerLink]="['/blog-home', { outlets: { primary: 'blog-list'} }]"
       [queryParams]="{category:category.title, authId:''}">
       <span [matBadge]="category.number" matBadgeOverlap="false">{{category.title}}</span>
     </button>
     <button
       mat-list-item
-      [routerLink]="['/blog-home', { outlets: { primary: 'blog-list', aux: ['blog-user', '']} }]"
+      [routerLink]="['/blog-home', { outlets: { primary: 'blog-list'} }]"
       [queryParams]="{category:'', authId:''}">
       <span matBadge="4" matBadgeOverlap="false">未分组</span>
     </button>
