@@ -32,12 +32,9 @@ export class ArticleDetailComponent implements OnInit {
     //文章详情
     this.id = this.routInfo.snapshot.queryParamMap.get('id')
     this.store$.dispatch(new actions.ArticleDetailAction(this.id));
-    this.store$.pipe(select(fromRoot.getArticleDetailState)).subscribe(v => {
-      this.article = v.articleResult
-      this.comments = v.commentResult
-      this.liked = v.liked
-      console.log(JSON.stringify(v))
-    })
+    this.store$.dispatch(new actions.CommentListAction(this.id));
+    this.store$.pipe(select(fromRoot.getArticleDetailState)).subscribe(v => this.article = v)
+    this.store$.pipe(select(fromRoot.getCommentListState)).subscribe(v => this.comments = v)
 
     //喜欢
     // this.store$.pipe(select(fromRoot.getLikeState)).subscribe(v => this.liked = v)

@@ -61,13 +61,22 @@ export class ArticleEffects {
     get_detail$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.ARTICLE_DETAIL),
         mergeMap((u:actions.ArticleDetailAction) => this.service$.get_detail(u.payload).pipe(
-            map(v => new actions.ArticleDetailSuccessAction(v.data.articleResult)),
+            map(v => new actions.ArticleDetailSuccessAction(v.data)),
             catchError(err => of(new actions.ArticleDetailFailAction(err)))
+        ))
+    )
+
+    @Effect()
+    get_comment$: Observable<Action> = this.actions$.pipe(
+        ofType(actions.ActionTypes.COMMENT_LIST),
+        mergeMap((u:actions.CommentListAction) => this.service$.get_comment(u.payload).pipe(
+            map(v => new actions.CommentListSuccessAction(v.data)),
+            catchError(err => of(new actions.CommentListFailAction(err)))
         ))
     )
     
     @Effect()
-    comment$: Observable<Action> = this.actions$.pipe(
+    reply$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.COMMENT),
         mergeMap((u:actions.CommentAction) => this.service$.reply(u.payload).pipe(
             map(v => new actions.CommentSuccessAction(v.data)),

@@ -20,8 +20,8 @@ export interface Like {
   likeUser:string[];
 }
 
-export interface articleDetail {
-  articleResult: Article
-  commentResult: any
-  liked: number
-}
+// export interface articleDetail {
+//   articleResult: Article
+//   commentResult: any
+//   liked: number
+// }

@@ -31,9 +31,9 @@ export enum ActionTypes {
     ARTICLE_DETAIL_SCCESS = '[Article] Article detail success',
     ARTICLE_DETAIL_FAIL = '[Article] Article detail fail',
     //获取评论
-    COMMENT_LIST = '[Comment] Comment',
-    COMMENT_LIST_SCCESS = '[Comment] Comment success',
-    COMMENT_LIST_FAIL = '[Comment] Comment fail',
+    COMMENT_LIST = '[Comment] Comment list',
+    COMMENT_LIST_SCCESS = '[Comment] Comment list success',
+    COMMENT_LIST_FAIL = '[Comment] Comment list fail',
    
 
 };
@@ -152,17 +152,17 @@ export class CommentFailAction implements Action {
 }
 //获取评论
 export class CommentListAction implements Action {
-    readonly type = ActionTypes.COMMENT;
+    readonly type = ActionTypes.COMMENT_LIST;
 
     constructor(public payload: string) { }
 }
 export class CommentListSuccessAction implements Action {
-    readonly type = ActionTypes.COMMENT_SCCESS;
+    readonly type = ActionTypes.COMMENT_LIST_SCCESS;
 
     constructor(public payload: Comment[]) { }
 }
 export class CommentListFailAction implements Action {
-    readonly type = ActionTypes.COMMENT_FAIL;
+    readonly type = ActionTypes.COMMENT_LIST_FAIL;
 
     constructor(public payload: null) { }
 }

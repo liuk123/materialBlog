@@ -5,33 +5,36 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import * as fromQuote from './quote.reducer';
 import * as fromAuth from './auth.reducer';
+import * as fromUser from './user.reducer';
 // import * as fromArticle from './article.reducer';
 import * as fromArticleDetail from './article-detail.reducer';
 import * as fromArticleList from './article-list.reducer';
 import * as fromCommentList from './comment-list.reducer';
-import * as fromComment from './comment.reducer';
+// import * as fromComment from './comment.reducer';
 //添加缓存
 import { createSelector } from '@ngrx/store';
-import { User, Article, articleDetail, Comment } from '../domain';
+import { User, Article, Comment } from '../domain';
 
 export interface State {
     quote: fromQuote.State;
     auth: User;//用户的信息
     user: User;//文章作者的信息
     // articleOperate: Article;
-    articleDetail: articleDetail;
+    articleDetail: Article;
     articleList: Article[];
-    comment: Comment
+    commentList: Comment[]
+    // comment: Comment
 };
 
 const reducers = {
     quote: fromQuote.reducer,
     auth: fromAuth.reducer,
-    user: fromAuth.reducer,
+    user: fromUser.reducer,
     // articleOperate: fromArticle.reducer,
     articleList: fromArticleList.reducer,
     articleDetail: fromArticleDetail.reducer,
-    comment: fromCommentList.reducer,
+    commentList: fromCommentList.reducer,
+    // comment: fromComment.reducer,
 }
 
 export const getQuoteState = (state: State) => state.quote;
@@ -41,8 +44,8 @@ export const getUserState = (state: State) => state.user;
 export const getArticleListState = (state: State) => state.articleList;
 export const getArticleDetailState = (state: State) => state.articleDetail;
 // export const getLikeState = (state: State) => state.like;
-export const getCommentState = (state: State) => state.comment;
-
+// export const getCommentState = (state: State) => state.comment;
+export const getCommentListState = (state: State) => state.commentList;
 export const getQuote = createSelector(getQuoteState, fromQuote.getQuote);
 
 @NgModule({

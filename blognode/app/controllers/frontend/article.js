@@ -123,23 +123,36 @@ class ArticleController {
     static async get_detail(ctx){
         const { id } = ctx.query
         let liked = 0
-        const articleResult = await ArticleModel.findById(id).select('title content category like commentNum visitNum')
-        if( articleResult &&
-            articleResult.like &&
-            articleResult.like.likeUser &&
-            articleResult.like.likeUser.find(v=>v == ctx.session.user._id)) liked = 1
+        const result = await ArticleModel.findById(id).select('title content category like commentNum visitNum')
+        if( result &&
+            result.like &&
+            result.like.likeUser &&
+            result.like.likeUser.find(v=>v == ctx.session.user._id)) liked = 1
 
-        const commentResult = await CommentModel.find({ title: id})
-                                                .populate({path:'from',select:{_id:1,userName:1}})
-                                                .populate({path:'reply.from',select:{_id:1,userName:1}})
-                                                .populate({path:'reply.to',select:{_id:1,userName:1}})
-                                                .sort({_id:-1})
+        const commentResult = await CommentModel
+            .find({ title: id})
+            .populate({path:'from',select:{_id:1,userName:1}})
+            .populate({path:'reply.from',select:{_id:1,userName:1}})
+            .populate({path:'reply.to',select:{_id:1,userName:1}})
+            .sort({_id:-1})
 
         await ArticleModel.updateOne({_id: id}, {$inc:{visitNum:+1}})
 
-        ctx.success({ msg:'获取详情成功!',data: {articleResult, commentResult, liked} })
+        ctx.success({ msg:'获取详情成功!',data: result })
     }
+    // 获取评论
+    static async get_comment(ctx){
+        const { id } = ctx.query
 
+        const result = await CommentModel
+            .find({ title: id})
+            .populate({ path: 'from', select: { _id:1, userName: 1 }})
+            .populate({ path: 'reply.from', select: { _id: 1, userName: 1 }})
+            .populate({ path: 'reply.to', select: { _id:1, userName: 1 }})
+            .sort({ _id: -1 })
+
+        ctx.success({ msg:'获取详情成功!',data: result })
+    }
     // 新建评论
     static async comment(ctx){
         const _comment = ctx.request.body

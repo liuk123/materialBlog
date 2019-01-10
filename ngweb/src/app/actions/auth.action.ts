@@ -15,10 +15,6 @@ export enum ActionTypes {
     USERCARD = '[UserCard] user-card',
     USERCARD_SCCESS = '[UserCard] user-card success',
     USERCARD_FAIL = '[UserCard] user-card fail',
-
-    USERCENTER = '[UserCenter] user-center',
-    USERCENTER_SCCESS = '[UserCenter] user-center success',
-    USERCENTER_FAIL = '[UserCenter] user-center fail',
 };
 
 //登录注册退出
@@ -77,22 +73,6 @@ export class UserCardFailAction implements Action {
     constructor(public payload: string) { }
 }
 
-export class UserCenterAction implements Action {
-    readonly type = ActionTypes.USERCENTER;
-
-    constructor(public payload: string) { }
-}
-export class UserCenterSuccessAction implements Action {
-    readonly type = ActionTypes.USERCENTER_SCCESS;
-
-    constructor(public payload: User) { }
-}
-export class UserCenterFailAction implements Action {
-    readonly type = ActionTypes.USERCENTER_FAIL;
-
-    constructor(public payload: string) { }
-}
-
 export type Actions
     = LoginAction
     | LoginSuccessAction
@@ -105,8 +85,4 @@ export type Actions
     | UserCardAction
     | UserCardSuccessAction
     | UserCardFailAction
-
-    | UserCenterAction
-    | UserCenterSuccessAction
-    | UserCenterFailAction
 

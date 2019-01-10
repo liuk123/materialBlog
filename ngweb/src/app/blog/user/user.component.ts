@@ -27,9 +27,7 @@ export class UserComponent implements OnInit {
       this.authId = m.get('authId');
       this.store$.dispatch(new actions.UserCardAction(this.authId))
     })
-    this.user$ = this.store$.pipe(
-      select(fromRoot.getUserState),
-    )
+    this.user$ = this.store$.pipe(select(fromRoot.getUserState))
   }
 
 }
