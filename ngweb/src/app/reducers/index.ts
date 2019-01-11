@@ -10,6 +10,7 @@ import * as fromUser from './user.reducer';
 import * as fromArticleDetail from './article-detail.reducer';
 import * as fromArticleList from './article-list.reducer';
 import * as fromCommentList from './comment-list.reducer';
+import * as fromLike from './like.reducer';
 // import * as fromComment from './comment.reducer';
 //添加缓存
 import { createSelector } from '@ngrx/store';
@@ -23,6 +24,7 @@ export interface State {
     articleDetail: Article;
     articleList: Article[];
     commentList: Comment[]
+    like: number
     // comment: Comment
 };
 
@@ -34,6 +36,7 @@ const reducers = {
     articleList: fromArticleList.reducer,
     articleDetail: fromArticleDetail.reducer,
     commentList: fromCommentList.reducer,
+    like: fromLike.reducer
     // comment: fromComment.reducer,
 }
 
@@ -44,7 +47,7 @@ export const getUserState = (state: State) => state.user;
 export const getAuthCardState = (state: State) => state.auth;
 export const getArticleListState = (state: State) => state.articleList;
 export const getArticleDetailState = (state: State) => state.articleDetail;
-// export const getLikeState = (state: State) => state.like;
+export const getLikeState = (state: State) => state.like;
 // export const getCommentState = (state: State) => state.comment;
 export const getCommentListState = (state: State) => state.commentList;
 export const getQuote = createSelector(getQuoteState, fromQuote.getQuote);

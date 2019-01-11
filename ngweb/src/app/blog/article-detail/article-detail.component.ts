@@ -19,8 +19,9 @@ export class ArticleDetailComponent implements OnInit {
 
   article: Article
   comments: Comment[]
-  liked: number = 0
+  liked: number
   id: string //articleId
+  authId: string
 
   constructor(
       private store$: Store<fromRoot.State>,
@@ -33,11 +34,26 @@ export class ArticleDetailComponent implements OnInit {
     this.id = this.routInfo.snapshot.queryParamMap.get('id')
     this.store$.dispatch(new actions.ArticleDetailAction(this.id));
     this.store$.dispatch(new actions.CommentListAction(this.id));
-    this.store$.pipe(select(fromRoot.getArticleDetailState)).subscribe(v => this.article = v)
+    this.store$.pipe(
+      select(fromRoot.getArticleDetailState),
+      filter(v => Object.keys(v).length>0)
+    ).subscribe(v => {
+      this.article = v
+      //初始化喜欢
+      if(this.article.like.likeUser.find( id => this.authId == id )){
+        this.liked = 1
+      }else{
+        this.liked = 0
+      }
+    })
     this.store$.pipe(select(fromRoot.getCommentListState)).subscribe(v => this.comments = v)
+    this.store$.pipe(select(fromRoot.getAuthCardState)).subscribe(v => this.authId = v._id)
 
     //喜欢
-    // this.store$.pipe(select(fromRoot.getLikeState)).subscribe(v => this.liked = v)
+    this.store$.pipe(select(fromRoot.getLikeState)).subscribe(v => {
+      this.liked = v
+      console.log(v)
+    })
 
     //删除
     // this.store$.pipe(select(fromRoot.getDeleteArticleState)).subscribe(res =>

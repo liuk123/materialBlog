@@ -2,7 +2,7 @@
   <button mat-icon-button (click)="openSidebar()">
       <mat-icon svgIcon="menu"></mat-icon>
   </button>
-  <span>天才笔记</span>
+  <span>{{(auth$ | async).userName}}</span>
   <span class="fill-remaining-space"></span>
 
   <button
