@@ -58,8 +58,7 @@ export class ArticleDetailComponent implements OnInit {
     //删除
     this.store$.pipe(
       select(v=>v.articleOp.delete),
-      filter(v => v),
-      map(v=> {console.log(v);return v})
+      filter(v => v)
     ).subscribe(res =>{
       this.location.back()
       this.store$.dispatch(new actions.DeleteArticleSuccessAction(false))
@@ -93,7 +92,7 @@ export class ArticleDetailComponent implements OnInit {
       })),
       switchMap(v => this.service$.reply(v))
     ).subscribe(res => {
-      console.log(res)
+      this.store$.dispatch(new actions.CommentListAction(this.id));
     })
   }
 }
