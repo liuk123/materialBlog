@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Article, Comment } from 'src/app/domain';
-
+import { Location } from '@angular/common';
 import * as fromRoot from '../../reducers';
 import * as actions from '../../actions/article.action';
 import { Store, select } from '@ngrx/store';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
-import { take, filter, map, switchMap, mergeMap } from 'rxjs/operators';
+import { take, filter, map, switchMap } from 'rxjs/operators';
 import { ReplayDialogComponent } from 'src/app/shared/replay-dialog/replay-dialog.component';
 import { ArticleService } from 'src/app/services/article.service';
 
@@ -27,7 +27,8 @@ export class ArticleDetailComponent implements OnInit {
       private store$: Store<fromRoot.State>,
       private routInfo: ActivatedRoute,
       private dialog: MatDialog,
-      private service$: ArticleService 
+      private service$: ArticleService,
+      private location:Location
     ){
 
     //文章详情
@@ -41,24 +42,28 @@ export class ArticleDetailComponent implements OnInit {
       this.article = v
       //初始化喜欢
       if(this.article.like.likeUser.find( id => this.authId == id )){
-        this.liked = 1
+        this.store$.dispatch(new actions.LikeSuccessAction(1))
       }else{
-        this.liked = 0
+        this.store$.dispatch(new actions.LikeSuccessAction(0))
       }
     })
     this.store$.pipe(select(fromRoot.getCommentListState)).subscribe(v => this.comments = v)
     this.store$.pipe(select(fromRoot.getAuthCardState)).subscribe(v => this.authId = v._id)
 
     //喜欢
-    this.store$.pipe(select(fromRoot.getLikeState)).subscribe(v => {
+    this.store$.pipe(select(v=>v.articleOp.like)).subscribe(v => {
       this.liked = v
-      console.log(v)
     })
 
     //删除
-    // this.store$.pipe(select(fromRoot.getDeleteArticleState)).subscribe(res =>
-    //   console.log(res)//删除文章
-    // )
+    this.store$.pipe(
+      select(v=>v.articleOp.delete),
+      filter(v => v),
+      map(v=> {console.log(v);return v})
+    ).subscribe(res =>{
+      this.location.back()
+      this.store$.dispatch(new actions.DeleteArticleSuccessAction(false))
+    })
   }
 
   ngOnInit() {

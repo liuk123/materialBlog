@@ -92,7 +92,8 @@ class ArticleController {
             { _id: ctx.session.user._id, 'categories.title': category },
             { $inc: {'categories.$.number': -1} } )
 
-        const commentResult = await CommentModel.delete({ 'title': id })
+        const commentResult = await CommentModel.deleteMany({ 'title': id })
+        console.log(commentResult)
         return ctx.success({ msg:'删除成功!' })
     }
 

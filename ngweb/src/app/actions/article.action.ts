@@ -111,7 +111,7 @@ export class DeleteArticleAction implements Action {
 export class DeleteArticleSuccessAction implements Action {
     readonly type = ActionTypes.DELETE_ARTICLE_SCCESS;
 
-    constructor(public payload: null) { }
+    constructor(public payload: boolean) { }
 }
 export class DeleteArticleFailAction implements Action {
     readonly type = ActionTypes.DELETE_ARTICLE_FAIL;

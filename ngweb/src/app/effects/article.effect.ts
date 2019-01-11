@@ -32,7 +32,7 @@ export class ArticleEffects {
     delete$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.DELETE_ARTICLE),
         mergeMap((u:actions.DeleteArticleAction) => this.service$.delete(u.payload).pipe(
-            map(v => new actions.DeleteArticleSuccessAction(null)),
+            map(v => new actions.DeleteArticleSuccessAction(true)),
             catchError(err => of(new actions.DeleteArticleFailAction(err)))
         ))
     )
