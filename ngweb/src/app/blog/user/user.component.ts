@@ -5,7 +5,6 @@ import * as fromRoot from '../../reducers';
 import * as actions from '../../actions/auth.action';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user',

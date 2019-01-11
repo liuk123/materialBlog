@@ -19,7 +19,7 @@ export interface State {
     quote: fromQuote.State;
     auth: User;//用户的信息
     user: User;//文章作者的信息
-    // articleOperate: Article;
+
     articleDetail: Article;
     articleList: Article[];
     commentList: Comment[]
@@ -30,7 +30,7 @@ const reducers = {
     quote: fromQuote.reducer,
     auth: fromAuth.reducer,
     user: fromUser.reducer,
-    // articleOperate: fromArticle.reducer,
+
     articleList: fromArticleList.reducer,
     articleDetail: fromArticleDetail.reducer,
     commentList: fromCommentList.reducer,
@@ -40,7 +40,8 @@ const reducers = {
 export const getQuoteState = (state: State) => state.quote;
 export const getAuthState = (state: State) => state.auth;
 export const getUserState = (state: State) => state.user;
-// export const getArticleOperateState = (state: State) => state.articleOperate;
+
+export const getAuthCardState = (state: State) => state.auth;
 export const getArticleListState = (state: State) => state.articleList;
 export const getArticleDetailState = (state: State) => state.articleDetail;
 // export const getLikeState = (state: State) => state.like;

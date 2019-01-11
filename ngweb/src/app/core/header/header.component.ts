@@ -17,9 +17,8 @@ export class HeaderComponent implements OnInit {
 
   auth$: Observable<User>
   constructor(private store$: Store<fromRoot.State>) {
-    this.auth$ = this.store$.pipe(
-      select(fromRoot.getAuthState)
-    )
+    this.auth$ = this.store$.pipe(select(fromRoot.getAuthCardState))
+    this.store$.dispatch(new actions.AuthCardAction(''))
   }
 
   ngOnInit() {

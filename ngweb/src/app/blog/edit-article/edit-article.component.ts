@@ -20,9 +20,8 @@ export class EditArticleComponent implements OnInit {
   article$: Observable<Article>
 
   constructor(private fb: FormBuilder, private store$: Store<fromRoot.State>,) {
-    // this.article$ = this.store$.pipe(select(fromRoot.getArticleState))
     this.categories$ = this.store$.pipe(
-      select(fromRoot.getUserState),
+      select(fromRoot.getAuthCardState),
       map(v => v.categories)
     )
   }
