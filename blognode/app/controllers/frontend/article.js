@@ -8,9 +8,12 @@ class ArticleController {
         const { id='', category='', current=0, pageSize=10 } = ctx.query
 
         const skip = Number(current)*Number(pageSize)
-        let condition = { author: (id || ctx.session.user._id) }
+        let condition = {}
         if( category !== 'all' ){
             condition.category = category
+        }
+        if( id != 'all'){
+            condition.author = id || ctx.session.user._id
         }
         
         const result = await ArticleModel

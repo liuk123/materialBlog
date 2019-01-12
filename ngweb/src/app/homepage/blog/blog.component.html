@@ -1,0 +1,33 @@
+<!-- <mat-card class="mb-3" *ngFor="let article of articles$ | async">
+  <mat-card-header
+    [routerLink]="['/blog-home', {outlets: { primary: 'blog-detail', aux: ['blog-user', article?.author]}}]"
+    [queryParams]="{id: article?._id, authId: article?.author}">
+
+
+    <div mat-card-avatar></div>
+    <mat-card-title>{{article?.title}}</mat-card-title>
+    <mat-card-subtitle>{{article?.author}}-{{article?.meta.updateAt | date:'yyyy-MM-dd'}}</mat-card-subtitle>
+
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{article?.abstract}}
+    </p>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+
+  <mat-card-footer>
+    <mat-grid-list cols="4" rowHeight="3rem">
+      <mat-grid-tile><mat-icon svgIcon="badge"></mat-icon>：{{article?.category}}</mat-grid-tile>
+      <mat-grid-tile><mat-icon svgIcon="edit"></mat-icon>：{{article?.commentNum}}</mat-grid-tile>
+      <mat-grid-tile><mat-icon svgIcon="eye"></mat-icon>：{{article?.visitNum}}</mat-grid-tile>
+      <mat-grid-tile><mat-icon svgIcon="heart"></mat-icon>：{{article?.like.likeNum}}</mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-footer>
+</mat-card> -->
+<app-card
+  mainRouter="/blog-home"
+  primaryRouter="blog-detail"
+  auxRouter="blog-user"
+  [articles$]="articles$"
+></app-card>
