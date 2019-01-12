@@ -76,7 +76,7 @@ export class ArticleDetailComponent implements OnInit {
     this.store$.dispatch(new actions.DeleteArticleAction({id, category}))
   }
 
-  openNewCommentDialog(cid,to){
+  openNewCommentDialog(cid = '', to = ''){
     const dialogRef = this.dialog.open(
       ReplayDialogComponent,
       {data: { title: '评论' }}
