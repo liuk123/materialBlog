@@ -31,8 +31,6 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { CkeditorComponent } from './ckeditor/ckeditor.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ReplayDialogComponent } from './replay-dialog/replay-dialog.component';
-import { CardComponent } from './card/card.component';
-import { AppRoutingModule } from '../core/app-routing.module';
 
 
 @NgModule({
@@ -63,8 +61,7 @@ import { AppRoutingModule } from '../core/app-routing.module';
     MatBadgeModule,
     MatPaginatorModule,
 
-    CKEditorModule,
-    AppRoutingModule
+    CKEditorModule
 
   ],
   exports: [
@@ -96,15 +93,13 @@ import { AppRoutingModule } from '../core/app-routing.module';
 
     ImageListSelectComponent,
     CKEditorModule,
-    CkeditorComponent,
-    CardComponent
+    CkeditorComponent
   ],
   declarations: [
     ImageListSelectComponent,
     ConfirmDialogComponent,
     CkeditorComponent,
-    ReplayDialogComponent,
-    CardComponent,
+    ReplayDialogComponent
   ],
   entryComponents:[
     ConfirmDialogComponent,

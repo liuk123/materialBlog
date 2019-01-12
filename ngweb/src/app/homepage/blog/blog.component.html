@@ -1,4 +1,4 @@
-<!-- <mat-card class="mb-3" *ngFor="let article of articles$ | async">
+<mat-card class="mb-3" *ngFor="let article of articles$ | async">
   <mat-card-header
     [routerLink]="['/blog-home', {outlets: { primary: 'blog-detail', aux: ['blog-user', article?.author]}}]"
     [queryParams]="{id: article?._id, authId: article?.author}">
@@ -24,10 +24,4 @@
       <mat-grid-tile><mat-icon svgIcon="heart"></mat-icon>：{{article?.like.likeNum}}</mat-grid-tile>
     </mat-grid-list>
   </mat-card-footer>
-</mat-card> -->
-<app-card
-  mainRouter="/blog-home"
-  primaryRouter="blog-detail"
-  auxRouter="blog-user"
-  [articles$]="articles$"
-></app-card>
+</mat-card>
