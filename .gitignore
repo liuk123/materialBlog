@@ -2,5 +2,5 @@
 /node_modules
 \node_modules
 \node_modules\*
-newproject/node/public/upload/*
-newproject/node/public/api/upload/*
+blognode/public/images/*
+blognode/public/*
