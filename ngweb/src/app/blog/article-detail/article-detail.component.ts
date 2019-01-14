@@ -28,7 +28,7 @@ export class ArticleDetailComponent implements OnInit {
       private routInfo: ActivatedRoute,
       private dialog: MatDialog,
       private service$: ArticleService,
-      private location:Location
+      private location:Location,
     ){
 
     //文章详情

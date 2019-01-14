@@ -7,6 +7,7 @@ import * as fromRoot from '../../reducers';
 import * as actions from '../../actions/article.action';
 import { Store, select } from '@ngrx/store';
 import { map } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-article',
@@ -17,13 +18,21 @@ export class EditArticleComponent implements OnInit {
 
   form:FormGroup
   categories$: Observable<Category[]>
-  article$: Observable<Article>
+  article: Article
+  id: string
 
-  constructor(private fb: FormBuilder, private store$: Store<fromRoot.State>,) {
-    this.categories$ = this.store$.pipe(
-      select(fromRoot.getAuthCardState),
-      map(v => v.categories)
-    )
+  constructor(
+      private fb: FormBuilder,
+      private store$: Store<fromRoot.State>,
+      private routInfo: ActivatedRoute
+    ) {
+      this.categories$ = this.store$.pipe(
+        select(fromRoot.getAuthCardState),
+        map(v => v.categories)
+      )
+      this.store$.pipe(select(fromRoot.getArticleDetailState)).subscribe(res => {
+        this.article = res
+      })
   }
 
   ngOnInit() {
@@ -33,6 +42,11 @@ export class EditArticleComponent implements OnInit {
       category: [''],
       newCategory: [''],
       content: ['']
+    })
+    this.routInfo.queryParamMap.subscribe(v => {
+      if(v.get('id')){
+        this.form.patchValue(this.article)
+      }
     })
   }
 

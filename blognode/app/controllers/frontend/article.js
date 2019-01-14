@@ -3,7 +3,6 @@ const ArticleModel = require('../../models/article')
 const CommentModel = require('../../models/comment')
 
 var fs = require('fs');
-var multer = require('koa-multer');
 var path = require('path');
 
 class ArticleController {
@@ -131,7 +130,7 @@ class ArticleController {
     static async get_detail(ctx){
         const { id } = ctx.query
         let liked = 0
-        const result = await ArticleModel.findById(id).select('title content category like commentNum visitNum')
+        const result = await ArticleModel.findById(id).select('title abstract content category like commentNum visitNum')
         if( result &&
             result.like &&
             result.like.likeUser &&
