@@ -28,7 +28,8 @@
   </mat-card-footer>
 </mat-card>
 
-<mat-paginator [length]="100"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]">
+<mat-paginator [length]="length"
+              [pageSize]="pageSize"
+              showFirstLastButtons = "true"
+              (page)="onPage($event)">
 </mat-paginator>

@@ -42,7 +42,7 @@ export enum ActionTypes {
 export class ArticleListAction implements Action {
     readonly type = ActionTypes.ARTICLE_LIST;
 
-    constructor(public payload: {id: string, category: string}) { }
+    constructor(public payload: {id: string, category: string, pageSize: number, current: number}) { }
 }
 export class ArticleListSuccessAction implements Action {
     readonly type = ActionTypes.ARTICLE_LIST_SCCESS;

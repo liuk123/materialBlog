@@ -28,9 +28,13 @@ export class ArticleService {
         return this.http.post<Result<null>>(uri, data );
     }
 
-    get_list({id , category}){
+    get_list({id , category, pageSize, current}){
         const uri=`${this.config.uri}/${this.domain}/get_list`;
-        const params = new HttpParams().append('id',id).append('category', category)
+        const params = new HttpParams()
+            .append('id',id)
+            .append('category', category)
+            .append('pageSize', pageSize)
+            .append('current', current)
         return this.http.get<Result<Article[]>>(uri, { params: params });
     }
     get_detail(id){

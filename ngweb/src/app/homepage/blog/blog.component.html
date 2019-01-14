@@ -25,3 +25,9 @@
     </mat-grid-list>
   </mat-card-footer>
 </mat-card>
+
+<mat-paginator [length]="length"
+              [pageSize]="pageSize"
+              showFirstLastButtons = "true"
+              (page)="onPage($event)">
+</mat-paginator>
