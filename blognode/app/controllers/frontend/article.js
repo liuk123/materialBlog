@@ -2,8 +2,12 @@ const UserModel = require('../../models/user')
 const ArticleModel = require('../../models/article')
 const CommentModel = require('../../models/comment')
 
+var fs = require('fs');
+var multer = require('koa-multer');
+var path = require('path');
+
 class ArticleController {
-    // 获取自己的文章列表
+    // 获取文章列表
     static async get_list(ctx){
         const { id='', category='', current=0, pageSize=10 } = ctx.query
 
@@ -144,6 +148,7 @@ class ArticleController {
 
         ctx.success({ msg:'获取详情成功!',data: result })
     }
+
     // 获取评论
     static async get_comment(ctx){
         const { id } = ctx.query
@@ -157,6 +162,7 @@ class ArticleController {
 
         ctx.success({ msg:'获取详情成功!',data: result })
     }
+
     // 新建评论
     static async comment(ctx){
         const _comment = ctx.request.body
@@ -182,6 +188,52 @@ class ArticleController {
         
         
     }
+
+    //上传图片
+    static async upload_pic(ctx){
+
+        const today = new Date();
+        const folder = today.getFullYear() + "/" + (today.getMonth() + 1) + "/" + today.getDate();
+        const dirname = path.join(__dirname,'../../../','/public/api/upload/'+folder)
+        if (mkdirsSync(dirname, '0777')) {
+            const file = ctx.request.files.file;
+            const fileName = new Date().getTime() + "." + file.name.split('.')[file.name.split('.').length - 1];
+            const newPath = dirname + "/" + fileName;
+            const result = await fs.rename(file.path, newPath);
+            ctx.body=JSON.stringify({fileName: '/upload/' + folder + "/" + fileName})
+        } else {
+            console.error('error')
+        }
+    }
+    
 }
 
 export default ArticleController;
+
+
+
+
+
+
+
+function mkdirsSync(dirpath, mode) {
+    if (!fs.existsSync(dirpath)) {
+        var pathtmp;
+        dirpath.split(path.sep).forEach(function (dirname) {
+            if (dirname == "") {
+                dirname = "/"
+            }
+            if (pathtmp) {
+                pathtmp = path.join(pathtmp, dirname);
+            } else {
+                pathtmp = dirname;
+            }
+            if (!fs.existsSync(pathtmp)) {
+                if (!fs.mkdirSync(pathtmp, mode)) {
+                    return false;
+                }
+            }
+        });
+    }
+    return true;
+}

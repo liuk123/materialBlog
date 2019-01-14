@@ -17,14 +17,19 @@ router
     .get('/api/article/get_list',ArticleController.get_list)
     .get('/api/article/get_detail',ArticleController.get_detail)                        // 获取详情
     .get('/api/article/get_comment',ArticleController.get_comment) 
-    .post('/api/article/comment',ArticleController.comment)                // 发表评论
+    .post('/api/article/comment',ArticleController.comment)                             // 发表评论
 
     // 用户
     .get('/api/user/logout',UserController.logout)                                       // 用户退出
     .post('/api/user/login',UserController.login)                                        // 用户登录
     .post('/api/user/register',UserController.register)                                  // 用户注册
-    .get('/api/user/user_card',UserController.user_card)                                   // 用户个人中心信息
-    // .post('/api/user/put_avatar', upload.alioss, UserController.put_avatar)              // 上传用户头像
+    .get('/api/user/user_card',UserController.user_card)                                 // 用户信息
+
+
+
+    
+    .post('/api/uploadpic',ArticleController.upload_pic)                             // 发表评论
+    // .post('/api/user/put_avatar', upload.alioss, UserController.put_avatar)           // 上传用户头像
     // .put('/api/user/put_userinfo',UserController.put_userinfo)
 
 module.exports = router;

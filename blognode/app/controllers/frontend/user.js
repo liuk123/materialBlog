@@ -96,6 +96,23 @@ class UserController {
         const updateavatar = await UserModel.findByIdAndUpdate(id,{ avatar: url });
         return ctx.success({ msg:'上传成功!',data: { url,id } });
     }
+
+    //midware for user
+    static async signinRequired(ctx,next) {
+        var user=ctx.session.user
+        if(!user){
+            return res.json({code:0,msg:'没有登录'})
+        }
+        next()
+    }
+    //midware for user
+    static async adminRequired(ctx,next) {
+        var user=ctx.session.user
+        if(user.role<=100||!user.role){
+            return res.json({code:0,msg:'没有用户权限'})
+        }
+        next()
+    }
 }
 
 
