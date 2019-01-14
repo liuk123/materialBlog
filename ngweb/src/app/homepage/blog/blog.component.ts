@@ -4,7 +4,6 @@ import * as actions from '../../actions/article.action';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { Article } from 'src/app/domain';
-import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-blog',

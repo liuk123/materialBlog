@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { IndexHomeComponent } from './index-home/index-home.component';
 
 const routes: Routes = [
-    // { path: 'homepage', redirectTo: '/login',},
     { path: 'index-home', component: IndexHomeComponent }
 ];
 
