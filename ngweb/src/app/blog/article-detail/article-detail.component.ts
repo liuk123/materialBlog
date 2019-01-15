@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Article, Comment } from 'src/app/domain';
 import { Location } from '@angular/common';
 import * as fromRoot from '../../reducers';
@@ -9,19 +9,21 @@ import { MatDialog } from '@angular/material';
 import { take, filter, map, switchMap } from 'rxjs/operators';
 import { ReplayDialogComponent } from 'src/app/shared/replay-dialog/replay-dialog.component';
 import { ArticleService } from 'src/app/services/article.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-article-detail',
   templateUrl: './article-detail.component.html',
   styleUrls: ['./article-detail.component.scss']
 })
-export class ArticleDetailComponent implements OnInit {
+export class ArticleDetailComponent implements OnInit, OnDestroy {
 
   article: Article
   comments: Comment[]
   liked: number
   id: string //articleId
   authId: string
+  subscription: Subscription
 
   constructor(
       private store$: Store<fromRoot.State>,
@@ -35,7 +37,7 @@ export class ArticleDetailComponent implements OnInit {
     this.id = this.routInfo.snapshot.queryParamMap.get('id')
     this.store$.dispatch(new actions.ArticleDetailAction(this.id));
     this.store$.dispatch(new actions.CommentListAction(this.id));
-    this.store$.pipe(
+    this.subscription = this.store$.pipe(
       select(fromRoot.getArticleDetailState),
       filter(v => Object.keys(v).length>0)
     ).subscribe(v => {
@@ -66,6 +68,10 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   like(titleId){
