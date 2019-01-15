@@ -20,7 +20,7 @@
   <button mat-icon-button [matMenuTriggerFor]="userManage"><mat-icon svgIcon="ellipsis"></mat-icon></button>
   <mat-menu #userManage="matMenu">
       <div *ngIf="auth._id else elseBlock">
-          <button mat-menu-item [routerLink]="['/person']"><mat-icon svgIcon="genius"></mat-icon>个人</button>
+          <button mat-menu-item [routerLink]="['/person-center']"><mat-icon svgIcon="genius"></mat-icon>个人</button>
           <button mat-menu-item (click)="logout()"><mat-icon svgIcon="genius"></mat-icon>退出</button>
       </div>
       <ng-template #elseBlock>

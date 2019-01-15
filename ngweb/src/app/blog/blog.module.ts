@@ -17,7 +17,6 @@ import { EditArticleComponent } from './edit-article/edit-article.component';
     EditArticleComponent,
   ],
   imports: [
-    CommonModule,
     blogRoutingModule,
     SharedModule,
   ],

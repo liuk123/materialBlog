@@ -7,6 +7,7 @@ import { SharedModule } from './shared/shared.module';
 import { LoginModule } from './login/login.module';
 import { BlogModule } from './blog/blog.module';
 import { HomepageModule } from './homepage/homepage.module';
+import { PersonModule } from './person/person.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HomepageModule } from './homepage/homepage.module';
     SharedModule,
     LoginModule,
     BlogModule,
-    HomepageModule
+    HomepageModule,
+    PersonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

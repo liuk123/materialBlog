@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
-import { Observable } from 'rxjs';
 import { User } from 'src/app/domain';
 import * as actions from '../../actions/auth.action';
 

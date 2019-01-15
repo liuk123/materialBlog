@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'homepage', redirectTo: '/index-home', pathMatch: 'full' },
   { path: 'blog-home', redirectTo: '/blog-home', pathMatch: 'full' },
+  { path: 'person-center', redirectTo: '/person-center', pathMatch: 'full' },
   
   // { path: '**', component: PageNotFoundComponent }
 ];
