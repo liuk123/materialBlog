@@ -6,7 +6,7 @@ const ArticleModel =  require('../../models/article')
 class UserController {
     //注册
     static async register(ctx){
-        const { userName, phone, password, repeat } = ctx.request.body
+        const { userName, phone, password, repeat, invite } = ctx.request.body
         if(!userName||!password) {
             return ctx.error({ msg: '用户名或密码不能为空!' });
         }

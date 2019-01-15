@@ -19,7 +19,6 @@ export class EditArticleComponent implements OnInit {
   form:FormGroup
   categories$: Observable<Category[]>
   article: Article
-  id: string
 
   constructor(
       private fb: FormBuilder,
@@ -37,11 +36,12 @@ export class EditArticleComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-	    title: ['', [ Validators.required ]],
-      abstract: ['', [ Validators.required, Validators.minLength(3) ]],
+	    title: ['', [ Validators.required, Validators.minLength(5) ]],
+      abstract: ['', [ Validators.required, Validators.minLength(15) ]],
       category: [''],
       newCategory: [''],
-      content: ['']
+      content: ['', [ Validators.required, Validators.minLength(20) ]],
+      _id: ['']
     })
     this.routInfo.queryParamMap.subscribe(v => {
       if(v.get('id')){
@@ -51,9 +51,13 @@ export class EditArticleComponent implements OnInit {
   }
 
   onSubmit({value,valid},ev:Event){
-    ev.preventDefault()
-    console.log(JSON.stringify(value))
-    this.store$.dispatch(new actions.CreateArticleAction(this.form.value))
+    if( !valid ) return false
+    if(value._id){
+      this.store$.dispatch(new actions.EditeArticleAction(value))
+    }else{
+      this.store$.dispatch(new actions.CreateArticleAction(value))
+    }
+    
   }
 
 }

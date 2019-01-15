@@ -63,7 +63,7 @@ class ArticleController {
         if(data.newCategory){
             data.category=data.newCategory
         }
-        const result = await ArticleModel.updateOne({_id: data.id}, data)
+        const result = await ArticleModel.updateOne({_id: data._id}, data)
         
         if(data.newCategory){
             await UserModel.updateOne(

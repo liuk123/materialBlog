@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
 import * as authActions from '../../actions/auth.action';
@@ -22,17 +22,17 @@ export class RegisterComponent implements OnInit {
     const nums = [1,2,3,4,5,6,7,8,9,10];
     this.items = nums.map(d=>`avatars:svg-${d}`);
     this.form=this.fb.group({
-      phone:[''],
-      userName:[''],
-      password:[''],
+      phone:['', [ Validators.required, Validators.minLength(5) ]],
+      userName:['', [ Validators.required, Validators.minLength(3) ]],
+      password:['', [ Validators.required, Validators.minLength(3) ]],
       repeat:[''],
+      invite: ['', [ Validators.required, Validators.minLength(3) ]],
       avatar:[img],
     })
     
   }
 
   onSubmit({value,valid},ev:Event){
-
     if( !valid ) return false
     this.store$.dispatch(new authActions.RegisterAction(value))
   }

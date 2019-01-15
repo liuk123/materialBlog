@@ -1,6 +1,7 @@
 
 
 <form class="form" [formGroup]="form" (ngSubmit)="onSubmit(form,$event)">
+  <input type="hidden" formControlName="_id">
   <mat-card class="card">
     <mat-card-title>新建or编辑</mat-card-title>
     <mat-card-content>
