@@ -37,8 +37,7 @@ export class ArticleDetailComponent implements OnInit {
     this.store$.dispatch(new actions.CommentListAction(this.id));
     this.store$.pipe(
       select(fromRoot.getArticleDetailState),
-      filter(v => Object.keys(v).length>0),
-      take(1)
+      filter(v => Object.keys(v).length>0)
     ).subscribe(v => {
       this.article = v
       //初始化喜欢
