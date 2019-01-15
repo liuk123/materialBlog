@@ -24,6 +24,7 @@ import {
   MatButtonToggleModule,
   MatBadgeModule,
   MatPaginatorModule,
+  MatChipsModule,
 
 } from "@angular/material";
 import { ImageListSelectComponent } from './image-list-select/image-list-select.component';
@@ -60,6 +61,7 @@ import { ReplayDialogComponent } from './replay-dialog/replay-dialog.component';
     MatButtonToggleModule,
     MatBadgeModule,
     MatPaginatorModule,
+    MatChipsModule,
 
     CKEditorModule
 
@@ -90,6 +92,7 @@ import { ReplayDialogComponent } from './replay-dialog/replay-dialog.component';
     MatButtonToggleModule,
     MatBadgeModule,
     MatPaginatorModule,
+    MatChipsModule,
 
     ImageListSelectComponent,
     CKEditorModule,
