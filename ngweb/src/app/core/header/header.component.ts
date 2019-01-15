@@ -15,9 +15,10 @@ export class HeaderComponent implements OnInit {
   @Output() toggle=new EventEmitter<void>();
   @Output() toggleDarkTheme=new EventEmitter<Boolean>();
 
-  auth$: Observable<User>
+  auth: User
   constructor(private store$: Store<fromRoot.State>) {
-    this.auth$ = this.store$.pipe(select(fromRoot.getAuthCardState))
+    this.store$.pipe(select(fromRoot.getAuthCardState)).subscribe(res => this.auth = res)
+    this.store$.pipe(select(fromRoot.getAuthState)).subscribe(res => this.auth = res)
     this.store$.dispatch(new actions.AuthCardAction(''))
   }
 
@@ -33,6 +34,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(){
-    this.store$.dispatch(new actions.LogoutAction(null))
+    this.store$.dispatch(new actions.LogoutAction(this.auth._id))
   }
 }

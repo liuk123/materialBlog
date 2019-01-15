@@ -11,6 +11,8 @@ export enum ActionTypes {
     REGISTER_FAIL = '[Auth] Register fail',
     
     LOGOUT = '[Auth] Logout',
+    LOGOUT_SCCESS = '[Auth] Logout success',
+    LOGOUT_FAIL = '[Auth] Logout fail',
 
     USERCARD = '[UserCard] user-card',
     USERCARD_SCCESS = '[UserCard] user-card success',
@@ -57,6 +59,16 @@ export class RegisterFailAction implements Action {
 export class LogoutAction implements Action {
     readonly type = ActionTypes.LOGOUT;
 
+    constructor(public payload: string) { }
+}
+export class LogoutSuccessAction implements Action {
+    readonly type = ActionTypes.LOGOUT_SCCESS;
+
+    constructor(public payload: null) { }
+}
+export class LogoutFailAction implements Action {
+    readonly type = ActionTypes.LOGOUT_FAIL;
+
     constructor(public payload: null) { }
 }
 
@@ -102,6 +114,8 @@ export type Actions
     | RegisterFailAction
     | RegisterSuccessAction
     | LogoutAction
+    | LogoutFailAction
+    | LogoutSuccessAction
 
     | UserCardAction
     | UserCardSuccessAction

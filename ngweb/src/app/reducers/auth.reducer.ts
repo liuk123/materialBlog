@@ -21,6 +21,13 @@ export function reducer(state = initialState, action: actions.Actions ): State {
         case actions.ActionTypes.LOGIN_FAIL: {
             return initialState
         }
+        
+        case actions.ActionTypes.LOGOUT_SCCESS:{
+            return {}
+        }
+        // case actions.ActionTypes.LOGOUT_FAIL:{
+        //     return false
+        // }
         default: {
             return state;
         }

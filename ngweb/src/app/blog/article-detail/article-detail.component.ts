@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import * as fromRoot from '../../reducers';
 import * as actions from '../../actions/article.action';
 import { Store, select } from '@ngrx/store';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { take, filter, map, switchMap } from 'rxjs/operators';
 import { ReplayDialogComponent } from 'src/app/shared/replay-dialog/replay-dialog.component';
@@ -37,7 +37,8 @@ export class ArticleDetailComponent implements OnInit {
     this.store$.dispatch(new actions.CommentListAction(this.id));
     this.store$.pipe(
       select(fromRoot.getArticleDetailState),
-      filter(v => Object.keys(v).length>0)
+      filter(v => Object.keys(v).length>0),
+      take(1)
     ).subscribe(v => {
       this.article = v
       //初始化喜欢

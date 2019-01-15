@@ -46,9 +46,10 @@ class UserController {
 
     //退出
     static async logout(ctx) {
-        const { userid } = ctx.query;
+        const id = ctx.request.body;
+ 
         const cookie_userid = ctx.cookies.get('userid');
-        if(!userid) return ctx.error({ msg:'用户id不存在!' });
+        if(!id) return ctx.error({ msg:'用户id不存在!' });
     
         const user = ctx.session.user;
         if(!user&&!cookie_userid) return ctx.error({ msg:'该用户已退出!' });

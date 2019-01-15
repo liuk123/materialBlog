@@ -15,4 +15,9 @@ export class AuthService {
         const uri=`${this.config.uri}/${this.domain}/login`;
         return this.http.post<any>(uri,params)
     }
+
+    logout(params){
+        const uri=`${this.config.uri}/${this.domain}/logout`;
+        return this.http.post<any>(uri,params)
+    }
 }

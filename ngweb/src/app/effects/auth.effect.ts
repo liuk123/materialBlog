@@ -23,7 +23,7 @@ export class AuthEffects {
     @Effect()
     register$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.REGISTER),
-        mergeMap((u:actions.LoginAction) => this.service$.register(u.payload).pipe(
+        mergeMap((u:actions.RegisterAction) => this.service$.register(u.payload).pipe(
             map(auth => new actions.RegisterSuccessAction(auth.data)),
             catchError(err => of(new actions.RegisterFailAction(err)))
         ))
@@ -32,11 +32,18 @@ export class AuthEffects {
     @Effect()
     logout$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.LOGOUT),
-        map(_ => new RouterActions.Go({
-            path: ['/login'],
-            query: { page: 1 },
-            extras: { replaceUrl: false }
-        }))
+        mergeMap((u:actions.LogoutAction) => this.service$.logout(u.payload).pipe(
+            map(u => {
+                new RouterActions.Go({
+                    path: ['/login'],
+                    query: { page: 1 },
+                    extras: { replaceUrl: false }
+                })
+                return new actions.LogoutSuccessAction(null)
+            }),
+            catchError(err => of(new actions.LogoutFailAction(err)))
+        ))
+        
     )
     
     @Effect()

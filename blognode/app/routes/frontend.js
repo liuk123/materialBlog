@@ -20,7 +20,7 @@ router
     .post('/api/article/comment',ArticleController.comment)                             // 发表评论
 
     // 用户
-    .get('/api/user/logout',UserController.logout)                                       // 用户退出
+    .post('/api/user/logout',UserController.logout)                                       // 用户退出
     .post('/api/user/login',UserController.login)                                        // 用户登录
     .post('/api/user/register',UserController.register)                                  // 用户注册
     .get('/api/user/user_card',UserController.user_card)                                 // 用户信息
