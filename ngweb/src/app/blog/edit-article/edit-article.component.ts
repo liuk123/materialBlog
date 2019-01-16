@@ -55,6 +55,7 @@ export class EditArticleComponent implements OnInit {
     if(value._id){
       this.store$.dispatch(new actions.EditeArticleAction(value))
     }else{
+      delete value._id
       this.store$.dispatch(new actions.CreateArticleAction(value))
     }
     

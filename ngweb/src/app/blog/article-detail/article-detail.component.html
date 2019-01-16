@@ -1,6 +1,5 @@
 <mat-card>
   <mat-card-header>
-    <div mat-card-avatar></div>
     <mat-card-title>{{article?.title}}</mat-card-title>
     <mat-card-subtitle>{{article?.meta?.updateAt}}</mat-card-subtitle>
   </mat-card-header>
@@ -31,14 +30,13 @@
   </mat-card-header>
   <mat-card-content>
       <div *ngFor="let comment of comments; let i=index" class="media">
-          <mat-icon svgIcon="unassigned"></mat-icon>
+          <mat-icon [svgIcon]="comment?.from?.avatar"></mat-icon>
           <div class="media-body">
             <strong>{{comment.from.userName}}</strong>
             <button mat-button  (click)="openNewCommentDialog(comment._id,comment?.from?._id)">回复</button>
             <div [innerHTML] = "comment?.content" class="nopad"></div>
         
             <div *ngFor="let subComment of comment.reply" class="media">
-              <mat-icon svgIcon="unassigned"></mat-icon>
               <div class="media-body">
                 <strong>{{subComment?.from?.userName}} @ {{subComment?.to?.userName}}</strong>
                 <button mat-button  (click)="openNewCommentDialog(comment._id,comment?.from?._id)">回复</button>

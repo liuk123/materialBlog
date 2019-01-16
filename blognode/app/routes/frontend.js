@@ -24,11 +24,11 @@ router
     .post('/api/user/login',UserController.login)                                        // 用户登录
     .post('/api/user/register',UserController.register)                                  // 用户注册
     .get('/api/user/user_card',UserController.user_card)                                 // 用户信息
-
+    // .post('/api/user/put_avatar', UserController.put_avatar)           // 上传用户头像
 
 
     
-    .post('/api/uploadpic',ArticleController.upload_pic)                             // 发表评论
+    .post('/api/uploadpic',ArticleController.upload_pic)                             // 编辑时上传照片
     // .post('/api/user/put_avatar', upload.alioss, UserController.put_avatar)           // 上传用户头像
     // .put('/api/user/put_userinfo',UserController.put_userinfo)
 

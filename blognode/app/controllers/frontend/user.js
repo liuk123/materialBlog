@@ -6,7 +6,7 @@ const ArticleModel =  require('../../models/article')
 class UserController {
     //注册
     static async register(ctx){
-        const { userName, phone, password, repeat, invite } = ctx.request.body
+        const { userName, phone, password, repeat, invite, avatar } = ctx.request.body
         if(!userName||!password) {
             return ctx.error({ msg: '用户名或密码不能为空!' });
         }
@@ -17,7 +17,7 @@ class UserController {
         if(ishas){
             return ctx.error({ msg: '该用户已存在!' });
         }
-        const result = await UserModel.create({ userName, phone, password: md5(password) });
+        const result = await UserModel.create({ userName, phone, password: md5(password), avatar });
         if(!result)
             return ctx.error({ msg: '注册失败!' });
             return ctx.success({ msg:'注册成功' });

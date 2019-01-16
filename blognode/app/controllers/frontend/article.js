@@ -154,9 +154,9 @@ class ArticleController {
 
         const result = await CommentModel
             .find({ title: id})
-            .populate({ path: 'from', select: { _id:1, userName: 1 }})
-            .populate({ path: 'reply.from', select: { _id: 1, userName: 1 }})
-            .populate({ path: 'reply.to', select: { _id:1, userName: 1 }})
+            .populate({ path: 'from', select: { _id:1, userName: 1, avatar: 1 }})
+            .populate({ path: 'reply.from', select: { _id: 1, userName: 1, avatar: 1 }})
+            .populate({ path: 'reply.to', select: { _id:1, userName: 1, avatar: 1 }})
             .sort({ _id: -1 })
 
         ctx.success({ msg:'获取详情成功!',data: result })

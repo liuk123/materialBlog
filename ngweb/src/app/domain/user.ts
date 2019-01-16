@@ -3,6 +3,7 @@ export interface User {
   userName: string;
   password?: string;
   introduce?: string;
+  avatar?:string;
   categories?: Category[];
   label?: [];
   role: number;

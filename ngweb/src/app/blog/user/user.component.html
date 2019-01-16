@@ -1,6 +1,8 @@
 <mat-card>
   <mat-card-header>
-    <div mat-card-avatar><img src="#"></div>
+    <div mat-card-avatar>
+      <mat-icon [svgIcon]="(user$ | async)?.avatar" style="width:100%;height:100%"></mat-icon>
+    </div>
     <mat-card-title>{{(user$ | async)?.userName}}</mat-card-title>
     <mat-card-subtitle>{{(user$ | async)?.introduce}}</mat-card-subtitle>
   </mat-card-header>

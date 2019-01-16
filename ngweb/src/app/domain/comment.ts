@@ -17,4 +17,5 @@ export interface Reply {
 interface User {
   userName?: string,
   _id: string
+  avatar?: string,
 }
