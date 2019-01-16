@@ -24,6 +24,4 @@ export const loadSvgResources=(ir:MatIconRegistry, ds:DomSanitizer)=>{
     ir.addSvgIcon('document',ds.bypassSecurityTrustResourceUrl(`${iconDir}/document.svg`));
     ir.addSvgIcon('badge',ds.bypassSecurityTrustResourceUrl(`${iconDir}/badge.svg`));
 
-
-
 }

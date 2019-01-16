@@ -38,7 +38,10 @@
         
             <div *ngFor="let subComment of comment.reply" class="media">
               <div class="media-body">
-                <strong>{{subComment?.from?.userName}} @ {{subComment?.to?.userName}}</strong>
+                <strong>
+                  <mat-icon [svgIcon]="subComment?.from?.avatar"></mat-icon>{{subComment?.from?.userName}} @ 
+                  <mat-icon [svgIcon]="subComment?.to?.avatar"></mat-icon>{{subComment?.to?.userName}}
+                </strong>
                 <button mat-button  (click)="openNewCommentDialog(comment._id,comment?.from?._id)">回复</button>
                 <div [innerHTML] = "subComment?.content" class="nopad"></div>
               </div>
