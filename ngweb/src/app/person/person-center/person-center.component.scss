@@ -1,0 +1,11 @@
+mat-card{
+    width:200px;
+    flex: 1 0 auto;
+    margin:1rem;
+}
+.m-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
