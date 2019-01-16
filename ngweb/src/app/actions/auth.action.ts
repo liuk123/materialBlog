@@ -21,6 +21,10 @@ export enum ActionTypes {
     AUTHCARD = '[AuthCard] auth-card',
     AUTHCARD_SCCESS = '[AuthCard] auth-card success',
     AUTHCARD_FAIL = '[AuthCard] auth-card fail',
+
+    UPDATE_AUTH = '[Auth] update-auth',
+    UPDATE_AUTH_SCCESS = '[Auth] update-auth success',
+    UPDATE_AUTH_FAIL = '[Auth] update-auth fail',
 };
 
 //登录注册退出
@@ -106,6 +110,23 @@ export class AuthCardFailAction implements Action {
     constructor(public payload: string) { }
 }
 
+export class UpdateAuthAction implements Action {
+    readonly type = ActionTypes.UPDATE_AUTH;
+
+    constructor(public payload: User) { }
+}
+export class UpdateAuthSuccessAction implements Action {
+    readonly type = ActionTypes.UPDATE_AUTH_SCCESS;
+
+    constructor(public payload: User) { }
+}
+export class UpdateAuthFailAction implements Action {
+    readonly type = ActionTypes.UPDATE_AUTH_FAIL;
+
+    constructor(public payload: null) { }
+}
+
+
 export type Actions
     = LoginAction
     | LoginSuccessAction
@@ -124,4 +145,8 @@ export type Actions
     | AuthCardAction
     | AuthCardSuccessAction
     | AuthCardFailAction
+
+    | UpdateAuthAction
+    | UpdateAuthSuccessAction
+    | UpdateAuthFailAction
 

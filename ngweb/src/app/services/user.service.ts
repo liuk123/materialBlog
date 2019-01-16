@@ -12,4 +12,9 @@ export class UserService {
         const params = new HttpParams().append('id',id);
         return this.http.get<Result<User>>(uri, {params: params});
     }
+
+    update_auth(data){
+        const uri=`${this.config.uri}/${this.domain}/update_user`;
+        return this.http.post<Result<User>>(uri, data);
+    }
 }

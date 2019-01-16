@@ -27,5 +27,14 @@ export class UserEffects {
             catchError(err => of(new actions.AuthCardFailAction(err)))
         ))
     )
+
+    @Effect()
+    updateAuth$: Observable<Action> = this.actions$.pipe(
+        ofType(actions.ActionTypes.UPDATE_AUTH),
+        mergeMap((u:actions.UpdateAuthAction) => this.service$.update_auth(u.payload).pipe(
+            map(user => new actions.UpdateAuthSuccessAction(user.data)),
+            catchError(err => of(new actions.UpdateAuthFailAction(err)))
+        ))
+    )
     constructor(private actions$: Actions, private service$: UserService){}
 }

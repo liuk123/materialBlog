@@ -25,6 +25,7 @@ router
     .post('/api/user/register',UserController.register)                                  // 用户注册
     .get('/api/user/user_card',UserController.user_card)                                 // 用户信息
     // .post('/api/user/put_avatar', UserController.put_avatar)           // 上传用户头像
+    .post('/api/user/update_user',UserController.update_user)                                 // 更新用户
 
 
     

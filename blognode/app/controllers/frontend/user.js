@@ -23,6 +23,29 @@ class UserController {
             return ctx.success({ msg:'注册成功' });
 
     }
+    //更新
+    static async update_user(ctx){
+        // const { userName, phone, password, repeat, avatar, introduce } = ctx.request.body
+        const data = ctx.request.body
+        if(data.password && data.password != data.repeat) {
+            return ctx.error({ msg: '两次输入的密码不一致!' });
+        }
+        if(data.password) {
+            data.password = md5(data.password)
+        }
+        const ishas = await UserModel.findOne({ userName: data.userName });
+        if(ishas && ishas._id != ctx.session.user._id){
+            return ctx.error({ msg: '该用户已存在!' });
+        }
+        const result = await UserModel.findByIdAndUpdate(
+            ctx.session.user._id,
+            data
+        );
+        if(!result)
+            return ctx.error({ msg: '更新失败!' });
+            return ctx.success({ msg:'更新成功',data: result });
+
+    }
 
     //登录
     static async login(ctx){
