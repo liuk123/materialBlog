@@ -5,20 +5,20 @@
 html, body, app-root, mat-sidenav-container, .site {
     width:100%;
     margin:0;
-    height:100%;
 }
-header,footer{
-  width:100%;
-}
-.site{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+header{
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index: 10;
 }
 main{
-    flex:0 1 auto;
+    padding-top: 84px;
+    padding-bottom: 3rem;
     max-width:900px;
-    padding:2rem 0;
+    margin-left:auto;
+    margin-right:auto;
 }
 .full-width{
     width:100%;
@@ -29,7 +29,10 @@ main{
 .text-right{
   text-align: right;
 }
-
+.nopad>p{
+  padding:0;
+  margin:0;
+}
 //===============
 .w-25 {
     width: 25% !important;
