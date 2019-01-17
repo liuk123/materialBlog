@@ -11,14 +11,13 @@
 
   </mat-card-header>
   <mat-card-content>
-    <p>
+    <p class="text-article">
       {{article?.abstract}}
     </p>
   </mat-card-content>
-  <mat-divider></mat-divider>
 
   <mat-card-footer>
-    <mat-grid-list cols="4" rowHeight="3rem">
+    <mat-grid-list cols="4" rowHeight="2.5rem" class="text-muted">
       <mat-grid-tile><mat-icon svgIcon="badge"></mat-icon>：{{article?.category}}</mat-grid-tile>
       <mat-grid-tile><mat-icon svgIcon="edit"></mat-icon>：{{article?.commentNum}}</mat-grid-tile>
       <mat-grid-tile><mat-icon svgIcon="eye"></mat-icon>：{{article?.visitNum}}</mat-grid-tile>

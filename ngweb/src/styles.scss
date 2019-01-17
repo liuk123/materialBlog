@@ -6,6 +6,7 @@ html, body, app-root, mat-sidenav-container, .site {
     width:100%;
     margin:0;
 }
+
 header{
   position: fixed;
   top:0;
@@ -32,6 +33,13 @@ main{
 .nopad>p{
   padding:0;
   margin:0;
+}
+.text-muted{
+  color: #6c757d!important;
+}
+.text-article{
+  line-height: 1.5rem;
+  text-indent: 2rem;
 }
 //===============
 .w-25 {

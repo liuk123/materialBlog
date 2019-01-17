@@ -19,7 +19,7 @@
       mat-list-item
       [routerLink]="['/blog-home', { outlets: { primary: 'blog-list'} }]"
       [queryParams]="{category:'all',authId: (user$ |async)._id}">
-      <span matBadge="4" matBadgeOverlap="false">全部分类</span>
+      全部分类
     </button>
     <button
       mat-list-item
@@ -32,6 +32,6 @@
       mat-list-item
       [routerLink]="['/blog-home', { outlets: { primary: 'blog-list'} }]"
       [queryParams]="{category:'', authId: (user$ |async)._id}">
-      <span matBadge="4" matBadgeOverlap="false">未分组</span>
+      未分组
     </button>
 </mat-action-list>

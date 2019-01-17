@@ -54,17 +54,18 @@ class UserController {
         if(!userName||!password) {
             return ctx.error({ msg: '获取用户失败!' })
         }
+        console.log(userName)
         const data = await UserModel.findOne({ userName, password: md5(password) },{ password:0 })
         if(!data) return ctx.error({ msg: '用户名或密码错误!' })
-
+        console.log(data)
         ctx.session.user = data
-        const id = data._id
-        const avatar = data.avatar
-        const keep_user = 604800000 // 7天
+        // const id = data._id
+        // const avatar = data.avatar
+        // const keep_user = 604800000 // 7天
 
-        ctx.cookies.set('userid', id, { maxAge: keep_user,httpOnly: false });
-        ctx.cookies.set('username', userName, { maxAge: keep_user,httpOnly: false });
-        ctx.cookies.set('avatar', avatar, { maxAge: keep_user,httpOnly: false });
+        // ctx.cookies.set('userid', id, { maxAge: keep_user,httpOnly: false });
+        // ctx.cookies.set('username', userName, { maxAge: keep_user,httpOnly: false });
+        // ctx.cookies.set('avatar', avatar, { maxAge: keep_user,httpOnly: false });
         ctx.success({ msg:'登录成功', data});
     }
 
