@@ -39,7 +39,8 @@ class UserController {
         }
         const result = await UserModel.findByIdAndUpdate(
             ctx.session.user._id,
-            data
+            data,
+            {new: true}
         );
         if(!result)
             return ctx.error({ msg: '更新失败!' });

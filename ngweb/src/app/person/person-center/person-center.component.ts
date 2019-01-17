@@ -4,6 +4,7 @@ import { Store, select } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
 import { User } from 'src/app/domain';
 import * as actions from '../../actions/auth.action';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-person-center',
@@ -14,19 +15,26 @@ export class PersonCenterComponent implements OnInit {
 
   auth: User
   items
-  avatar
-  constructor(private store$: Store<fromRoot.State>) {
+  form: FormGroup
+  constructor(private store$: Store<fromRoot.State>,private fb: FormBuilder) {
+    this.form = this.fb.group({
+      userName: [''],
+      introduce: [''],
+      phone: [''],
+      avatar: ['']
+    })
     this.store$.pipe(select(fromRoot.getAuthCardState)).subscribe(res => {
       this.auth = res
-      this.avatar = res.avatar
+      this.form.patchValue(res)
     })
   }
 
   ngOnInit() {
     const nums = [1,2,3,4,5,6,7,8,9,10]
     this.items = nums.map(d=>`avatars:svg-${d}`)
+    
   }
-  updateAuth(data){
-    this.store$.dispatch(new actions.UpdateAuthAction(data))
+  onSubmit({value,valid},ev:Event){
+    this.store$.dispatch(new actions.UpdateAuthAction(value))
   }
 }
