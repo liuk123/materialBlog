@@ -37,4 +37,7 @@ export class PersonCenterComponent implements OnInit {
   onSubmit({value,valid},ev:Event){
     this.store$.dispatch(new actions.UpdateAuthAction(value))
   }
+  del_category(){
+
+  }
 }
