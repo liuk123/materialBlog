@@ -1,7 +1,7 @@
 import md5 from 'md5'
 
 const UserModel = require('../../models/user')
-const ArticleModel =  require('../../models/article')
+const AdminModel =  require('../../models/admin')
 
 class UserController {
     //注册
@@ -13,6 +13,12 @@ class UserController {
         if(password!=repeat) {
             return ctx.error({ msg: '两次输入的密码不一致!' });
         }
+        const isInvite = await AdminModel.findOneAndRemove({invite});
+        console.log(isInvite)
+        if(!isInvite){
+            return ctx.error({msg: '请输入正确的邀请码'})
+        }
+
         const ishas = await UserModel.findOne({ userName });
         if(ishas){
             return ctx.error({ msg: '该用户已存在!' });

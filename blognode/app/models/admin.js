@@ -1,21 +1,15 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const UserSchema=new Schema({
-	userName:{ unique:true, type:String },
-	introduce:String,
-	password:String,
-	categories:[],
-	avatar:String,
-	label:[],
-	role:{ type:Number, default:0 },
-	phone:Number,
+const AdminSchema=new Schema({
+	invite: String,
 	meta:{
 		createAt:{ type:Date, default:Date.now() },
 		updateAt:{ type:Date, default:Date.now() }
 	}
 })
-UserSchema.pre('save',function(next){
+
+AdminSchema.pre('save',function(next){
 	if(this.isNew){
 		this.meta.createAt=this.meta.updateAt=Date.now()
 	}else{
@@ -23,5 +17,4 @@ UserSchema.pre('save',function(next){
 	}
 	next()
 })
-
-module.exports=mongoose.model('User', UserSchema);
+module.exports=mongoose.model('Admin', AdminSchema);

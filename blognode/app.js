@@ -48,7 +48,7 @@ app.use(async (ctx, next) => {
 app.use(require('./app/middlewares/response'));
 // app.use(require('./rest/middlewares/filter'));
 app
-    // .use(backendRouter.routes())
+    .use(backendRouter.routes())
     // .use(backendRouter.allowedMethods())
     .use(frontendRouter.routes())
     .use(frontendRouter.allowedMethods());
