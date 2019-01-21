@@ -4,10 +4,10 @@
 */
 
 const router = require('koa-router')()
-import { AdminController } from '../controllers/backend.export'
+import { InviteController } from '../controllers/backend.export'
 
 router
-        .post('/api/admin/invate',AdminController.invite)
+        .post('/api/admin/invite',InviteController.invite)
 
 
 module.exports = router;
