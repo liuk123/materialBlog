@@ -11,7 +11,7 @@
     <button mat-button [color]="liked==1?'primary':''" (click)="like(article?._id)">喜欢</button>
     <button mat-button (click)="openNewCommentDialog()">评论</button>
     
-    <span *ngIf="article.author == authId">
+    <span *ngIf="article?.author == authId">
       <button mat-button (click)="delete(article?._id, article?.category)">删除</button>
       <button mat-button [routerLink]="['/edit-article']" [queryParams]="{id: article?._id}">编辑</button>
     </span>
