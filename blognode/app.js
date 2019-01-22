@@ -23,7 +23,7 @@ app.keys = ['koa2:secret']
 
 app.use(convert(logger()))
    .use(convert(session(CONFIG,app)))
-   .use(require('koa-static')(__dirname + '/public'));
+   .use(require('koa-static')(__dirname + '/public/ngweb'));
 
 app.use(koaBody({
     formLimit: 1048576,  // 最大1M
@@ -51,7 +51,7 @@ app
     .use(backendRouter.routes())
     // .use(backendRouter.allowedMethods())
     .use(frontendRouter.routes())
-    .use(frontendRouter.allowedMethods());
+    .use(frontendRouter.allowedMethods())
 
 module.exports = app
 

@@ -8,6 +8,7 @@ import { LoginModule } from './login/login.module';
 import { BlogModule } from './blog/blog.module';
 import { HomepageModule } from './homepage/homepage.module';
 import { PersonModule } from './person/person.module';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,10 @@ import { PersonModule } from './person/person.module';
     HomepageModule,
     PersonModule,
   ],
-  providers: [],
+  providers: [{
+    provide:LocationStrategy,
+    useClass:HashLocationStrategy
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
