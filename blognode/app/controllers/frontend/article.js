@@ -132,7 +132,7 @@ class ArticleController {
     static async get_detail(ctx){
         const { id } = ctx.query
         let liked = 0
-        const result = await ArticleModel.findById(id).select('title abstract content category like commentNum visitNum')
+        const result = await ArticleModel.findById(id).select('title abstract content category like commentNum visitNum author')
         if( result &&
             result.like &&
             result.like.likeUser &&

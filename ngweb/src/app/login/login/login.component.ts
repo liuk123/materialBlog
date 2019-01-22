@@ -35,8 +35,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit({value,valid},ev:Event){
-    ev.preventDefault()
-    console.log(JSON.stringify(value))
+    if( !valid ) return false
     this.store$.dispatch(new authActions.LoginAction(value))
   }
 
