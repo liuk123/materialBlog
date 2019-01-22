@@ -21,7 +21,7 @@ class ArticleController {
         
         const result = await ArticleModel
                         .find(condition)
-                        .sort({ createdAt: '-1' })
+                        .sort({ 'meta.createAt': -1 })
                         .skip(skip)
                         .limit(Number(pageSize))
                         .select('-content')
@@ -55,6 +55,8 @@ class ArticleController {
 
         return ctx.success({ msg:'新建成功!' })
     }
+
+   
 
     // 更新 -分类待优化
     static async update(ctx){
@@ -204,6 +206,8 @@ class ArticleController {
             console.error('error')
         }
     }
+
+   
     
 }
 

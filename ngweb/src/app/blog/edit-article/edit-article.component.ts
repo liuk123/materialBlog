@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 import * as fromRoot from '../../reducers';
 import * as actions from '../../actions/article.action';
+import * as Auth_actions from '../../actions/auth.action';
 import { Store, select } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
@@ -36,11 +37,11 @@ export class EditArticleComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-	    title: ['', [ Validators.required, Validators.minLength(5) ]],
-      abstract: ['', [ Validators.required, Validators.minLength(15) ]],
+	    title: ['', [ Validators.required, Validators.minLength(3) ]],
+      abstract: ['', [ Validators.required, Validators.minLength(3) ]],
       category: [''],
       newCategory: [''],
-      content: ['', [ Validators.required, Validators.minLength(20) ]],
+      content: ['', [ Validators.required, Validators.minLength(3) ]],
       _id: ['']
     })
     this.routInfo.queryParamMap.subscribe(v => {
@@ -52,6 +53,9 @@ export class EditArticleComponent implements OnInit {
 
   onSubmit({value,valid},ev:Event){
     if( !valid ) return false
+    if(value.newCategory){
+      this.store$.dispatch(new Auth_actions.AuthCardAction(''))
+    }
     if(value._id){
       this.store$.dispatch(new actions.EditeArticleAction(value))
     }else{

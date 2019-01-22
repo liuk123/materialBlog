@@ -2,6 +2,7 @@ import md5 from 'md5'
 
 const UserModel = require('../../models/user')
 const InviteModel =  require('../../models/invite')
+const ArticleModel =  require('../../models/article')
 
 class UserController {
     //注册
@@ -101,6 +102,20 @@ class UserController {
         return ctx.success({ msg:'获取成功',data: result });
     }
 
+    //分类
+    static async del_category(ctx){
+        const { category } = ctx.request.query
+        const result = await UserModel.findByIdAndUpdate(
+            ctx.session.user._id,
+            { '$pull': {categories: { title: decodeURIComponent(category) }} },
+            { new: true })
+        const articleResult = await ArticleModel.updateMany(
+                { author: ctx.session.user._id, category: category},
+                { category: ''})
+        if(!result)
+            return ctx.error({ msg: '删除分类失败' })
+            return ctx.success({ msg:'删除分类成功', data: result });
+    }
     // 更新用户个人信息
     static async put_userinfo(ctx) {   
         const fields = ctx.request.body;

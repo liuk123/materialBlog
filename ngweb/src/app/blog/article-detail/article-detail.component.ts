@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Article, Comment } from 'src/app/domain';
-import { Location } from '@angular/common';
 import * as fromRoot from '../../reducers';
 import * as actions from '../../actions/article.action';
 import { Store, select } from '@ngrx/store';
@@ -10,6 +9,7 @@ import { take, filter, map, switchMap } from 'rxjs/operators';
 import { ReplayDialogComponent } from 'src/app/shared/replay-dialog/replay-dialog.component';
 import { ArticleService } from 'src/app/services/article.service';
 import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-article-detail',
@@ -30,7 +30,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
       private routInfo: ActivatedRoute,
       private dialog: MatDialog,
       private service$: ArticleService,
-      private location:Location,
+      private location: Location
     ){
 
     //文章详情
@@ -63,6 +63,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
       filter(v => v)
     ).subscribe(res =>{
       this.location.back()
+      // this.router.navigate(['/'])
       this.store$.dispatch(new actions.DeleteArticleSuccessAction(false))
     })
   }

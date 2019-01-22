@@ -25,6 +25,10 @@ export enum ActionTypes {
     UPDATE_AUTH = '[Auth] update-auth',
     UPDATE_AUTH_SCCESS = '[Auth] update-auth success',
     UPDATE_AUTH_FAIL = '[Auth] update-auth fail',
+
+    DEL_CATEGORY = '[Category] del_category',
+    DEL_CATEGORY_SCCESS = '[Category] del_category success',
+    DEL_CATEGORY_FAIL = '[Category] del_category fail',
 };
 
 //登录注册退出
@@ -127,6 +131,23 @@ export class UpdateAuthFailAction implements Action {
 }
 
 
+export class DelCategoryAction implements Action {
+    readonly type = ActionTypes.DEL_CATEGORY;
+
+    constructor(public payload: string) { }
+}
+export class DelCategorySuccessAction implements Action {
+    readonly type = ActionTypes.DEL_CATEGORY_SCCESS;
+
+    constructor(public payload: User) { }
+}
+export class DelCategoryFailAction implements Action {
+    readonly type = ActionTypes.DEL_CATEGORY_FAIL;
+
+    constructor(public payload: null) { }
+}
+
+
 export type Actions
     = LoginAction
     | LoginSuccessAction
@@ -149,4 +170,8 @@ export type Actions
     | UpdateAuthAction
     | UpdateAuthSuccessAction
     | UpdateAuthFailAction
+
+    | DelCategoryAction
+    | DelCategorySuccessAction
+    | DelCategoryFailAction
 
