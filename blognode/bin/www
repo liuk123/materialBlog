@@ -13,7 +13,7 @@ const config = cfile[process.env.NODE_ENV];
  * Get port from environment and store in Express.
  */
 // const port = normalizePort(config.port);
-const port = 3200
+const port = 3000
 
 /**
  * Create HTTP server.
