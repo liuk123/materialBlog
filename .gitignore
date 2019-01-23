@@ -4,3 +4,4 @@
 \node_modules\*
 blognode/public/images/*
 blognode/public/*
+blognode/ngweb/*
