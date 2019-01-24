@@ -30,7 +30,7 @@ export class AuthGuardService implements CanActivate {
     return this.store$.pipe(
         select(s => s.auth),
         map(auth => {
-          const result = auth !== undefined && auth !== null;
+          const result = auth !== undefined && auth !== null && Object.keys(auth).length > 0;
           if (!result) {
             new RouterActions.Go({
                 path: ['/'],
