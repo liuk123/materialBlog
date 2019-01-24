@@ -96,7 +96,7 @@ class UserController {
     // 用户信息
     static async user_card(ctx) {
         const { id } = ctx.request.query;
-
+        if( !id && !ctx.session.user ) return ctx.error({ msg: '请登录' });
         const result = await UserModel.findById( id || ctx.session.user._id);
         if(!result) return ctx.error({ msg: '获取用户信息失败!' });
         return ctx.success({ msg:'获取成功',data: result });

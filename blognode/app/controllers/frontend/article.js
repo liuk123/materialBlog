@@ -9,7 +9,7 @@ class ArticleController {
     // 获取文章列表
     static async get_list(ctx){
         const { id='', category='', current=0, pageSize=10 } = ctx.query
-
+        if( !id && !ctx.session.user ) return ctx.error({ msg: '请登录' })
         const skip = Number(current)*Number(pageSize)
         let condition = {}
         if( category !== 'all' ){
@@ -133,7 +133,9 @@ class ArticleController {
         const { id } = ctx.query
         let liked = 0
         const result = await ArticleModel.findById(id).select('title abstract content category like commentNum visitNum author')
-        if( result &&
+        if( ctx.session.user &&
+            ctx.session.user._id &&
+            result &&
             result.like &&
             result.like.likeUser &&
             result.like.likeUser.find(v=>v == ctx.session.user._id)) liked = 1

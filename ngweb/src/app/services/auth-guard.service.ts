@@ -33,7 +33,7 @@ export class AuthGuardService implements CanActivate {
           const result = auth !== undefined && auth !== null && Object.keys(auth).length > 0;
           if (!result) {
             new RouterActions.Go({
-                path: ['/'],
+                path: ['/login'],
                 query: { page: 1 },
                 extras: { replaceUrl: false }
             })
