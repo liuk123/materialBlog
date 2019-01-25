@@ -4,6 +4,8 @@ import { AuthService } from './auth.service';
 import { UserService } from './user.service';
 import { ArticleService } from './article.service';
 import { AuthGuardService } from './auth-guard.service';
+import { InterceptorService } from './Interceptor.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 export {
   AuthGuardService
@@ -18,7 +20,8 @@ export class ServicesModule {
         AuthService,
         UserService,
         ArticleService,
-        AuthGuardService
+        AuthGuardService,
+        { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
       ]
     }
   }
