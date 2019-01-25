@@ -1,8 +1,11 @@
-.grid-list{
-    display: flex;
-    flex-direction: row;
-}
-.grid-tile{
-    padding: 0 1rem;
-    flex: 1 1 auto;
+
+@media screen and ( min-width: 700px ){
+    .grid-list{
+        display: flex;
+        flex-direction: row;
+    }
+    .grid-tile{
+        padding: 0 1rem;
+        flex: 1 1 auto;
+    }
 }
