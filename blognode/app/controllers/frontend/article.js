@@ -202,7 +202,10 @@ class ArticleController {
             const file = ctx.request.files.file;
             const fileName = new Date().getTime() + "." + file.name.split('.')[file.name.split('.').length - 1];
             const newPath = dirname + "/" + fileName;
-            const result = await fs.rename(file.path, newPath);
+            // const result = await fs.rename(file.path, newPath);
+            const readStream = fs.createReadStream(file.path)
+            const writeStream = fs.createWriteStream(newPath)
+            readStream.pipe(writeStream)
             ctx.body=JSON.stringify({fileName: '/upload/' + folder + "/" + fileName})
         } else {
             console.error('error')
