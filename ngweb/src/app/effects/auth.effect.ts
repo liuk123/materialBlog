@@ -8,6 +8,7 @@ import { catchError, map, mergeMap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import * as RouterActions from '../actions/router.action';
 
+
 @Injectable()
 export class AuthEffects {
 
@@ -15,7 +16,7 @@ export class AuthEffects {
     login$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.LOGIN),
         mergeMap((u:actions.LoginAction) => this.service$.login(u.payload).pipe(
-            map(auth => new actions.LoginSuccessAction(auth.data)),
+            map(auth =>  new actions.LoginSuccessAction(auth.data)),
             catchError(err => of(new actions.LoginFailAction(err)))
         ))
     )
@@ -35,7 +36,7 @@ export class AuthEffects {
         mergeMap((u:actions.LogoutAction) => this.service$.logout(u.payload).pipe(
             map(u => {
                 new RouterActions.Go({
-                    path: ['/login'],
+                    path: ['/loggin'],
                     query: { page: 1 },
                     extras: { replaceUrl: false }
                 })
@@ -50,7 +51,7 @@ export class AuthEffects {
     loginAndNavigate$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.LOGIN_SCCESS),
         map(_ => new RouterActions.Go({
-            path: ['/'],
+            path: ['/homepage'],
             query: { page: 1 },
             extras: { replaceUrl: false }
         }))
@@ -60,10 +61,12 @@ export class AuthEffects {
     registerAndNavigate$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.REGISTER_SCCESS),
         map(_ => new RouterActions.Go({
-            path: ['/'],
+            path: ['/login'],
             query: { page: 1 },
             extras: { replaceUrl: false }
         }))
     )
-    constructor(private actions$: Actions, private service$: AuthService){}
+    constructor(
+        private actions$: Actions,
+        private service$: AuthService){}
 }

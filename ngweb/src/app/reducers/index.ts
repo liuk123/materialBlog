@@ -11,18 +11,22 @@ import * as fromArticleList from './article-list.reducer';
 import * as fromCommentList from './comment-list.reducer';
 import * as fromArticleOp from './article.reducer';
 
+import * as fromRouter from '@ngrx/router-store';
+
 import { createSelector } from '@ngrx/store';
 import { User, Article, Comment } from '../domain';
 
 export interface State {
-    quote: fromQuote.State;
-    auth: User;//用户的信息
-    user: User;//文章作者的信息
+    quote: fromQuote.State
+    auth: User //用户的信息
+    user: User //文章作者的信息
 
-    articleDetail: Article;
-    articleList: Article[];
+    articleDetail: Article
+    articleList: Article[]
     commentList: Comment[]
     articleOp: fromArticleOp.State
+
+    routerReducer: fromRouter.RouterReducerState
    
 };
 
@@ -34,7 +38,9 @@ const reducers = {
     articleList: fromArticleList.reducer,
     articleDetail: fromArticleDetail.reducer,
     commentList: fromCommentList.reducer,
-    articleOp: fromArticleOp.reducer
+    articleOp: fromArticleOp.reducer,
+
+    routerReducer: fromRouter.routerReducer,
 }
 
 export const getQuoteState = (state: State) => state.quote;

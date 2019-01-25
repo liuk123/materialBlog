@@ -9,7 +9,7 @@ import { take, filter, map, switchMap } from 'rxjs/operators';
 import { ReplayDialogComponent } from 'src/app/shared/replay-dialog/replay-dialog.component';
 import { ArticleService } from 'src/app/services/article.service';
 import { Subscription } from 'rxjs';
-import { Location } from '@angular/common';
+import * as RouterActions from '../../actions/router.action';
 
 @Component({
   selector: 'app-article-detail',
@@ -29,8 +29,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
       private store$: Store<fromRoot.State>,
       private routInfo: ActivatedRoute,
       private dialog: MatDialog,
-      private service$: ArticleService,
-      private location: Location
+      private service$: ArticleService
     ){
 
     //文章详情
@@ -62,7 +61,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
       select(v=>v.articleOp.delete),
       filter(v => v)
     ).subscribe(res =>{
-      this.location.back()
+      this.store$.dispatch(new RouterActions.Back())
       // this.router.navigate(['/'])
       this.store$.dispatch(new actions.DeleteArticleSuccessAction(false))
     })

@@ -37,6 +37,14 @@ export class LoginComponent implements OnInit {
   onSubmit({value,valid},ev:Event){
     if( !valid ) return false
     this.store$.dispatch(new authActions.LoginAction(value))
+    
+    // this.store$.dispatch(new RouterActions.Go({
+    //   path: ['/homepage'],
+    //   query: { page: 1 },
+    //   extras: { replaceUrl: false }
+    // }))
+
+    // this.store$.dispatch(new RouterActions.Back())
   }
 
 }
