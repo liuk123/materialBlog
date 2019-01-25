@@ -8,7 +8,11 @@
         <app-header (toggle)="sidenav.toggle()" (toggleDarkTheme)="switchTheme($event)"></app-header>
       </header>
       <main>
-        <router-outlet></router-outlet>
+        <span class="fill-remaining-space"></span>
+        <div class="container">
+            <router-outlet></router-outlet>
+        </div>
+        <span class="fill-remaining-space"></span>
       </main>
       <footer class="full-width">
         <app-footer></app-footer>
