@@ -6,6 +6,8 @@ import { Action } from '@ngrx/store';
 import * as actions from '../actions/article.action';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { ArticleService } from '../services/article.service';
+import * as RouterActions from '../actions/router.action';
+
 
 @Injectable()
 export class ArticleEffects {
@@ -14,7 +16,10 @@ export class ArticleEffects {
     update$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.EDITE_ARTICLE),
         mergeMap((u:actions.EditeArticleAction) => this.service$.update(u.payload).pipe(
-            map(v => new actions.EditeArticleSuccessAction(null)),
+            map(v => {
+              
+                return new actions.EditeArticleSuccessAction(null)
+            }),
             catchError(err => of(new actions.EditeArticleFailAction(err)))
         ))
     )
@@ -23,7 +28,10 @@ export class ArticleEffects {
     create$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.CREATE_ARTICLE),
         mergeMap((u:actions.CreateArticleAction) => this.service$.create(u.payload).pipe(
-            map(v => new actions.CreateArticleSuccessAction(null)),
+            map(v => {
+           
+                return new actions.CreateArticleSuccessAction(null)
+            }),
             catchError(err => of(new actions.CreateArticleFailAction(err)))
         ))
     )
@@ -82,6 +90,22 @@ export class ArticleEffects {
             map(v => new actions.CommentSuccessAction(v.data)),
             catchError(err => of(new actions.CommentFailAction(err)))
         ))
+    )
+
+    @Effect()
+    updateAndNavigate$: Observable<Action> = this.actions$.pipe(
+        ofType(actions.ActionTypes.EDITE_ARTICLE_SCCESS),
+        map(_ => new RouterActions.Back())
+    )
+
+    @Effect()
+    createAndNavigate$: Observable<Action> = this.actions$.pipe(
+        ofType(actions.ActionTypes.CREATE_ARTICLE_SCCESS),
+        map(_ => new RouterActions.Go({
+            path: ['/homepage'],
+            query: { page: 1 },
+            extras: { replaceUrl: false }
+        }))
     )
     constructor(private actions$: Actions, private service$: ArticleService){}
 }

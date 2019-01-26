@@ -24,6 +24,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
   id: string //articleId
   authId: string
   subscription: Subscription
+  delSubscription: Subscription
 
   constructor(
       private store$: Store<fromRoot.State>,
@@ -57,9 +58,10 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     })
 
     //删除
-    this.store$.pipe(
+    this.delSubscription = this.store$.pipe(
       select(v=>v.articleOp.delete),
-      filter(v => v)
+      filter(v => v),
+      take(1)
     ).subscribe(res =>{
       this.store$.dispatch(new RouterActions.Back())
       // this.router.navigate(['/'])
@@ -72,6 +74,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.delSubscription.unsubscribe();
   }
 
   like(titleId){

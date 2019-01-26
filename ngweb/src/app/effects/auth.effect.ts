@@ -34,19 +34,22 @@ export class AuthEffects {
     logout$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.LOGOUT),
         mergeMap((u:actions.LogoutAction) => this.service$.logout(u.payload).pipe(
-            map(u => {
-                new RouterActions.Go({
-                    path: ['/loggin'],
-                    query: { page: 1 },
-                    extras: { replaceUrl: false }
-                })
-                return new actions.LogoutSuccessAction(null)
-            }),
+            map(u => new actions.LogoutSuccessAction(null)),
             catchError(err => of(new actions.LogoutFailAction(err)))
         ))
         
     )
     
+    @Effect()
+    logoutAndNavigate$: Observable<Action> = this.actions$.pipe(
+        ofType(actions.ActionTypes.LOGOUT_SCCESS),
+        map(_ => new RouterActions.Go({
+            path: ['/login'],
+            query: { page: 1 },
+            extras: { replaceUrl: false }
+        }))
+    )
+
     @Effect()
     loginAndNavigate$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.LOGIN_SCCESS),
