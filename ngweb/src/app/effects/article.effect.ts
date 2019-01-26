@@ -16,10 +16,7 @@ export class ArticleEffects {
     update$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.EDITE_ARTICLE),
         mergeMap((u:actions.EditeArticleAction) => this.service$.update(u.payload).pipe(
-            map(v => {
-              
-                return new actions.EditeArticleSuccessAction(null)
-            }),
+            map(v => new actions.EditeArticleSuccessAction(null)),
             catchError(err => of(new actions.EditeArticleFailAction(err)))
         ))
     )
@@ -28,10 +25,7 @@ export class ArticleEffects {
     create$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.CREATE_ARTICLE),
         mergeMap((u:actions.CreateArticleAction) => this.service$.create(u.payload).pipe(
-            map(v => {
-           
-                return new actions.CreateArticleSuccessAction(null)
-            }),
+            map(v => new actions.CreateArticleSuccessAction(null)),
             catchError(err => of(new actions.CreateArticleFailAction(err)))
         ))
     )
