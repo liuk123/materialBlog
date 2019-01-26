@@ -147,7 +147,7 @@ class UserController {
     static async signinRequired(ctx,next) {
         var user=ctx.session.user
         if(!user){
-            return res.json({code:0,msg:'没有登录'})
+            return ctx.error({ msg: '请登录' })
         }
         next()
     }
@@ -155,7 +155,7 @@ class UserController {
     static async adminRequired(ctx,next) {
         var user=ctx.session.user
         if(user.role<=100||!user.role){
-            return res.json({code:0,msg:'没有用户权限'})
+            return ctx.error({ msg: '没有权限' })
         }
         next()
     }

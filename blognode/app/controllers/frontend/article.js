@@ -38,7 +38,6 @@ class ArticleController {
         if(data.newCategory) data.category = data.newCategory
 
         const result = await ArticleModel.create(data)
-        if(!result) return ctx.error({ msg: '文章创建失败!' })
 
         if(data.newCategory){// 新建分类
             const hasCatResult = await UserModel.findByIdAndUpdate(
@@ -91,17 +90,16 @@ class ArticleController {
     // 删除
     static async delete(ctx){
         const { id, category } = ctx.query
-        if(!id) return ctx.error({ msg: '发送数据失败!' })
+        if(!id) return ctx.error({ msg: '删除失败' })
 
         const result = await ArticleModel.deleteOne({'_id': id})
-        // if(!result) return ctx.error({ msg: '删除失败!' })
 
         const userResult = await UserModel.findOneAndUpdate(
             { _id: ctx.session.user._id, 'categories.title': category },
             { $inc: {'categories.$.number': -1} } )
 
         const commentResult = await CommentModel.deleteMany({ 'title': id })
-        console.log(commentResult)
+
         return ctx.success({ msg:'删除成功!' })
     }
 
@@ -170,20 +168,17 @@ class ArticleController {
     static async comment(ctx){
         const _comment = ctx.request.body
         const { userName, _id } = ctx.session.user
+
         if(_comment.cid){
             const result = await CommentModel.updateOne(
                 { _id: _comment.cid },
                 { '$push': { reply: { from: _id, to: _comment.to, content: _comment.content } }})
 
-            if(!result)
-                return ctx.error({ msg: '评论失败!' })
 
             await ArticleModel.updateOne({_id:_comment.title},{$inc:{commentNum:+1}})
             return ctx.success({ msg:'评论成功!' })
         }else{
             const result = await CommentModel.create({content:_comment.content, title:_comment.title, from:_id})
-            if(!result)
-                return ctx.error({ msg: '评论失败!' })
 
             await ArticleModel.updateOne({_id:_comment.title},{$inc:{commentNum:+1}})
             return ctx.success({ msg:'评论成功!', data: {fromId:result.from}})
@@ -217,10 +212,6 @@ class ArticleController {
 }
 
 export default ArticleController;
-
-
-
-
 
 
 
