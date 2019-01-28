@@ -30,6 +30,9 @@ class ArticleController {
     }
     // 新建
     static async create(ctx){
+
+        if( !ctx.session.user ) return ctx.error({ msg: '请登录' })
+
         const { userName, _id } = ctx.session.user
         const data = ctx.request.body
         if(!data) return ctx.error({ msg: '发送数据失败!' })
@@ -59,6 +62,9 @@ class ArticleController {
 
     // 更新 -分类待优化
     static async update(ctx){
+
+        if( !ctx.session.user ) return ctx.error({ msg: '请登录' })
+
         const data = ctx.request.body
         if(!data) return ctx.error({ msg: '发送数据失败!' })
         if(data.newCategory){
@@ -89,8 +95,11 @@ class ArticleController {
 
     // 删除
     static async delete(ctx){
+
+        if( !ctx.session.user ) return ctx.error({ msg: '请登录' })
+
         const { id, category } = ctx.query
-        if(!id) return ctx.error({ msg: '删除失败' })
+        if(!id || !category) return ctx.error({ msg: '删除失败' })
 
         const result = await ArticleModel.deleteOne({'_id': id})
 
@@ -105,6 +114,9 @@ class ArticleController {
 
     // 点赞
     static async like(ctx){
+
+        if( !ctx.session.user ) return ctx.error({ msg: '请登录' })
+
         const { id, liked } = ctx.request.body
         const { userName, _id } = ctx.session.user
 
@@ -166,6 +178,9 @@ class ArticleController {
 
     // 新建评论
     static async comment(ctx){
+        
+        if( !ctx.session.user ) return ctx.error({ msg: '请登录' })
+
         const _comment = ctx.request.body
         const { userName, _id } = ctx.session.user
 

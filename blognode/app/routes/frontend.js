@@ -10,14 +10,14 @@ const router = require('koa-router')()
 router
 
     // 文章
-    .post('/api/article/create', UserController.signinRequired, ArticleController.create)                                //新建文章
-    .post('/api/article/update', UserController.signinRequired, ArticleController.update)                                //编辑文章
-    .delete('/api/article/delete', UserController.signinRequired, ArticleController.delete)                              //删除文章
-    .post('/api/article/like', UserController.signinRequired, ArticleController.like)                                    //点赞
+    .post('/api/article/create', ArticleController.create)                                //新建文章
+    .post('/api/article/update', ArticleController.update)                                //编辑文章
+    .delete('/api/article/delete', ArticleController.delete)                              //删除文章
+    .post('/api/article/like', ArticleController.like)                                    //点赞
     .get('/api/article/get_list', ArticleController.get_list)
     .get('/api/article/get_detail', ArticleController.get_detail)                        // 获取详情
     .get('/api/article/get_comment', ArticleController.get_comment) 
-    .post('/api/article/comment', UserController.signinRequired, ArticleController.comment)                             // 发表评论
+    .post('/api/article/comment', ArticleController.comment)                             // 发表评论
     
     
     
