@@ -2,9 +2,7 @@
   <!-- <mat-card-header
     [routerLink]="['/blog-home', {outlets: { primary: 'blog-detail', aux: ['blog-user', article?.author]}}]"
     [queryParams]="{id: article?._id, authId: article?.author}"> -->
-  <mat-card-header
-    [routerLink]="['/blog-home', {outlets: { primary: 'blog-detail'}}]"
-    [queryParams]="{id: article?._id, authId: article?.author}">
+  <mat-card-header>
 
     <mat-card-title>{{article?.title}}</mat-card-title>
     <mat-card-subtitle>{{article?.meta.updateAt | date:'yyyy-MM-dd'}}</mat-card-subtitle>
@@ -16,14 +14,19 @@
     </p>
   </mat-card-content>
 
-  <mat-card-footer>
+  <mat-card-actions>
+      <button mat-button color="accent"
+      [routerLink]="['/blog-home', {outlets: { primary: 'blog-detail'}}]"
+      [queryParams]="{id: article?._id, authId: article?.author}">查看详情</button>
+    </mat-card-actions>
+  <!-- <mat-card-footer>
     <mat-grid-list cols="4" rowHeight="2.5rem" class="text-muted">
       <mat-grid-tile><mat-icon svgIcon="badge"></mat-icon>：{{article?.category}}</mat-grid-tile>
       <mat-grid-tile><mat-icon svgIcon="edit"></mat-icon>：{{article?.commentNum}}</mat-grid-tile>
       <mat-grid-tile><mat-icon svgIcon="eye"></mat-icon>：{{article?.visitNum}}</mat-grid-tile>
       <mat-grid-tile><mat-icon svgIcon="heart"></mat-icon>：{{article?.like.likeNum}}</mat-grid-tile>
     </mat-grid-list>
-  </mat-card-footer>
+  </mat-card-footer> -->
 </mat-card>
 
 <mat-paginator [length]="length"

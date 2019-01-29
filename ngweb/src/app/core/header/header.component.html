@@ -17,7 +17,7 @@
     [routerLink]="['/edit-article']">编写</button>
   <span class="fill-remaining-space"></span>
 
-  <button mat-icon-button [matMenuTriggerFor]="userManage"><mat-icon svgIcon="ellipsis"></mat-icon></button>
+  <button mat-icon-button [matMenuTriggerFor]="userManage" ><mat-icon svgIcon="ellipsis"></mat-icon></button>
   <mat-menu #userManage="matMenu">
       <div *ngIf="auth._id else elseBlock">
           <button mat-menu-item [routerLink]="['/person-center']"><mat-icon svgIcon="genius"></mat-icon>个人</button>
@@ -30,4 +30,5 @@
   </mat-menu>
 
   <mat-slide-toggle (change)="onChange($event.checked)"></mat-slide-toggle>
+  
 </mat-toolbar>
