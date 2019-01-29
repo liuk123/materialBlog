@@ -1,3 +1,6 @@
 :host ::ng-deep .ck-editor__editable {
     min-height: 30rem;
 }
+:host ::ng-deep .ck.ck-toolbar{
+background-color: rgba(220,220,220,.3)!important;
+}

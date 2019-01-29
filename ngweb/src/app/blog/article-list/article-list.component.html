@@ -1,4 +1,4 @@
-<mat-card class="mb-3" *ngFor="let article of articles$ | async">
+<mat-card class="mb-2" *ngFor="let article of articles$ | async">
   <!-- <mat-card-header
     [routerLink]="['/blog-home', {outlets: { primary: 'blog-detail', aux: ['blog-user', article?.author]}}]"
     [queryParams]="{id: article?._id, authId: article?.author}"> -->
@@ -10,8 +10,8 @@
     <mat-card-subtitle>{{article?.meta.updateAt | date:'yyyy-MM-dd'}}</mat-card-subtitle>
 
   </mat-card-header>
-  <mat-card-content>
-    <p class="text-article">
+  <mat-card-content class="text-article">
+    <p>
       {{article?.abstract}}
     </p>
   </mat-card-content>
@@ -29,5 +29,6 @@
 <mat-paginator [length]="length"
               [pageSize]="pageSize"
               showFirstLastButtons = "true"
-              (page)="onPage($event)">
+              (page)="onPage($event)"
+              class="mb-2">
 </mat-paginator>
