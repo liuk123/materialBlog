@@ -26,7 +26,12 @@
       *ngFor="let category of (user$ | async)?.categories"
       [routerLink]="['/blog-home', { outlets: { primary: 'blog-list'} }]"
       [queryParams]="{category:category.title, authId: (user$ |async)._id}">
-      <span [matBadge]="category.number" matBadgeOverlap="false">{{category.title}}</span>
+
+      <span
+        [matBadge]="category.number"
+        matBadgeOverlap="false"
+        matBadgeColor="warn">{{category.title}}</span>
+
     </button>
     <button
       mat-list-item

@@ -11,7 +11,7 @@ $my-app-primary: mat-palette($mat-indigo);
 $my-app-accent: mat-palette($mat-pink, A200, A100, A400);
 
 // 警告的调色板此处定义其实是不必要的，因为默认就是红色，但列在这里便于以后的自定义。
-$my-app-warn: mat-palette($mat-red);
+$my-app-warn: mat-palette($mat-amber);
 
 // 创建一个主题对象 (包含所有自定义的调色板).
 $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
