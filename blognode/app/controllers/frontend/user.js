@@ -8,21 +8,23 @@ class UserController {
     //注册
     static async register(ctx){
         const { userName, phone, password, repeat, invite, avatar } = ctx.request.body
-        if(!userName||!password) {
-            return ctx.error({ msg: '用户名或密码不能为空!' });
+        if(!userName||!password||!phone) {
+            return ctx.error({ msg: '用户名、密码、手机号不能为空!' });
         }
         if(password!=repeat) {
             return ctx.error({ msg: '两次输入的密码不一致!' });
         }
+        
+        const ishas = await UserModel.findOne({ '$or': [{userName},{phone}] });
+        if(ishas){
+            return ctx.error({ msg: '该用户已存在!' });
+        }
+
         const isInvite = await InviteModel.findOneAndRemove({invite});
         if(!isInvite){
             return ctx.error({msg: '请输入正确的邀请码'})
         }
 
-        const ishas = await UserModel.findOne({ userName });
-        if(ishas){
-            return ctx.error({ msg: '该用户已存在!' });
-        }
         const result = await UserModel.create({ userName, phone, password: md5(password), avatar });
         if(!result)
             return ctx.error({ msg: '注册失败!' });
@@ -39,7 +41,7 @@ class UserController {
         if(data.password) {
             data.password = md5(data.password)
         }
-        const ishas = await UserModel.findOne({ userName: data.userName });
+        const ishas = await UserModel.findOne({ '$or': [{ userName: data.userName },{phone}] });
         if(ishas && ishas._id != ctx.session.user._id){
             return ctx.error({ msg: '该用户已存在!' });
         }
@@ -56,14 +58,12 @@ class UserController {
 
     //登录
     static async login(ctx){
-        const { userName, password } = ctx.request.body
-        if(!userName||!password) {
+        const { phone, password } = ctx.request.body
+        if(!phone||!password) {
             return ctx.error({ msg: '获取用户失败!' })
         }
-        console.log(userName)
-        const data = await UserModel.findOne({ userName, password: md5(password) },{ password:0 })
-        if(!data) return ctx.error({ msg: '用户名或密码错误!' })
-        console.log(data)
+        const data = await UserModel.findOne({ phone, password: md5(password) },{ password:0 })
+        if(!data) return ctx.error({ msg: '手机号或密码错误!' })
         ctx.session.user = data
         // const id = data._id
         // const avatar = data.avatar
@@ -86,9 +86,9 @@ class UserController {
         if(!user&&!cookie_userid) return ctx.error({ msg:'该用户已退出!' });
     
         ctx.session.user = null;
-        ctx.cookies.set('userid',null);
-        ctx.cookies.set('username',null);
-        ctx.cookies.set('avatar',null);
+        // ctx.cookies.set('userid',null);
+        // ctx.cookies.set('username',null);
+        // ctx.cookies.set('avatar',null);
     
         return ctx.success({ msg:'退出成功!' });
     }
