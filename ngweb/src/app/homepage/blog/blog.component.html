@@ -3,10 +3,10 @@
     <mat-card-title>{{article?.title}}</mat-card-title>
 
     <mat-card-subtitle>
-      category：{{article?.category}} /
-      time：{{article?.meta.updateAt | date:'yyyy-MM-dd'}} /
-      comment：{{article?.commentNum}} /
-      like: {{article?.like.likeNum}}
+        分类：{{article?.category}} 、
+        发布于：{{article?.meta.updateAt | date:'yyyy-MM-dd'}} 、
+        评论：{{article?.commentNum}} 、
+        喜欢：{{article?.like.likeNum}}
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content class="text-article">
