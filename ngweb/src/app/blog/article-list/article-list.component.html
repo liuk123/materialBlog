@@ -5,7 +5,12 @@
   <mat-card-header>
 
     <mat-card-title>{{article?.title}}</mat-card-title>
-    <mat-card-subtitle>{{article?.meta.updateAt | date:'yyyy-MM-dd'}}</mat-card-subtitle>
+    <mat-card-subtitle>
+      category：{{article?.category}} /
+      time：{{article?.meta.updateAt | date:'yyyy-MM-dd'}} /
+      comment：{{article?.commentNum}} /
+      like: {{article?.like.likeNum}}
+    </mat-card-subtitle>
 
   </mat-card-header>
   <mat-card-content class="text-article">
@@ -29,9 +34,10 @@
   </mat-card-footer> -->
 </mat-card>
 
-<mat-paginator [length]="length"
-              [pageSize]="pageSize"
-              showFirstLastButtons = "true"
-              (page)="onPage($event)"
-              class="mb-2">
+<mat-paginator
+  [length]="length"
+  [pageSize]="pageSize"
+  showFirstLastButtons = "true"
+  (page)="onPage($event)"
+  class="mb-2">
 </mat-paginator>
