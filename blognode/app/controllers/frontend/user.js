@@ -41,7 +41,7 @@ class UserController {
         if(data.password) {
             data.password = md5(data.password)
         }
-        const ishas = await UserModel.findOne({ '$or': [{ userName: data.userName },{phone}] });
+        const ishas = await UserModel.findOne({ '$or': [{ userName: data.userName },{phone: data.phone}] });
         if(ishas && ishas._id != ctx.session.user._id){
             return ctx.error({ msg: '该用户已存在!' });
         }
