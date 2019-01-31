@@ -3,10 +3,10 @@
     <mat-card-title>注册</mat-card-title>
     <mat-card-content>
       <mat-form-field class="full-width">
-        <input matInput placeholder="phone" formControlName="phone">
+        <input matInput type="tel" placeholder="phone" formControlName="phone" autofocus>
       </mat-form-field>
       <mat-form-field class="full-width">
-        <input matInput placeholder="用户名" formControlName="userName">
+        <input matInput type="text" placeholder="用户名" formControlName="userName">
       </mat-form-field>
       <mat-form-field class="full-width">
         <input matInput type="password" placeholder="密码" formControlName="password">
@@ -22,7 +22,7 @@
       <mat-card-content>
         
         <mat-form-field class="full-width">
-          <input matInput placeholder="邀请码" formControlName="invite">
+          <input matInput type="number" placeholder="邀请码" formControlName="invite">
         </mat-form-field>
         <app-image-list-select
           [useSvgIcon]="true"
