@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-// import { AuthGuardService } from '../services/services.module';
-// import { PageNotFoundComponent } from './page-not-found';
 
 const routes: Routes = [
   {
@@ -23,9 +21,7 @@ const routes: Routes = [
     redirectTo: '/person-center',
     pathMatch: 'full',
     // canActivate: [AuthGuardService]
-  },
-  
-  // { path: '**', component: PageNotFoundComponent }
+  }
 ];
 
 @NgModule({
