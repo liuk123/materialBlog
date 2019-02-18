@@ -4,7 +4,7 @@
           <mat-card-title>{{article?.title}}</mat-card-title>
       
           <mat-card-subtitle>
-              标签：<span *ngFor='let label of article?.label'>{{label}}/</span> 、
+              标签：<span *ngFor='let label of article?.label'>{{label}}&nbsp;</span> 、
               发布于：{{article?.meta.updateAt | date:'yyyy-MM-dd'}} 、
               {{article?.commentNum}} 人评论、
               {{article?.like.likeNum}}人喜欢
