@@ -111,7 +111,7 @@ class UserController {
             .find()
             .skip(skip)
             .limit(Number(pageSize))
-            .select('userName introduce avatar label');
+            .select('userName introduce avatar label categories');
         if(!result) return ctx.error({ msg: '获取用户列表失败!' });
         return ctx.success({ msg:'获取成功',data: result });
     }
