@@ -10,6 +10,11 @@
           >{{user?.userName}}</mat-card-title>
         <mat-card-subtitle>{{user?.introduce}}</mat-card-subtitle>
       </mat-card-header>
+      <mat-card-content>
+          <mat-chip-list>
+              <mat-chip *ngFor="let item of user.label">{{item}}</mat-chip>
+          </mat-chip-list>
+      </mat-card-content>
     </mat-card>
     
     
