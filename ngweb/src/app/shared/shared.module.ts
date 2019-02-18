@@ -26,6 +26,7 @@ import {
   MatPaginatorModule,
   MatChipsModule,
   MatSnackBarModule,
+  MatTabsModule
 
 } from "@angular/material";
 import { ImageListSelectComponent } from './image-list-select/image-list-select.component';
@@ -64,6 +65,7 @@ import { ReplayDialogComponent } from './replay-dialog/replay-dialog.component';
     MatPaginatorModule,
     MatChipsModule,
     MatSnackBarModule,
+    MatTabsModule,
 
     CKEditorModule
 
@@ -96,6 +98,7 @@ import { ReplayDialogComponent } from './replay-dialog/replay-dialog.component';
     MatPaginatorModule,
     MatChipsModule,
     MatSnackBarModule,
+    MatTabsModule,
 
     ImageListSelectComponent,
     CKEditorModule,

@@ -15,7 +15,14 @@
 </div> -->
 <div class="grid-list">
     <div class="grid-tile">
-        <app-blog></app-blog>
+        <mat-tab-group dynamicHeight>
+            <mat-tab label="笔记">
+                <ng-template matTabContent><app-blog></app-blog></ng-template>
+            </mat-tab>
+            <mat-tab label="用户">
+                <ng-template matTabContent><app-auth-list></app-auth-list></ng-template>
+            </mat-tab>
+        </mat-tab-group>
     </div>
     <div class="grid-tile" style="flex: 0 0 15rem">
         <app-notice></app-notice>

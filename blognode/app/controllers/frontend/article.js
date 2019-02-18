@@ -227,9 +227,10 @@ class ArticleController {
                 // web:['js','es6','vue'],
                 // java:['spring'],
                 // '数据库':['mongodb']
-                {name: 'web', items: ['js','es6','vue']},
-                {name: 'java', items: ['spring']},
-                {name: '数据库', items: ['mongodb']},
+                {name: '前端开发', items: ['web','js','html/css','es6','jquery','react','vue','angular','小程序','nodejs','前端工具',]},
+                {name: '后端开发', items: ['后端开发','java','springBoot','python','爬虫','Go','c','c++']},
+                {name: '数据库', items: ['数据库','mongodb','mySQL','redis']},
+                {name: '个人', items: ['个人','笔记','写作']},
 
             ]
         })
