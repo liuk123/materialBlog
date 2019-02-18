@@ -102,6 +102,20 @@ class UserController {
         return ctx.success({ msg:'获取成功',data: result });
     }
 
+    // 用户列表信息
+    static async user_list(ctx) {
+
+        const { current=0, pageSize=10 } = ctx.query
+        const skip = Number(current)*Number(pageSize)
+        const result = await UserModel
+            .find()
+            .skip(skip)
+            .limit(Number(pageSize))
+            .select('userName introduce avatar label');
+        if(!result) return ctx.error({ msg: '获取用户列表失败!' });
+        return ctx.success({ msg:'获取成功',data: result });
+    }
+
     //分类
     static async del_category(ctx){
         const { category } = ctx.request.query

@@ -1,0 +1,9 @@
+.user-card-container{
+    display: flex;
+    flex: 1 1 50%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    mat-card{
+        width:44%
+    }
+}

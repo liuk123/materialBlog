@@ -18,6 +18,10 @@ export enum ActionTypes {
     USERCARD_SCCESS = '[UserCard] user-card success',
     USERCARD_FAIL = '[UserCard] user-card fail',
 
+    USERLIST = '[UserList] user-list',
+    USERLIST_SCCESS = '[UserList] user-list success',
+    USERLIST_FAIL = '[UserList] user-list fail',
+
     AUTHCARD = '[AuthCard] auth-card',
     AUTHCARD_SCCESS = '[AuthCard] auth-card success',
     AUTHCARD_FAIL = '[AuthCard] auth-card fail',
@@ -96,7 +100,22 @@ export class UserCardFailAction implements Action {
 
     constructor(public payload: string) { }
 }
+//用户列表信息
+export class UserListAction implements Action {
+    readonly type = ActionTypes.USERLIST;
 
+    constructor(public payload: object) { }
+}
+export class UserListSuccessAction implements Action {
+    readonly type = ActionTypes.USERLIST_SCCESS;
+
+    constructor(public payload: User[]) { }
+}
+export class UserListFailAction implements Action {
+    readonly type = ActionTypes.USERLIST_FAIL;
+
+    constructor(public payload: string) { }
+}
 //用户信息
 export class AuthCardAction implements Action {
     readonly type = ActionTypes.AUTHCARD;
@@ -174,4 +193,8 @@ export type Actions
     | DelCategoryAction
     | DelCategorySuccessAction
     | DelCategoryFailAction
+
+    | UserListAction
+    | UserListSuccessAction
+    | UserListFailAction
 

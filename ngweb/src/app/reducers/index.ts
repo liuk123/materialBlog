@@ -26,7 +26,8 @@ export interface State {
     commentList: Comment[]
     articleOp: fromArticleOp.State
     routerReducer: fromRouter.RouterReducerState
-    label: Label[]
+    label: Label[],
+    userList: User[]
    
 };
 
@@ -42,13 +43,15 @@ const reducers = {
 
     routerReducer: fromRouter.routerReducer,
 
-    label: fromLabel.reducer
+    label: fromLabel.reducer,
+    userList: fromUser.userListReducer
     
 }
 
 export const getQuoteState = (state: State) => state.quote;
 export const getAuthState = (state: State) => state.auth;
 export const getUserState = (state: State) => state.user;
+export const getUserListState = (state: State) => state.userList;
 
 export const getAuthCardState = (state: State) => state.auth;
 export const getArticleListState = (state: State) => state.articleList;

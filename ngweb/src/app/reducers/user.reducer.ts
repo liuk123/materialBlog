@@ -22,3 +22,17 @@ export function reducer(state = initialState, action: actions.Actions ): State {
         }
     }
 }
+
+export function userListReducer(state = [], action: actions.Actions ) {
+    switch (action.type) {
+        case actions.ActionTypes.USERLIST_SCCESS: {
+            return <User[]>action.payload;
+        }
+        case actions.ActionTypes.USERLIST_FAIL: {
+            return initialState
+        }
+        default: {
+            return state;
+        }
+    }
+}

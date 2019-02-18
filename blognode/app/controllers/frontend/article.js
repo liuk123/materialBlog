@@ -224,13 +224,11 @@ class ArticleController {
 
    static async label(ctx){
         return ctx.success({ msg:'标签成功!', data: [
-                // web:['js','es6','vue'],
-                // java:['spring'],
-                // '数据库':['mongodb']
                 {name: '前端开发', items: ['web','js','html/css','es6','jquery','react','vue','angular','小程序','nodejs','前端工具',]},
                 {name: '后端开发', items: ['后端开发','java','springBoot','python','爬虫','Go','c','c++']},
                 {name: '数据库', items: ['数据库','mongodb','mySQL','redis']},
                 {name: '个人', items: ['个人','笔记','写作']},
+                {name: '新闻', items: ['新闻','技术','互联网']},
 
             ]
         })

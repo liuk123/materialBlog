@@ -18,6 +18,7 @@ router
     .get('/api/article/get_detail', ArticleController.get_detail)                        // 获取详情
     .get('/api/article/get_comment', ArticleController.get_comment) 
     .post('/api/article/comment', ArticleController.comment)                             // 发表评论
+    .get('/api/article/label', ArticleController.label)
     
 
     // 用户
@@ -28,8 +29,8 @@ router
     // .post('/api/user/put_avatar', UserController.put_avatar)                           // 上传用户头像
     .post('/api/user/update_user',UserController.update_user)                               // 更新用户
     .delete('/api/user/del_category',UserController.del_category)                        //删除分类
+    .get('/api/user/user_list',UserController.user_list)                                 // 用户列表信息
 
-    .get('/api/article/label', ArticleController.label)
     
 
 

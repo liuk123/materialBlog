@@ -22,10 +22,11 @@
         </mat-card-actions>
       </mat-card>
       
-      <mat-paginator [length]="length"
-                    [pageSize]="pageSize"
-                    showFirstLastButtons = "true"
-                    (page)="onPage($event)"
-                    class="mb-2">
-      </mat-paginator>
+      
 </div>
+<mat-paginator [length]="length"
+        [pageSize]="pageSize"
+        showFirstLastButtons = "true"
+        (page)="onPage($event)"
+        class="mb-2">
+        </mat-paginator>

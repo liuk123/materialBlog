@@ -1,3 +1,22 @@
-<p>
-  正在开发中
-</p>
+<div class="p-1 user-card-container">
+    <mat-card *ngFor="let user of (userlist$ | async)" class="mb-1">
+      <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon [svgIcon]="user?.avatar" style="width:100%;height:100%"></mat-icon>
+        </div>
+        <mat-card-title
+          [routerLink]="['/blog-home', {outlets: { primary: 'blog-list', aux: ['blog-user', user._id]}}]"
+          [queryParams]="{category:'all', authId: user._id}"
+          >{{user?.userName}}</mat-card-title>
+        <mat-card-subtitle>{{user?.introduce}}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    
+    
+</div>
+<mat-paginator [length]="length"
+      [pageSize]="pageSize"
+      showFirstLastButtons = "true"
+      (page)="onPage($event)"
+      class="mb-2">
+      </mat-paginator>

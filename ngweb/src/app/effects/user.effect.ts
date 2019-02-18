@@ -45,5 +45,14 @@ export class UserEffects {
             catchError(err => of(new actions.DelCategoryFailAction(err)))
         ))
     )
+
+    @Effect()
+    userList$: Observable<Action> = this.actions$.pipe(
+        ofType(actions.ActionTypes.USERLIST),
+        mergeMap((u:actions.UserListAction) => this.service$.user_list(u.payload).pipe(
+            map(user => new actions.UserListSuccessAction(user.data)),
+            catchError(err => of(new actions.UserListFailAction(err)))
+        ))
+    )
     constructor(private actions$: Actions, private service$: UserService){}
 }
