@@ -8,7 +8,7 @@ export class QuoteService {
     constructor(private http:HttpClient,@Inject('BASE_CONFIG') private config){}
 
     getAuote():Observable<Quote>{
-        const uri=`${this.config.uri}/assets/img/quotes/${Math.floor(Math.random()*10)}`
+        const uri=`${this.config.uri}/quotes/${Math.floor(Math.random()*10)}`
         return this.http.get<any>(uri)
     }
 }

@@ -110,7 +110,7 @@ class UserController {
             { '$pull': {categories: { title: decodeURIComponent(category) }} },
             { new: true })
         const articleResult = await ArticleModel.updateMany(
-                { author: ctx.session.user._id, category: category},
+                { author: ctx.session.user._id, category: decodeURIComponent(category)},
                 { category: ''})
         if(!result)
             return ctx.error({ msg: '删除分类失败' })

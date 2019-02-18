@@ -10,23 +10,23 @@ import * as fromArticleDetail from './article-detail.reducer';
 import * as fromArticleList from './article-list.reducer';
 import * as fromCommentList from './comment-list.reducer';
 import * as fromArticleOp from './article.reducer';
+import * as fromLabel from './label.reducer';
 
 import * as fromRouter from '@ngrx/router-store';
 
 import { createSelector } from '@ngrx/store';
-import { User, Article, Comment } from '../domain';
+import { User, Article, Comment, Label } from '../domain';
 
 export interface State {
     quote: fromQuote.State
     auth: User //用户的信息
     user: User //文章作者的信息
-
     articleDetail: Article
     articleList: Article[]
     commentList: Comment[]
     articleOp: fromArticleOp.State
-
     routerReducer: fromRouter.RouterReducerState
+    label: Label[]
    
 };
 
@@ -41,6 +41,9 @@ const reducers = {
     articleOp: fromArticleOp.reducer,
 
     routerReducer: fromRouter.routerReducer,
+
+    label: fromLabel.reducer
+    
 }
 
 export const getQuoteState = (state: State) => state.quote;
@@ -53,6 +56,7 @@ export const getArticleDetailState = (state: State) => state.articleDetail;
 export const getCommentListState = (state: State) => state.commentList;
 
 export const getArticleOpState = (state: State) => state.articleOp;
+export const getLabelState = (state: State) => state.label;
 
 export const getQuote = createSelector(getQuoteState, fromQuote.getQuote);
 export const getLike = createSelector(getArticleOpState, fromArticleOp.getLike);

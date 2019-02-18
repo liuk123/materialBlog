@@ -1,6 +1,7 @@
 <div class="m-container">
-    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit(form,$event)">
-        <mat-card>
+    
+    <mat-card>
+        <form class="form" [formGroup]="form" (ngSubmit)="onSubmit(form,$event)">
             <mat-card-header>
                 <mat-card-title>信息修改</mat-card-title>
             </mat-card-header>
@@ -15,6 +16,19 @@
                 <mat-form-field class="full-width">
                     <input  matInput type="tel" placeholder="手机号" formControlName="phone">
                 </mat-form-field>
+                <mat-chip-list>
+                    <mat-chip *ngFor="let item of form?.get('label').value" color="primary">{{item}}</mat-chip>
+                </mat-chip-list>
+                <mat-form-field>
+                    <mat-select placeholder="标签" formControlName="label" multiple>
+                        <mat-optgroup *ngFor="let labelGroup of label$ | async" [label]="labelGroup.name">
+                            <mat-option *ngFor="let item of labelGroup.items" [value]="item">
+                            {{item}}
+                            </mat-option>
+                        </mat-optgroup>
+                    </mat-select>
+                </mat-form-field>
+                
                 <app-image-list-select
                     [useSvgIcon]="true"
                     [cols]="6"
@@ -26,8 +40,9 @@
             <mat-card-actions>
                 <button mat-button color="accent" type="submit">保存</button>
             </mat-card-actions>
-        </mat-card>
-    </form>
+        </form>
+    </mat-card>
+    
     
     
     <mat-card>
@@ -38,9 +53,9 @@
             <mat-list>
                 <mat-list-item *ngFor="let category of auth?.categories">
                     <h5 matLine>{{category.title}}</h5>
-                    <mat-form-field matLine>
+                    <!-- <mat-form-field matLine>
                         <input  matInput [value]="category.number">
-                    </mat-form-field>
+                    </mat-form-field> -->
                     <button mat-button color="accent" (click)="del_category(category.title)">删除</button>
                     <mat-divider></mat-divider>
                 </mat-list-item>
@@ -48,20 +63,14 @@
         </mat-card-content>
     </mat-card>
         
-    <mat-card>
+    <!-- <mat-card>
         <mat-card-header>
             <mat-card-title>标签</mat-card-title>
         </mat-card-header>
         <mat-card-content>
             <mat-chip-list>
-                <mat-chip color="primary">ngrx</mat-chip>
-                <mat-chip color="primary">es6</mat-chip>
-                <mat-chip color="primary">angular</mat-chip>
-                <mat-chip color="primary" selected>react</mat-chip>
-            </mat-chip-list>
+                <mat-chip *ngFor="let item of labels" color="primary">{{item}}</mat-chip>
+            </mat-chip-list>   
         </mat-card-content>
-        <mat-card-actions>
-            <button mat-button color="accent">关注更多</button>
-        </mat-card-actions>
-    </mat-card>
+    </mat-card> -->
 </div>

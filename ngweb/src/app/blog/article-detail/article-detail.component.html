@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title><h2>{{article?.title}}</h2></mat-card-title>
-    <mat-card-subtitle>{{article?.meta?.updateAt}}</mat-card-subtitle>
+    <mat-card-subtitle>{{article?.meta?.updateAt}} - 标签：<span *ngFor='let label of article?.label'>{{label}}、</span></mat-card-subtitle>
   </mat-card-header>
   <mat-card-content class="text-article article-contaiter" [innerHTML] = "article?.content">
     正在加载中

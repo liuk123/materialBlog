@@ -19,6 +19,7 @@ export class EditArticleComponent implements OnInit {
 
   form:FormGroup
   categories$: Observable<Category[]>
+  label$: Observable<object>
   article: Article
 
   constructor(
@@ -30,9 +31,8 @@ export class EditArticleComponent implements OnInit {
         select(fromRoot.getAuthCardState),
         map(v => v.categories)
       )
-      this.store$.pipe(select(fromRoot.getArticleDetailState)).subscribe(res => {
-        this.article = res
-      })
+      this.store$.pipe(select(fromRoot.getArticleDetailState)).subscribe(res => this.article = res)
+      this.label$ = this.store$.pipe(select(fromRoot.getLabelState))
   }
 
   ngOnInit() {
@@ -42,7 +42,8 @@ export class EditArticleComponent implements OnInit {
       category: [''],
       newCategory: [''],
       content: ['', [ Validators.required, Validators.minLength(3) ]],
-      _id: ['']
+      _id: [''],
+      label: ['']
     })
     this.routInfo.queryParamMap.subscribe(v => {
       if(v.get('id')){

@@ -3,10 +3,11 @@
     <mat-card-title>{{article?.title}}</mat-card-title>
 
     <mat-card-subtitle>
-        分类：{{article?.category}} 、
+        <!-- 分类：{{article?.category}} 、 -->
+        标签：<span *ngFor='let label of article?.label'>{{label}}/</span> 、
         发布于：{{article?.meta.updateAt | date:'yyyy-MM-dd'}} 、
-        评论：{{article?.commentNum}} 、
-        喜欢：{{article?.like.likeNum}}
+        {{article?.commentNum}} 人评论、
+        {{article?.like.likeNum}}人喜欢
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content class="text-article">

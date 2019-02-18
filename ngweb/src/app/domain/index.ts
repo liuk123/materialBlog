@@ -8,3 +8,7 @@ export interface Result<T>{
     msg: string;
     data?:T;
 }
+export interface Label{
+    name:string,
+    items:string[]
+}

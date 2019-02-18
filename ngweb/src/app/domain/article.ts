@@ -19,9 +19,3 @@ export interface Like {
   likeNum:number;
   likeUser:string[];
 }
-
-// export interface articleDetail {
-//   articleResult: Article
-//   commentResult: any
-//   liked: number
-// }

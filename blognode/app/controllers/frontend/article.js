@@ -99,7 +99,7 @@ class ArticleController {
         if( !ctx.session.user ) return ctx.error({ msg: '请登录' })
 
         const { id, category } = ctx.query
-        if(!id || !category) return ctx.error({ msg: '删除失败' })
+        if(!id) return ctx.error({ msg: '删除失败' })
 
         const result = await ArticleModel.deleteOne({'_id': id})
 
@@ -142,7 +142,7 @@ class ArticleController {
     static async get_detail(ctx){
         const { id } = ctx.query
         let liked = 0
-        const result = await ArticleModel.findById(id).select('title abstract content category like commentNum visitNum author')
+        const result = await ArticleModel.findById(id).select('title abstract content category like commentNum visitNum author label')
         if( ctx.session.user &&
             ctx.session.user._id &&
             result &&
@@ -222,7 +222,18 @@ class ArticleController {
         }
     }
 
-   
+   static async label(ctx){
+        return ctx.success({ msg:'标签成功!', data: [
+                // web:['js','es6','vue'],
+                // java:['spring'],
+                // '数据库':['mongodb']
+                {name: 'web', items: ['js','es6','vue']},
+                {name: 'java', items: ['spring']},
+                {name: '数据库', items: ['mongodb']},
+
+            ]
+        })
+   }
     
 }
 

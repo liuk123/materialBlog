@@ -30,6 +30,15 @@
               <input matInput placeholder="新建分类" formControlName="newCategory">
             </mat-form-field>
         </div>
+        <div class="grid-tille">
+          <mat-select placeholder="标签" formControlName="label" multiple>
+            <mat-optgroup *ngFor="let labelGroup of label$ | async" [label]="labelGroup.name">
+              <mat-option *ngFor="let item of labelGroup.items" [value]="item">
+                {{item}}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </div>
       </div>
       <app-ckeditor formControlName="content"></app-ckeditor>
     </mat-card-content>

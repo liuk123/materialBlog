@@ -6,6 +6,7 @@ import { ArticleService } from './article.service';
 import { AuthGuardService } from './auth-guard.service';
 import { InterceptorService } from './Interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LabelService } from './label.service';
 
 export {
   AuthGuardService
@@ -21,6 +22,7 @@ export class ServicesModule {
         UserService,
         ArticleService,
         AuthGuardService,
+        LabelService,
         { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
       ]
     }

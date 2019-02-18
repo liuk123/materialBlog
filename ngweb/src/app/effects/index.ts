@@ -5,6 +5,7 @@ import { AuthEffects } from './auth.effect';
 import { UserEffects } from './user.effect';
 import { ArticleEffects } from './article.effect';
 import { routerEffects } from './router.effect';
+import { LabelEffects } from './label.effect';
 
 @NgModule({
     imports: [
@@ -13,7 +14,8 @@ import { routerEffects } from './router.effect';
             AuthEffects,
             UserEffects,
             ArticleEffects,
-            routerEffects
+            routerEffects,
+            LabelEffects
         ])
     ]
 })
