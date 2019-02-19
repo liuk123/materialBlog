@@ -7,7 +7,7 @@
 
   <button
     mat-button
-    [routerLink]="['/homepage']">广场</button>
+    [routerLink]="['/index-home', {outlets: { primary: 'blog-list' }}]">广场</button>
   <button
     mat-button
     [routerLink]="['/blog-home', {outlets: { primary: 'blog-list', aux: ['blog-user', '']}}]"
