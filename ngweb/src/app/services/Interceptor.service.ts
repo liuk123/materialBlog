@@ -35,15 +35,16 @@ export class InterceptorService implements HttpInterceptor {
     switch (event.status) {
       case 500:
         this.snackBar.open('服务器端错误,请稍后重试', '关闭')
-        return of(event);
+        break
       case 400:
         this.snackBar.open(event.error.msg, '关闭',{
           duration: 2000,
         })
-        return of(event);
+        break
       default:
-        return of(event);
+        
     }
+    return of(event);
   }
 
 }

@@ -18,7 +18,7 @@ router
     .get('/api/article/get_detail', ArticleController.get_detail)                        // 获取详情
     .get('/api/article/get_comment', ArticleController.get_comment) 
     .post('/api/article/comment', ArticleController.comment)                             // 发表评论
-    .get('/api/article/label', ArticleController.label)
+    // .get('/api/article/label', ArticleController.label)
     
 
     // 用户
