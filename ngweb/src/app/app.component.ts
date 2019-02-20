@@ -7,16 +7,37 @@ import { OverlayContainer } from '@angular/cdk/overlay';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ngweb';
+
   darkTheme:boolean=false;
+  theme:string
 
   constructor(private oc:OverlayContainer){}
-  switchTheme(dark){
-    this.darkTheme=dark;
-    if(dark){
-      this.oc.getContainerElement().classList.add('myapp-dark-theme')
-    }else{
-      this.oc.getContainerElement().classList.remove('myapp-dark-theme')
+
+  switchTheme(theme){
+    // this.darkTheme=theme;
+    // if(theme == 'dark'){
+    //   this.oc.getContainerElement().classList.add('myapp-dark-theme')
+    // }else{
+    //   this.oc.getContainerElement().classList.remove('myapp-dark-theme')
+    // }
+    console.log(theme)
+    this.theme = theme;
+    switch(theme){
+      case 'myapp-green-theme':
+        this.oc.getContainerElement().classList.add('myapp-green-theme')
+        break
+
+      case 'myapp-blue-theme':
+        this.oc.getContainerElement().classList.add('myapp-blue-theme')
+        break
+
+      case 'myapp-dark-theme':
+        this.oc.getContainerElement().classList.add('myapp-dark-theme')
+        this.darkTheme=true
+        break
+
+      default:
+        this.oc.getContainerElement().classList.add('myapp-indigo-theme')
     }
   }
 }

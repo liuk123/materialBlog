@@ -4,7 +4,8 @@
   </button>
   <span class="auth-name">{{auth.userName}}</span>
   <span class="fill-remaining-space"></span>
-
+  
+  <button mat-button>导航</button>
   <button
     mat-button
     [routerLink]="['/index-home', {outlets: { primary: 'blog-list' }}]">广场</button>
@@ -12,15 +13,15 @@
     mat-button
     [routerLink]="['/blog-home', {outlets: { primary: 'blog-list', aux: ['blog-user', '']}}]"
     [queryParams]="{category:'all', authId:''}">主页</button>
-  <button
-    mat-button
-    [routerLink]="['/edit-article']">编写</button>
+  
   <span class="fill-remaining-space"></span>
 
   <button mat-icon-button [matMenuTriggerFor]="userManage" ><mat-icon svgIcon="ellipsis"></mat-icon></button>
   <mat-menu #userManage="matMenu">
       <div *ngIf="auth._id else elseBlock">
           <button mat-menu-item [routerLink]="['/person-center']"><mat-icon svgIcon="genius"></mat-icon>个人</button>
+          <button mat-menu-item [routerLink]="['/edit-article']"><mat-icon svgIcon="genius"></mat-icon>编写</button>
+          <button mat-menu-item [matMenuTriggerFor]="theme"><mat-icon svgIcon="genius"></mat-icon>主题</button> 
           <button mat-menu-item (click)="logout()"><mat-icon svgIcon="genius"></mat-icon>退出</button>
       </div>
       <ng-template #elseBlock>
@@ -29,6 +30,14 @@
       </ng-template>
   </mat-menu>
 
-  <mat-slide-toggle (change)="onChange($event.checked)"></mat-slide-toggle>
+  <!-- <mat-slide-toggle (change)="onChange($event.checked)"></mat-slide-toggle> -->
   
+  <!-- <button mat-icon-button [matMenuTriggerFor]="theme" ><mat-icon svgIcon="ellipsis"></mat-icon></button> -->
+  <mat-menu #theme="matMenu">
+      <button mat-menu-item (click)="changeTheme('myapp-indigo-theme')">indigo</button>
+      <button mat-menu-item (click)="changeTheme('myapp-blue-theme')">blue</button>
+      <button mat-menu-item (click)="changeTheme('myapp-green-theme')">green</button>
+      <button mat-menu-item (click)="changeTheme('myapp-dark-theme')">dark</button>
+  </mat-menu>
+
 </mat-toolbar>

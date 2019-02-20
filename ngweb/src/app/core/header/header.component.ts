@@ -13,7 +13,7 @@ import * as LabelActions from '../../actions/label.action';
 export class HeaderComponent implements OnInit {
 
   @Output() toggle=new EventEmitter<void>();
-  @Output() toggleDarkTheme=new EventEmitter<Boolean>();
+  @Output() switchTheme=new EventEmitter<string>();
 
   auth: User
   // label
@@ -32,10 +32,13 @@ export class HeaderComponent implements OnInit {
     this.toggle.emit();
   }
 
-  onChange(checked:boolean){
-    this.toggleDarkTheme.emit(checked)
-  }
+  // onChange(checked:boolean){
+  //   this.toggleTheme.emit(checked)
+  // }
 
+  changeTheme(color){
+    this.switchTheme.emit(color)
+  }
   logout(){
     this.store$.dispatch(new actions.LogoutAction(this.auth._id))
   }

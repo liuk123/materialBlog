@@ -8,7 +8,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { mergeMap, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 
 
@@ -35,10 +35,12 @@ export class InterceptorService implements HttpInterceptor {
     switch (event.status) {
       case 500:
         this.snackBar.open('服务器端错误,请稍后重试', '关闭')
+        return of(event);
       case 400:
         this.snackBar.open(event.error.msg, '关闭',{
           duration: 2000,
         })
+        return of(event);
       default:
         return of(event);
     }
