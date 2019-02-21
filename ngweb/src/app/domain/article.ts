@@ -19,3 +19,11 @@ export interface Like {
   likeNum:number;
   likeUser:string[];
 }
+
+export interface ArticleListParam {
+  id: string,
+  category?: string,
+  collect?: string,
+  pageSize: number,
+  current: number
+}

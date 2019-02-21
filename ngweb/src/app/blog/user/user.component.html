@@ -18,6 +18,12 @@
     <button
       mat-list-item
       [routerLink]="['/blog-home', { outlets: { primary: 'blog-list'} }]"
+      [queryParams]="{collect:1, authId: (user$ |async)._id}">
+      收藏
+    </button>
+    <button
+      mat-list-item
+      [routerLink]="['/blog-home', { outlets: { primary: 'blog-list'} }]"
       [queryParams]="{category:'all',authId: (user$ |async)._id}">
       全部分类
     </button>

@@ -8,25 +8,42 @@ var path = require('path');
 class ArticleController {
     // 获取文章列表
     static async get_list(ctx){
-        const { id='', category='', current=0, pageSize=10 } = ctx.query
+        const { id='', category='', collect='', current=0, pageSize=10 } = ctx.query
         if( !id && !ctx.session.user ) return ctx.error({ msg: '请登录' })
         const skip = Number(current)*Number(pageSize)
         let condition = {}
-        if( category !== 'all' ){
-            condition.category = category
-        }
-        if( id != 'all'){
-            condition.author = id || ctx.session.user._id
+        if(collect == 1){
+            const userResult = await UserModel.findById(id).selected('collect')
+            if(!userResult) return ctx.error({ msg:'收藏内容为空', data: userResult });
+            const result = await ArticleModel
+                            .find(userResult)
+                            .sort({ 'meta.createAt': -1 })
+                            .skip(skip)
+                            .limit(Number(pageSize))
+                            .select('-content')
+
+            return ctx.success({ msg:'获取成功', data: result });
+            
+        }else{
+
+            if( category !== 'all' ){
+                condition.category = category
+            }
+            if( id != 'all'){
+                condition.author = id || ctx.session.user._id
+            }
+            
+            const result = await ArticleModel
+                            .find(condition)
+                            .sort({ 'meta.createAt': -1 })
+                            .skip(skip)
+                            .limit(Number(pageSize))
+                            .select('-content')
+
+            return ctx.success({ msg:'获取成功', data: result });
         }
         
-        const result = await ArticleModel
-                        .find(condition)
-                        .sort({ 'meta.createAt': -1 })
-                        .skip(skip)
-                        .limit(Number(pageSize))
-                        .select('-content')
         
-        return ctx.success({ msg:'获取成功', data: result });
     }
     // 新建
     static async create(ctx){
@@ -234,7 +251,9 @@ class ArticleController {
 //             ]
 //         })
 //    }
-    
+    static async collect(ctx){
+        return ctx.error({ msg:'收藏功能正在开发', data: '' })
+    }
 }
 
 export default ArticleController;

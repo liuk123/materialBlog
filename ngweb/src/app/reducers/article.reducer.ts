@@ -3,16 +3,18 @@ import * as actions from '../actions/article.action';
 export interface State {
     like: number;
     delete: boolean;
+    collect: boolean;
 
 };
 export const initialState: State = {
     like:0,
     delete:false,
+    collect:false,
 };
 
 export function reducer(state = initialState, action: actions.Actions ): State {
     switch (action.type) {
-        //
+        //喜欢
         case actions.ActionTypes.LIKE_SCCESS:{
             return Object.assign(state, {like: action.payload});
         }
@@ -26,6 +28,13 @@ export function reducer(state = initialState, action: actions.Actions ): State {
         case actions.ActionTypes.DELETE_ARTICLE_FAIL: {
             return action.payload;
         }
+        // 收藏
+        case actions.ActionTypes.COLLECT_ARTICLE_SCCESS: {
+            return Object.assign(state, {collect: action.payload});
+        }
+        case actions.ActionTypes.COLLECT_ARTICLE_FAIL: {
+            return action.payload;
+        }
         default: {
             return state;
         }
@@ -33,3 +42,4 @@ export function reducer(state = initialState, action: actions.Actions ): State {
 }
 export const getLike = (state: State) => state.like;
 export const getDelete = (state: State) => state.delete;
+export const getCollect = (state: State) => state.collect;

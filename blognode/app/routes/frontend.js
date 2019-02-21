@@ -19,7 +19,7 @@ router
     .get('/api/article/get_comment', ArticleController.get_comment) 
     .post('/api/article/comment', ArticleController.comment)                             // 发表评论
     // .get('/api/article/label', ArticleController.label)
-    
+    .post('/api/article/collect', ArticleController.collect)                             // 收藏
 
     // 用户
     .post('/api/user/logout',UserController.logout)                                       // 用户退出

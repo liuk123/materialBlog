@@ -20,7 +20,7 @@ export class AppComponent {
     // }else{
     //   this.oc.getContainerElement().classList.remove('myapp-dark-theme')
     // }
-    console.log(theme)
+
     this.theme = theme;
     switch(theme){
       case 'myapp-green-theme':
@@ -33,7 +33,6 @@ export class AppComponent {
 
       case 'myapp-dark-theme':
         this.oc.getContainerElement().classList.add('myapp-dark-theme')
-        this.darkTheme=true
         break
 
       default:

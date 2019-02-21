@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { Article, Comment } from '../domain'
+import { Article, Comment, ArticleListParam } from '../domain'
 
 export enum ActionTypes {
     //编辑
@@ -22,6 +22,10 @@ export enum ActionTypes {
     LIKE = '[Article] Like',
     LIKE_SCCESS = '[Article] Like success',
     LIKE_FAIL = '[Article] Like fail',
+    //收藏
+    COLLECT_ARTICLE = '[Collect] Collect article',
+    COLLECT_ARTICLE_SCCESS = '[Collect] Collect article success',
+    COLLECT_ARTICLE_FAIL = '[Collect] Collect article fail',
     //获取列表
     ARTICLE_LIST = '[Article] Article list',
     ARTICLE_LIST_SCCESS = '[Article] Article list success',
@@ -42,7 +46,7 @@ export enum ActionTypes {
 export class ArticleListAction implements Action {
     readonly type = ActionTypes.ARTICLE_LIST;
 
-    constructor(public payload: {id: string, category: string, pageSize: number, current: number}) { }
+    constructor(public payload: ArticleListParam) { }
 }
 export class ArticleListSuccessAction implements Action {
     readonly type = ActionTypes.ARTICLE_LIST_SCCESS;
@@ -134,6 +138,22 @@ export class LikeFailAction implements Action {
 
     constructor(public payload: null) { }
 }
+//收藏
+export class CollectArticleAction implements Action {
+    readonly type = ActionTypes.COLLECT_ARTICLE;
+
+    constructor(public payload: { id: string }) { }
+}
+export class CollectArticleSuccessAction implements Action {
+    readonly type = ActionTypes.COLLECT_ARTICLE_SCCESS;
+
+    constructor(public payload: null) { }
+}
+export class CollectArticleFailAction implements Action {
+    readonly type = ActionTypes.COLLECT_ARTICLE_FAIL;
+
+    constructor(public payload: null) { }
+}
 //发表评论
 export class CommentAction implements Action {
     readonly type = ActionTypes.COMMENT;
@@ -200,3 +220,7 @@ export type Actions
     | CommentListAction
     | CommentListSuccessAction
     | CommentListFailAction
+
+    | CollectArticleAction
+    | CollectArticleSuccessAction
+    | CollectArticleFailAction

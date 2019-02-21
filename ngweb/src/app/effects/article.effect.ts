@@ -47,6 +47,14 @@ export class ArticleEffects {
             catchError(err => of(new actions.LikeFailAction(err)))
         ))
     )
+    @Effect()
+    collect$: Observable<Action> = this.actions$.pipe(
+        ofType(actions.ActionTypes.COLLECT_ARTICLE),
+        mergeMap((u:actions.CollectArticleSuccessAction) => this.service$.collect(u.payload).pipe(
+            map(v => new actions.CollectArticleSuccessAction(v.data)),
+            catchError(err => of(new actions.CollectArticleFailAction(err)))
+        ))
+    )
 
 
 

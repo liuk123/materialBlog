@@ -25,18 +25,28 @@
         </mat-tab-group> -->
         <nav mat-tab-nav-bar>
             <a mat-tab-link
-                
                 [routerLink]="[{outlets: { primary: 'blog-list' }}]"
                 routerLinkActive #rla="routerLinkActive"
                 [active]="rla.isActive">
                 笔记
             </a>
             <a mat-tab-link
-                
                 [routerLink]="[{outlets: { primary: 'auth-list' }}]"
                 routerLinkActive #rlb="routerLinkActive"
                 [active]="rlb.isActive">
                 用户
+            </a>
+            <a mat-tab-link
+                [routerLink]="[{outlets: { primary: 'blog-list' }}]"
+                routerLinkActive #rla="routerLinkActive"
+                [active]="rla.isActive">
+                推荐笔记
+            </a>
+            <a mat-tab-link
+                [routerLink]="[{outlets: { primary: 'auth-list' }}]"
+                routerLinkActive #rlb="routerLinkActive"
+                [active]="rlb.isActive">
+                推荐用户
             </a>
         </nav>
         

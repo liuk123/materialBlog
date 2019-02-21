@@ -64,6 +64,7 @@ export const getLabelState = (state: State) => state.label;
 export const getQuote = createSelector(getQuoteState, fromQuote.getQuote);
 export const getLike = createSelector(getArticleOpState, fromArticleOp.getLike);
 export const getDelete = createSelector(getArticleOpState, fromArticleOp.getDelete);
+export const getCollect = createSelector(getArticleOpState, fromArticleOp.getCollect);
 
 @NgModule({
     imports: [

@@ -81,6 +81,10 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     this.store$.dispatch(new actions.LikeAction({id: titleId, liked: this.liked}))
   }
 
+  collect(id){
+    this.store$.dispatch(new actions.CollectArticleAction(id))
+  }
+
   delete(id, category){
     this.store$.dispatch(new actions.DeleteArticleAction({id, category}))
   }

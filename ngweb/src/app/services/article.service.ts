@@ -1,12 +1,18 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Result, Article, Comment } from '../domain';
+import { Result, Article, Comment, ArticleListParam } from '../domain';
 
 @Injectable()
 export class ArticleService {
     private readonly domain='api/article';
     constructor(private http:HttpClient,@Inject('BASE_CONFIG') private config){}
-
+    private encodeParams(params){
+        return Object.keys(params)
+          .filter(key=>params[key])
+          .reduce((sum:HttpParams,key:string)=>{
+            return sum.append(key,params[key]);
+          },new HttpParams());
+      }
     update(data){
         const uri=`${this.config.uri}/${this.domain}/update`;
         return this.http.post<Result<null>>(uri, data );
@@ -28,14 +34,13 @@ export class ArticleService {
         return this.http.post<Result<null>>(uri, data );
     }
 
-    get_list({id , category, pageSize, current}){
+    collect(id){
+        const uri=`${this.config.uri}/${this.domain}/collect`;
+        return this.http.post<Result<null>>(uri, id );
+    }
+    get_list(data:ArticleListParam){
         const uri=`${this.config.uri}/${this.domain}/get_list`;
-        const params = new HttpParams()
-            .append('id',id)
-            .append('category', category)
-            .append('pageSize', pageSize)
-            .append('current', current)
-        return this.http.get<Result<Article[]>>(uri, { params: params });
+        return this.http.get<Result<Article[]>>(uri, { params: this.encodeParams(data) });
     }
     get_detail(id){
         const uri=`${this.config.uri}/${this.domain}/get_detail`;
