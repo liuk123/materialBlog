@@ -26,10 +26,12 @@ export enum ActionTypes {
     COLLECT_ARTICLE = '[Collect] Collect article',
     COLLECT_ARTICLE_SCCESS = '[Collect] Collect article success',
     COLLECT_ARTICLE_FAIL = '[Collect] Collect article fail',
+   
     //关注
     COLLECT_USER = '[Collect] Collect user',
     COLLECT_USER_SCCESS = '[Collect] Collect user success',
     COLLECT_USER_FAIL = '[Collect] Collect user fail',
+    
     //获取列表
     ARTICLE_LIST = '[Article] Article list',
     ARTICLE_LIST_SCCESS = '[Article] Article list success',
@@ -146,7 +148,7 @@ export class LikeFailAction implements Action {
 export class CollectArticleAction implements Action {
     readonly type = ActionTypes.COLLECT_ARTICLE;
 
-    constructor(public payload: { id: string }) { }
+    constructor(public payload: { id: string, isCollected: boolean }) { }
 }
 export class CollectArticleSuccessAction implements Action {
     readonly type = ActionTypes.COLLECT_ARTICLE_SCCESS;
@@ -162,7 +164,7 @@ export class CollectArticleFailAction implements Action {
 export class CollectUserAction implements Action {
     readonly type = ActionTypes.COLLECT_USER;
 
-    constructor(public payload: { id: string }) { }
+    constructor(public payload: { id: string, isCollected: boolean }) { }
 }
 export class CollectUserSuccessAction implements Action {
     readonly type = ActionTypes.COLLECT_USER_SCCESS;

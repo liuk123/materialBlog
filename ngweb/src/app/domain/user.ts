@@ -6,6 +6,7 @@ export interface User {
   avatar?: string;
   categories?: Category[];
   collect?: string[],
+  collectUser?:string[],
   theme?:string,
   label?: string[];
   role?: number;

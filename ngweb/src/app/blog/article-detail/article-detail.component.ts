@@ -25,6 +25,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
   authId: string
   subscription: Subscription
   delSubscription: Subscription
+  isCollected: boolean
 
   constructor(
       private store$: Store<fromRoot.State>,
@@ -50,7 +51,12 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
       }
     })
     this.store$.pipe(select(fromRoot.getCommentListState)).subscribe(v => this.comments = v)
-    this.store$.pipe(select(fromRoot.getAuthCardState)).subscribe(v => this.authId = v._id)
+    this.store$.pipe(select(fromRoot.getAuthCardState)).subscribe(v => {
+      this.authId = v._id
+      if(v.collect&&v.collect instanceof Array){
+        this.isCollected = v.collect.find(v =>v==this.id)?true:false
+      }
+    })
 
     //喜欢
     this.store$.pipe(select(v=>v.articleOp.like)).subscribe(v => {
@@ -82,7 +88,10 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
   }
 
   collect(id){
-    this.store$.dispatch(new actions.CollectArticleAction(id))
+    this.store$.dispatch(new actions.CollectArticleAction({id, isCollected: this.isCollected}))
+  }
+  delCollect(id){
+    this.store$.dispatch(new actions.CollectArticleAction({id, isCollected: this.isCollected}))
   }
 
   delete(id, category){

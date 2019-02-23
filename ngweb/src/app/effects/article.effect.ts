@@ -4,6 +4,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { Action } from '@ngrx/store';
 import * as actions from '../actions/article.action';
+import * as authActions from '../actions/auth.action';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { ArticleService } from '../services/article.service';
 import * as RouterActions from '../actions/router.action';
@@ -45,7 +46,7 @@ export class ArticleEffects {
         ofType(actions.ActionTypes.LIKE),
         mergeMap((u:actions.LikeAction) => this.service$.like(u.payload).pipe(
             map(v => {
-                this.snackBar.open('喜欢成功', '关闭', {duration: 4000})
+                this.snackBar.open(v.msg, '关闭', {duration: 4000})
                 return new actions.LikeSuccessAction(v.data)}),
             catchError(err => of(new actions.LikeFailAction(err)))
         ))
@@ -55,8 +56,8 @@ export class ArticleEffects {
         ofType(actions.ActionTypes.COLLECT_ARTICLE),
         mergeMap((u:actions.CollectArticleSuccessAction) => this.service$.collectArticle(u.payload).pipe(
             map(v => {
-                this.snackBar.open('收藏成功', '关闭', {duration: 4000})
-                return new actions.CollectArticleSuccessAction(v.data)}),
+                this.snackBar.open(v.msg, '关闭', {duration: 4000})
+                return new authActions.AuthCardAction('')}),
             catchError(err => of(new actions.CollectArticleFailAction(err)))
         ))
     )
@@ -66,8 +67,8 @@ export class ArticleEffects {
         ofType(actions.ActionTypes.COLLECT_USER),
         mergeMap((u:actions.CollectUserSuccessAction) => this.service$.collectUser(u.payload).pipe(
             map(v => {
-                this.snackBar.open('关注成功', '关闭', {duration: 4000})
-                return new actions.CollectUserSuccessAction(v.data)}),
+                this.snackBar.open(v.msg, '关闭', {duration: 4000})
+                return new authActions.AuthCardAction('')}),
             catchError(err => of(new actions.CollectUserFailAction(err)))
         ))
     )

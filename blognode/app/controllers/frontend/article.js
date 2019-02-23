@@ -254,24 +254,42 @@ class ArticleController {
 //    }
     static async collect(ctx){
         if(!ctx.session.user) return ctx.error({ msg:'请登录' })
-        const id = ctx.request.body
+        const {id, isCollected} = ctx.request.body
 
-        const result = await UserModel.updateOne(
-            { _id: ctx.session.user._id },
-            { $addToSet: {collect: id}})
-
-        return ctx.success({ msg:'收藏成功!' })
+        if(isCollected){
+            const result = await UserModel.updateOne(
+                { _id: ctx.session.user._id },
+                { $pull: {collect: id}})
+    
+            return ctx.success({ msg:'取消收藏成功!' })
+        }else{
+            const result = await UserModel.updateOne(
+                { _id: ctx.session.user._id },
+                { $addToSet: {collect: id}})
+    
+            return ctx.success({ msg:'收藏成功!' })
+        }
+        
 
     }
     static async collectUser(ctx){
         if(!ctx.session.user) return ctx.error({ msg:'请登录' })
-        const { id } = ctx.request.body
-      
-        const result = await UserModel.updateOne(
-            { _id: ctx.session.user._id },
-            { $addToSet: {collectUser: id}})
-
-        return ctx.success({ msg:'关注成功!' })
+        const { id, isCollected } = ctx.request.body
+        
+        if(isCollected){
+            const result = await UserModel.updateOne(
+                { _id: ctx.session.user._id },
+                { $pull: {collectUser: id}})
+    
+            return ctx.success({ msg:'取消关注成功!' })
+        }else{
+            const result = await UserModel.updateOne(
+                { _id: ctx.session.user._id },
+                { $addToSet: {collectUser: id}})
+    
+            return ctx.success({ msg:'关注成功!' })
+        }
+        
 
     }
 }
