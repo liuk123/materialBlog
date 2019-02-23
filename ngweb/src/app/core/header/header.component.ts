@@ -18,8 +18,12 @@ export class HeaderComponent implements OnInit {
   auth: User
   // label
   constructor(private store$: Store<fromRoot.State>) {
-    this.store$.pipe(select(fromRoot.getAuthCardState)).subscribe(res => this.auth = res)
-    this.store$.pipe(select(fromRoot.getAuthState)).subscribe(res => this.auth = res)
+    this.store$.pipe(select(fromRoot.getAuthCardState)).subscribe(res => {
+      this.switchTheme.emit(res.theme)
+      this.auth = res})
+    this.store$.pipe(select(fromRoot.getAuthState)).subscribe(res => {
+      this.switchTheme.emit(res.theme)
+      this.auth = res})
 
     this.store$.dispatch(new actions.AuthCardAction(''))
     this.store$.dispatch(new LabelActions.LabelAction(null))
@@ -32,8 +36,9 @@ export class HeaderComponent implements OnInit {
     this.toggle.emit();
   }
 
-  changeTheme(color){
+  changeTheme(color:string){
     this.switchTheme.emit(color)
+    this.store$.dispatch(new actions.UpdateAuthAction({theme: color}))
   }
   logout(){
     this.store$.dispatch(new actions.LogoutAction(this.auth._id))

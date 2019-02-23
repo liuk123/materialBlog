@@ -9,6 +9,7 @@ const UserSchema=new Schema({
 	avatar:String,
 	collect:[],
 	collectUser:[],
+	theme:String,
 	label:[],
 	role:{ type:Number, default:0 },
 	phone:Number,

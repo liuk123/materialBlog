@@ -1,13 +1,14 @@
 export interface User {
   _id?: string;
-  userName: string;
+  userName?: string;
   password?: string;
   introduce?: string;
   avatar?: string;
   categories?: Category[];
   collect?: string[],
+  theme?:string,
   label?: string[];
-  role: number;
+  role?: number;
   phone?: number;
   meta?: Meta;
 }

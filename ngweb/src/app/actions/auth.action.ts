@@ -2,34 +2,39 @@ import { Action } from '@ngrx/store'
 import { User } from '../domain'
 
 export enum ActionTypes {
+    //资料
     LOGIN = '[Auth] Login',
     LOGIN_SCCESS = '[Auth] Login success',
     LOGIN_FAIL = '[Auth] Login fail',
-
+    //注册
     REGISTER = '[Auth] Register',
     REGISTER_SCCESS = '[Auth] Register success',
     REGISTER_FAIL = '[Auth] Register fail',
-    
+    //退出
     LOGOUT = '[Auth] Logout',
     LOGOUT_SCCESS = '[Auth] Logout success',
     LOGOUT_FAIL = '[Auth] Logout fail',
-
+    //获取用户详情
     USERCARD = '[UserCard] user-card',
     USERCARD_SCCESS = '[UserCard] user-card success',
     USERCARD_FAIL = '[UserCard] user-card fail',
-
+    //获取用户列表
     USERLIST = '[UserList] user-list',
     USERLIST_SCCESS = '[UserList] user-list success',
     USERLIST_FAIL = '[UserList] user-list fail',
-
+    //获取自己资料详情
     AUTHCARD = '[AuthCard] auth-card',
     AUTHCARD_SCCESS = '[AuthCard] auth-card success',
     AUTHCARD_FAIL = '[AuthCard] auth-card fail',
-
+    //修改
     UPDATE_AUTH = '[Auth] update-auth',
     UPDATE_AUTH_SCCESS = '[Auth] update-auth success',
     UPDATE_AUTH_FAIL = '[Auth] update-auth fail',
-
+    // //主题
+    // THEME = '[Theme] theme',
+    // THEME_SCCESS = '[Theme] theme success',
+    // THEME_FAIL = '[Theme] theme fail',
+    //分类
     DEL_CATEGORY = '[Category] del_category',
     DEL_CATEGORY_SCCESS = '[Category] del_category success',
     DEL_CATEGORY_FAIL = '[Category] del_category fail',
@@ -165,6 +170,22 @@ export class DelCategoryFailAction implements Action {
 
     constructor(public payload: null) { }
 }
+//主题
+// export class ThemeAction implements Action {
+//     readonly type = ActionTypes.DEL_CATEGORY;
+
+//     constructor(public payload: string) { }
+// }
+// export class ThemeSuccessAction implements Action {
+//     readonly type = ActionTypes.DEL_CATEGORY_SCCESS;
+
+//     constructor(public payload: User) { }
+// }
+// export class ThemeFailAction implements Action {
+//     readonly type = ActionTypes.DEL_CATEGORY_FAIL;
+
+//     constructor(public payload: null) { }
+// }
 
 
 export type Actions
@@ -197,4 +218,8 @@ export type Actions
     | UserListAction
     | UserListSuccessAction
     | UserListFailAction
+
+    // | ThemeAction
+    // | ThemeSuccessAction
+    // | ThemeFailAction
 
