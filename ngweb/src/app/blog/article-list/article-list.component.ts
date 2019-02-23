@@ -19,6 +19,7 @@ export class ArticleListComponent implements OnInit {
   id: string
   category: string
   collect: string
+  condition:ArticleListParam
 
   articles$: Observable<Article[]>
 
@@ -28,13 +29,8 @@ export class ArticleListComponent implements OnInit {
       this.id = v.get('authId')
       this.category = v.get('category')
       this.collect = v.get('collect')
-      let condition:ArticleListParam
-      if(this.collect == '1'){//收藏
-        condition = {id: this.id, collect: this.collect, pageSize: this.pageSize, current: 0}
-      }else{//分类
-        condition = {id: this.id, category: this.category, pageSize: this.pageSize, current: 0}
-      }
-      this.store$.dispatch(new actions.ArticleListAction(condition))
+      this.condition = {id: this.id, category: this.category, collect: this.collect, pageSize: this.pageSize, current: 0}
+      this.store$.dispatch(new actions.ArticleListAction(this.condition))
       this.articles$ = this.store$.pipe(select(fromRoot.getArticleListState))
     })
     
@@ -44,7 +40,8 @@ export class ArticleListComponent implements OnInit {
   }
 
   onPage(ev){
-    this.store$.dispatch(new actions.ArticleListAction({id: this.id, category: this.category, pageSize: ev.pageSize, current: ev.pageIndex}))
+    this.condition = {id: this.id, category: this.category, collect: this.collect, pageSize: ev.pageSize, current: ev.pageIndex}
+    this.store$.dispatch(new actions.ArticleListAction(this.condition))
   }
  
 }

@@ -3,9 +3,10 @@ export interface User {
   userName: string;
   password?: string;
   introduce?: string;
-  avatar?:string;
+  avatar?: string;
   categories?: Category[];
-  label?: [];
+  collect?: string[],
+  label?: string[];
   role: number;
   phone?: number;
   meta?: Meta;

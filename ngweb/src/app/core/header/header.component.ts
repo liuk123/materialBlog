@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   constructor(private store$: Store<fromRoot.State>) {
     this.store$.pipe(select(fromRoot.getAuthCardState)).subscribe(res => this.auth = res)
     this.store$.pipe(select(fromRoot.getAuthState)).subscribe(res => this.auth = res)
-    // this.store$.pipe(select(fromRoot.getLabelState)).subscribe(res => this.label = res)
+
     this.store$.dispatch(new actions.AuthCardAction(''))
     this.store$.dispatch(new LabelActions.LabelAction(null))
   }
@@ -31,10 +31,6 @@ export class HeaderComponent implements OnInit {
   openSidebar(){
     this.toggle.emit();
   }
-
-  // onChange(checked:boolean){
-  //   this.toggleTheme.emit(checked)
-  // }
 
   changeTheme(color){
     this.switchTheme.emit(color)

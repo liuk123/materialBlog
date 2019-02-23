@@ -7,6 +7,7 @@ const UserSchema=new Schema({
 	password:String,
 	categories:[],
 	avatar:String,
+	collect:[],
 	label:[],
 	role:{ type:Number, default:0 },
 	phone:Number,

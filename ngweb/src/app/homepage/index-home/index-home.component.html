@@ -37,15 +37,15 @@
                 用户
             </a>
             <a mat-tab-link
-                [routerLink]="[{outlets: { primary: 'blog-list' }}]"
-                routerLinkActive #rla="routerLinkActive"
-                [active]="rla.isActive">
+                [routerLink]="[{outlets: { primary: 'recommend-blog-list' }}]"
+                routerLinkActive #rlc="routerLinkActive"
+                [active]="rlc.isActive">
                 推荐笔记
             </a>
             <a mat-tab-link
-                [routerLink]="[{outlets: { primary: 'auth-list' }}]"
-                routerLinkActive #rlb="routerLinkActive"
-                [active]="rlb.isActive">
+                [routerLink]="[{outlets: { primary: 'recommend-auth-list' }}]"
+                routerLinkActive #rld="routerLinkActive"
+                [active]="rld.isActive">
                 推荐用户
             </a>
         </nav>
