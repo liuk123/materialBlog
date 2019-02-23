@@ -18,7 +18,7 @@ export class ArticleListComponent implements OnInit {
   pageSize = 10
   id: string
   category: string
-  collect: string
+  collect: string[]
   condition:ArticleListParam
 
   articles$: Observable<Article[]>
@@ -28,7 +28,7 @@ export class ArticleListComponent implements OnInit {
     this.routInfo.queryParamMap.subscribe(v => {
       this.id = v.get('authId')
       this.category = v.get('category')
-      this.collect = v.get('collect')
+      this.collect = v.getAll('collect')
       this.condition = {id: this.id, category: this.category, collect: this.collect, pageSize: this.pageSize, current: 0}
       this.store$.dispatch(new actions.ArticleListAction(this.condition))
       this.articles$ = this.store$.pipe(select(fromRoot.getArticleListState))

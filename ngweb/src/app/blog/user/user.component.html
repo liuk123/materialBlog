@@ -1,12 +1,27 @@
-<mat-card>
+<mat-card class="mb-3">
   <mat-card-header>
     <div mat-card-avatar>
       <mat-icon [svgIcon]="(user$ | async)?.avatar" style="width:100%;height:100%"></mat-icon>
     </div>
-    <mat-card-title>{{(user$ | async)?.userName}}</mat-card-title>
+    <mat-card-title>
+      {{(user$ | async)?.userName}}
+      <button mat-button (click)="collectUser()" *ngIf="authId">关注</button>
+    </mat-card-title>
     <mat-card-subtitle>{{(user$ | async)?.introduce}}</mat-card-subtitle>
   </mat-card-header>
 </mat-card>
+
+<button mat-button
+      [routerLink]="['/blog-home', { outlets: { primary: 'blog-list'} }]"
+      [queryParams]="{collect:(user$ | async)?.collect, authId: (user$ |async)._id}">
+  收藏
+</button>
+<button mat-button
+      [routerLink]="['/blog-home', { outlets: { primary: 'auth-list'} }]"
+      [queryParams]="{collect:(user$ | async)?.collectUser, authId: (user$ |async)._id}">
+  关注
+</button>
+
 
 <mat-action-list>
     <!-- <button
@@ -15,12 +30,7 @@
       [queryParams]="{category:'all',authId:''}">
       <span matBadge="4" matBadgeOverlap="false">全部分类</span>
     </button> -->
-    <button
-      mat-list-item
-      [routerLink]="['/blog-home', { outlets: { primary: 'blog-list'} }]"
-      [queryParams]="{collect:1, authId: (user$ |async)._id}">
-      收藏
-    </button>
+    
     <button
       mat-list-item
       [routerLink]="['/blog-home', { outlets: { primary: 'blog-list'} }]"

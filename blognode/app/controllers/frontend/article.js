@@ -12,21 +12,17 @@ class ArticleController {
         if( !id && !ctx.session.user ) return ctx.error({ msg: '请登录' })
         const skip = Number(current)*Number(pageSize)
 
-        if(collect == 1){
-            const userResult = await UserModel.findById(id).select('collect -_id')
-
-            if(!userResult) return ctx.error({ msg:'收藏内容为空' });
-            console.log(id)
-            console.log(userResult)
+        if(collect != ''){
+            // const userResult = await UserModel.findById(id).select('collect -_id')
+            // if(!userResult) return ctx.error({ msg:'收藏内容为空' });
+  
             const result = await ArticleModel
-                            // .where('_id')
-                            // .in(userResult.collect)
-                            .find({'_id': {$in: userResult.collect}})
+                            .find({'_id': {$in: collect.split(',')}})
                             .sort({ 'meta.createAt': -1 })
                             .skip(skip)
                             .limit(Number(pageSize))
                             .select('-content')
-            console.log(result)
+            
             return ctx.success({ msg:'获取成功', data: result });
             
         }else{
@@ -265,6 +261,17 @@ class ArticleController {
             { $addToSet: {collect: id}})
 
         return ctx.success({ msg:'收藏成功!' })
+
+    }
+    static async collectUser(ctx){
+        if(!ctx.session.user) return ctx.error({ msg:'请登录' })
+        const { id } = ctx.request.body
+      
+        const result = await UserModel.updateOne(
+            { _id: ctx.session.user._id },
+            { $addToSet: {collectUser: id}})
+
+        return ctx.success({ msg:'关注成功!' })
 
     }
 }

@@ -26,6 +26,10 @@ export enum ActionTypes {
     COLLECT_ARTICLE = '[Collect] Collect article',
     COLLECT_ARTICLE_SCCESS = '[Collect] Collect article success',
     COLLECT_ARTICLE_FAIL = '[Collect] Collect article fail',
+    //关注
+    COLLECT_USER = '[Collect] Collect user',
+    COLLECT_USER_SCCESS = '[Collect] Collect user success',
+    COLLECT_USER_FAIL = '[Collect] Collect user fail',
     //获取列表
     ARTICLE_LIST = '[Article] Article list',
     ARTICLE_LIST_SCCESS = '[Article] Article list success',
@@ -154,6 +158,22 @@ export class CollectArticleFailAction implements Action {
 
     constructor(public payload: null) { }
 }
+//关注
+export class CollectUserAction implements Action {
+    readonly type = ActionTypes.COLLECT_USER;
+
+    constructor(public payload: { id: string }) { }
+}
+export class CollectUserSuccessAction implements Action {
+    readonly type = ActionTypes.COLLECT_USER_SCCESS;
+
+    constructor(public payload: null) { }
+}
+export class CollectUserFailAction implements Action {
+    readonly type = ActionTypes.COLLECT_USER_FAIL;
+
+    constructor(public payload: null) { }
+}
 //发表评论
 export class CommentAction implements Action {
     readonly type = ActionTypes.COMMENT;
@@ -224,3 +244,7 @@ export type Actions
     | CollectArticleAction
     | CollectArticleSuccessAction
     | CollectArticleFailAction
+
+    | CollectUserAction
+    | CollectUserSuccessAction
+    | CollectUserFailAction

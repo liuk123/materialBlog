@@ -6,10 +6,12 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
 import { ArticleListComponent } from './article-list/article-list.component';
 import { EditArticleComponent } from './edit-article/edit-article.component';
 import { AuthGuardService } from '../services/services.module';
+import { AuthListComponent } from './auth-list/auth-list.component';
 
 const routes: Routes = [
     { path: 'blog-home', component: BlogHomeComponent, children: [
         { path: 'blog-list', component: ArticleListComponent },
+        { path: 'auth-list', component: AuthListComponent },
         { path: 'blog-detail', component: ArticleDetailComponent },
         { path: 'blog-user/:authId', component: UserComponent, outlet: "aux" },
     ]},

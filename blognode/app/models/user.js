@@ -8,6 +8,7 @@ const UserSchema=new Schema({
 	categories:[],
 	avatar:String,
 	collect:[],
+	collectUser:[],
 	label:[],
 	role:{ type:Number, default:0 },
 	phone:Number,

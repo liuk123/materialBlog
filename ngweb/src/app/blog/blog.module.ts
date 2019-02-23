@@ -6,6 +6,7 @@ import { UserComponent } from './user/user.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { EditArticleComponent } from './edit-article/edit-article.component';
+import { AuthListComponent } from './auth-list/auth-list.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { EditArticleComponent } from './edit-article/edit-article.component';
     ArticleListComponent,
     ArticleDetailComponent,
     EditArticleComponent,
+    AuthListComponent,
   ],
   imports: [
     blogRoutingModule,

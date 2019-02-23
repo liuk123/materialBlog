@@ -7,6 +7,7 @@ import * as actions from '../actions/article.action';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { ArticleService } from '../services/article.service';
 import * as RouterActions from '../actions/router.action';
+import { MatSnackBar } from '@angular/material';
 
 
 @Injectable()
@@ -43,19 +44,33 @@ export class ArticleEffects {
     like$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.LIKE),
         mergeMap((u:actions.LikeAction) => this.service$.like(u.payload).pipe(
-            map(v => new actions.LikeSuccessAction(v.data)),
+            map(v => {
+                this.snackBar.open('喜欢成功', '关闭', {duration: 4000})
+                return new actions.LikeSuccessAction(v.data)}),
             catchError(err => of(new actions.LikeFailAction(err)))
         ))
     )
     @Effect()
-    collect$: Observable<Action> = this.actions$.pipe(
+    collectArticle$: Observable<Action> = this.actions$.pipe(
         ofType(actions.ActionTypes.COLLECT_ARTICLE),
-        mergeMap((u:actions.CollectArticleSuccessAction) => this.service$.collect(u.payload).pipe(
-            map(v => new actions.CollectArticleSuccessAction(v.data)),
+        mergeMap((u:actions.CollectArticleSuccessAction) => this.service$.collectArticle(u.payload).pipe(
+            map(v => {
+                this.snackBar.open('收藏成功', '关闭', {duration: 4000})
+                return new actions.CollectArticleSuccessAction(v.data)}),
             catchError(err => of(new actions.CollectArticleFailAction(err)))
         ))
     )
 
+    @Effect()
+    collectUser$: Observable<Action> = this.actions$.pipe(
+        ofType(actions.ActionTypes.COLLECT_USER),
+        mergeMap((u:actions.CollectUserSuccessAction) => this.service$.collectUser(u.payload).pipe(
+            map(v => {
+                this.snackBar.open('关注成功', '关闭', {duration: 4000})
+                return new actions.CollectUserSuccessAction(v.data)}),
+            catchError(err => of(new actions.CollectUserFailAction(err)))
+        ))
+    )
 
 
     @Effect()
@@ -109,5 +124,5 @@ export class ArticleEffects {
             extras: { replaceUrl: false }
         }))
     )
-    constructor(private actions$: Actions, private service$: ArticleService){}
+    constructor(private actions$: Actions, private service$: ArticleService, private snackBar: MatSnackBar){}
 }

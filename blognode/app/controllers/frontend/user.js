@@ -105,15 +105,26 @@ class UserController {
     // 用户列表信息
     static async user_list(ctx) {
 
-        const { current=0, pageSize=10 } = ctx.query
+        const { collect='', current=0, pageSize=10 } = ctx.query
         const skip = Number(current)*Number(pageSize)
-        const result = await UserModel
-            .find()
-            .skip(skip)
-            .limit(Number(pageSize))
-            .select('userName introduce avatar label categories');
-        if(!result) return ctx.error({ msg: '获取用户列表失败!' });
-        return ctx.success({ msg:'获取成功',data: result });
+        if(collect != ''){
+            const result = await UserModel
+                .find({'_id': { $in: collect.split(',')}})
+                .skip(skip)
+                .limit(Number(pageSize))
+                .select('userName introduce avatar label categories');
+                return ctx.success({ msg:'获取成功', data: result });
+        }else{
+            const result = await UserModel
+                .find()
+                .skip(skip)
+                .limit(Number(pageSize))
+                .select('userName introduce avatar label categories');
+            if(!result) return ctx.error({ msg: '获取用户列表失败!' });
+            return ctx.success({ msg:'获取成功',data: result });
+        }
+
+        
     }
 
     //分类

@@ -38,7 +38,7 @@ export class InterceptorService implements HttpInterceptor {
         break
       case 400:
         this.snackBar.open(event.error.msg, '关闭',{
-          duration: 2000,
+          duration: 4000,
         })
         break
       default:

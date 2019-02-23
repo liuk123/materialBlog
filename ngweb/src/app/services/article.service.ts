@@ -34,10 +34,16 @@ export class ArticleService {
         return this.http.post<Result<null>>(uri, data );
     }
 
-    collect(id){
-        const uri=`${this.config.uri}/${this.domain}/collect`;
-        return this.http.post<Result<null>>(uri, id );
+    collectArticle(data){
+        const uri=`${this.config.uri}/${this.domain}/collectArticle`;
+        return this.http.post<Result<null>>(uri, data );
     }
+    
+    collectUser(data){
+        const uri=`${this.config.uri}/${this.domain}/collectUser`;
+        return this.http.post<Result<null>>(uri, data );
+    }
+
     get_list(data:ArticleListParam){
         const uri=`${this.config.uri}/${this.domain}/get_list`;
         return this.http.get<Result<Article[]>>(uri, { params: this.encodeParams(data) });

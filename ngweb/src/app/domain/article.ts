@@ -23,7 +23,7 @@ export interface Like {
 export interface ArticleListParam {
   id: string,
   category?: string,
-  collect?: string,
+  collect?: string[],
   pageSize: number,
   current: number
 }
