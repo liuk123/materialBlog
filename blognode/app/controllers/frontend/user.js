@@ -105,7 +105,7 @@ class UserController {
     // 用户列表信息
     static async user_list(ctx) {
 
-        const { collect='', current=0, pageSize=10 } = ctx.query
+        const { collect='',label='', current=0, pageSize=10 } = ctx.query
         const skip = Number(current)*Number(pageSize)
         if(collect != ''){
             const result = await UserModel
@@ -114,6 +114,13 @@ class UserController {
                 .limit(Number(pageSize))
                 .select('userName introduce avatar label categories');
                 return ctx.success({ msg:'获取成功', data: result });
+        }else if(label != ''){
+            const result = await UserModel
+                .find({'label': { $in: label.split(',')}})
+                .skip(skip)
+                .limit(Number(pageSize))
+                .select('userName introduce avatar label categories');
+            return ctx.success({ msg:'获取成功', data: result });
         }else{
             const result = await UserModel
                 .find()

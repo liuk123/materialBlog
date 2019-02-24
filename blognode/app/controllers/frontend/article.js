@@ -8,11 +8,11 @@ var path = require('path');
 class ArticleController {
     // 获取文章列表
     static async get_list(ctx){
-        const { id='', category='', collect='', current=0, pageSize=10 } = ctx.query
+        const { id='', category='', collect='', label='', current=0, pageSize=10 } = ctx.query
         if( !id && !ctx.session.user ) return ctx.error({ msg: '请登录' })
         const skip = Number(current)*Number(pageSize)
 
-        if(collect != ''){
+        if(collect != ''){//查看收藏的文章
             // const userResult = await UserModel.findById(id).select('collect -_id')
             // if(!userResult) return ctx.error({ msg:'收藏内容为空' });
   
@@ -25,7 +25,16 @@ class ArticleController {
             
             return ctx.success({ msg:'获取成功', data: result });
             
-        }else{
+        }else if(label != ''){
+            const result = await ArticleModel
+                            .find({'label': {$in: label.split(',')}})
+                            .sort({ 'meta.createAt': -1 })
+                            .skip(skip)
+                            .limit(Number(pageSize))
+                            .select('-content')
+
+            return ctx.success({ msg:'获取成功', data: result });
+        }else{//所有文章，分类的文章
             let condition = {}
             if( category !== 'all' ){
                 condition.category = category
@@ -33,7 +42,6 @@ class ArticleController {
             if( id != 'all'){
                 condition.author = id || ctx.session.user._id
             }
-            
             const result = await ArticleModel
                             .find(condition)
                             .sort({ 'meta.createAt': -1 })
