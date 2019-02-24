@@ -24,7 +24,7 @@ export class AuthListComponent implements OnInit {
     this.routInfo.queryParamMap.subscribe(v=>{
       this.collect = v.getAll('collect')
       if(this.collect.length == 0){
-        this.snackBar.open('他没有关注的人', '关闭', {duration: 4000})
+        this.snackBar.open('没有关注的人', '关闭', {duration: 4000})
         return false
       }
       this.condition = {collect: this.collect, pageSize: this.pageSize, current: 0}

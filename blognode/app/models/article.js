@@ -11,6 +11,7 @@ const ArticleSchema=new Schema({
 		likeNum:{ type:Number, default:0 },
 		likeUser:[]
 	},
+	collect:[],
 	commentNum:{ type:Number, default:0 },
 	visitNum:{ type:Number, default:0 },
 	content:String,

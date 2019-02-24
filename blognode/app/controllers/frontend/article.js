@@ -127,7 +127,12 @@ class ArticleController {
         const { id, category } = ctx.query
         if(!id) return ctx.error({ msg: '删除失败' })
 
-        const result = await ArticleModel.deleteOne({'_id': id})
+        const result = await ArticleModel.findOneAndDelete({'_id': id})
+
+        //删除用户收藏的collect
+        const collectResult = await UserModel.update(
+            {'_id': {$in: result.collect}},
+            { $pull: {collect: id}},)
 
         const userResult = await UserModel.findOneAndUpdate(
             { _id: ctx.session.user._id, 'categories.title': category },
@@ -270,13 +275,18 @@ class ArticleController {
                 { $pull: {collect: id}},
                 { new: true })
     
+            const articleResult = await ArticleModel.update(
+                { _id: id},
+                { $pull: {collect: ctx.session.user._id}})
             return ctx.success({ msg:'取消收藏成功!', data: result })
         }else{
             const result = await UserModel.findOneAndUpdate(
                 { _id: ctx.session.user._id },
                 { $addToSet: {collect: id}},
                 { new: true })
-    
+            const articleResult = await ArticleModel.update(
+                { _id: id},
+                { $addToSet: {collect: ctx.session.user._id}})
             return ctx.success({ msg:'收藏成功!', data: result })
         }
         
