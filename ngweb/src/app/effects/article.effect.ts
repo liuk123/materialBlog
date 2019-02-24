@@ -57,7 +57,7 @@ export class ArticleEffects {
         mergeMap((u:actions.CollectArticleSuccessAction) => this.service$.collectArticle(u.payload).pipe(
             map(v => {
                 this.snackBar.open(v.msg, '关闭', {duration: 4000})
-                return new authActions.AuthCardAction('')}),
+                return new authActions.AuthCardSuccessAction(v.data)}),
             catchError(err => of(new actions.CollectArticleFailAction(err)))
         ))
     )
@@ -68,7 +68,7 @@ export class ArticleEffects {
         mergeMap((u:actions.CollectUserSuccessAction) => this.service$.collectUser(u.payload).pipe(
             map(v => {
                 this.snackBar.open(v.msg, '关闭', {duration: 4000})
-                return new authActions.AuthCardAction('')}),
+                return new authActions.AuthCardSuccessAction(v.data)}),
             catchError(err => of(new actions.CollectUserFailAction(err)))
         ))
     )

@@ -10,8 +10,7 @@
   <mat-card-actions>
     <button mat-button [color]="liked==1?'accent':''" (click)="like(article?._id)">喜欢</button>
     <button mat-button color="accent" (click)="openNewCommentDialog()">评论</button>
-    <button mat-button color="accent" (click)="collect(article?._id)" *ngIf="!isCollected">收藏</button>
-    <button mat-button color="accent" (click)="delCollect(article?._id)" *ngIf="isCollected">取消收藏</button>
+    <button mat-button color="accent" (click)="collect(article?._id)">{{isCollected?'取消收藏':'收藏'}}</button>
     
     <span *ngIf="article?.author == authId">
       <button mat-button color="accent" (click)="delete(article?._id, article?.category)">删除</button>

@@ -90,9 +90,6 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
   collect(id){
     this.store$.dispatch(new actions.CollectArticleAction({id, isCollected: this.isCollected}))
   }
-  delCollect(id){
-    this.store$.dispatch(new actions.CollectArticleAction({id, isCollected: this.isCollected}))
-  }
 
   delete(id, category){
     this.store$.dispatch(new actions.DeleteArticleAction({id, category}))

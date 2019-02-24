@@ -257,17 +257,19 @@ class ArticleController {
         const {id, isCollected} = ctx.request.body
 
         if(isCollected){
-            const result = await UserModel.updateOne(
+            const result = await UserModel.findOneAndUpdate(
                 { _id: ctx.session.user._id },
-                { $pull: {collect: id}})
+                { $pull: {collect: id}},
+                { new: true })
     
-            return ctx.success({ msg:'取消收藏成功!' })
+            return ctx.success({ msg:'取消收藏成功!', data: result })
         }else{
-            const result = await UserModel.updateOne(
+            const result = await UserModel.findOneAndUpdate(
                 { _id: ctx.session.user._id },
-                { $addToSet: {collect: id}})
+                { $addToSet: {collect: id}},
+                { new: true })
     
-            return ctx.success({ msg:'收藏成功!' })
+            return ctx.success({ msg:'收藏成功!', data: result })
         }
         
 
@@ -277,17 +279,19 @@ class ArticleController {
         const { id, isCollected } = ctx.request.body
         
         if(isCollected){
-            const result = await UserModel.updateOne(
+            const result = await UserModel.findOneAndUpdate(
                 { _id: ctx.session.user._id },
-                { $pull: {collectUser: id}})
+                { $pull: {collectUser: id}},
+                { new: true })
     
-            return ctx.success({ msg:'取消关注成功!' })
+            return ctx.success({ msg:'取消关注成功!', data: result })
         }else{
-            const result = await UserModel.updateOne(
+            const result = await UserModel.findOneAndUpdate(
                 { _id: ctx.session.user._id },
-                { $addToSet: {collectUser: id}})
+                { $addToSet: {collectUser: id}},
+                { new: true })
     
-            return ctx.success({ msg:'关注成功!' })
+            return ctx.success({ msg:'关注成功!', data: result })
         }
         
 

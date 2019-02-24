@@ -4,7 +4,6 @@ import { Store, select } from '@ngrx/store';
 import * as fromRoot from '../../reducers';
 import * as actions from '../../actions/auth.action';
 import * as ArticleActions from '../../actions/article.action';
-import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -14,9 +13,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserComponent implements OnInit {
 
-  user$: Observable<User>
-  authId: string
+  authId: string //作者id 可以是其他作者
   isCollected: boolean //是否已经关注
+  auth:User
+  user:User
 
   constructor(
     private store$: Store<fromRoot.State>,
@@ -28,19 +28,23 @@ export class UserComponent implements OnInit {
       this.authId = m.get('authId')
       this.store$.dispatch(new actions.UserCardAction(this.authId))
     })
-    this.user$ = this.store$.pipe(select(fromRoot.getUserState))
-    //取消关注、关注
+    
+    //关注-监听auth用户信息，判断是否关注
     this.store$.pipe(select(fromRoot.getAuthCardState)).subscribe(v=>{
-      if(v.collectUser&&v.collectUser instanceof Array){
-        this.isCollected = v.collectUser.find(v =>v==this.authId)?true:false  
+      this.auth = v
+      if(this.auth.collectUser&&this.auth.collectUser instanceof Array){
+        this.isCollected = this.auth.collectUser.find(v =>v==this.authId)?true:false  
+      }
+    })
+    this.store$.pipe(select(fromRoot.getUserState)).subscribe(v=>{
+      this.user = v
+      if(this.auth.collectUser&&this.auth.collectUser instanceof Array){
+        this.isCollected = this.auth.collectUser.find(v =>v==this.authId)?true:false  
       }
     })
   }
 
   collectUser(){
-    this.store$.dispatch(new ArticleActions.CollectUserAction({id: this.authId, isCollected: this.isCollected}))
-  }
-  delCollectUser(){
     this.store$.dispatch(new ArticleActions.CollectUserAction({id: this.authId, isCollected: this.isCollected}))
   }
 }
