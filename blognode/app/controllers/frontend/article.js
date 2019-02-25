@@ -106,9 +106,12 @@ class ArticleController {
                 { _id: ctx.session.user._id, 'categories.title': data.oldCategory },
                 { $inc: {'categories.$.number': -1} })
         }else{
-            await UserModel.updateOne(
-                { _id: ctx.session.user._id, 'categories.title': data.oldCategory },
-                { $inc: {'categories.$.number': -1} })
+            if(data.oldCategory){
+                await UserModel.updateOne(
+                    { _id: ctx.session.user._id, 'categories.title': data.oldCategory },
+                    { $inc: {'categories.$.number': -1} })
+            }
+           
                 
             await UserModel.updateOne(
                 { _id: ctx.session.user._id, 'categories.title': data.newCategory },

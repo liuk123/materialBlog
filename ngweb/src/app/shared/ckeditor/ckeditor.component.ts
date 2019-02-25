@@ -31,7 +31,6 @@ export class CkeditorComponent implements ControlValueAccessor {
   public Editor = DecoupledEditor;
   public config = {
     language: 'zh-cn',
-    // extraPlugins: [ MyUploadAdapterPlugin ],
   };
 
   constructor() { }
