@@ -24,7 +24,7 @@ export interface ArticleListParam {
   id: string,
   category?: string,
   collect?: string[],
-  label?: string[],
+  label?: string,
   pageSize: number,
   current: number
 }

@@ -18,29 +18,31 @@ export class ArticleListComponent implements OnInit {
   pageSize = 10
   id: string
   category: string
-  collect: string[]
+  collect: string[] = []
+  isCollect: boolean
   condition:ArticleListParam
 
   articles$: Observable<Article[]>
 
   constructor(private store$: Store<fromRoot.State>, private routInfo: ActivatedRoute) {
-
-    this.routInfo.queryParamMap.subscribe(v => {
-      this.id = v.get('authId')
-      this.category = v.get('category')
-      this.collect = v.getAll('collect')
-      this.condition = {id: this.id, category: this.category, collect: this.collect, pageSize: this.pageSize, current: 0}
-      this.store$.dispatch(new actions.ArticleListAction(this.condition))
-      this.articles$ = this.store$.pipe(select(fromRoot.getArticleListState))
+    this.store$.pipe(select(fromRoot.getUserState)).subscribe(v=>{
+      this.collect = v.collect
     })
-    
   }
 
   ngOnInit() {
+    this.routInfo.queryParamMap.subscribe(v => {
+      this.id = v.get('authId')
+      this.category = v.get('category')
+      this.isCollect = v.get('collect') == '1'
+      this.condition = {id: this.id, category: this.category, collect: this.isCollect?this.collect:[], pageSize: this.pageSize, current: 0}
+      this.store$.dispatch(new actions.ArticleListAction(this.condition))
+      this.articles$ = this.store$.pipe(select(fromRoot.getArticleListState))
+    })
   }
 
   onPage(ev){
-    this.condition = {id: this.id, category: this.category, collect: this.collect, pageSize: ev.pageSize, current: ev.pageIndex}
+    this.condition = {id: this.id, category: this.category, collect: this.isCollect?this.collect:[], pageSize: ev.pageSize, current: ev.pageIndex}
     this.store$.dispatch(new actions.ArticleListAction(this.condition))
   }
  

@@ -15,16 +15,13 @@ export class BlogComponent implements OnInit {
 
   length = 100
   pageSize = 10
-  label: string[] = []
+  label: string = '1'
   articles$: Observable<Article[]>
   constructor(private store$: Store<fromRoot.State>, private routerInfo: ActivatedRoute) { }
 
   ngOnInit() {
-    // this.store$.dispatch(new actions.ArticleListAction({id:'all', category: 'all', pageSize: this.pageSize, current: 0}))
     this.articles$ = this.store$.pipe(select(fromRoot.getArticleListState))
-    this.store$.pipe(select(fromRoot.getAuthCardState)).subscribe(v => {
-      this.label = v.label
-    })
+  
     this.routerInfo.data.subscribe(v=>{
       if(v.key == 'all'){
         this.store$.dispatch(new actions.ArticleListAction({id:'all', category: 'all', pageSize: this.pageSize, current: 0}))
