@@ -9,6 +9,7 @@ import { BlogModule } from './blog/blog.module';
 import { HomepageModule } from './homepage/homepage.module';
 import { PersonModule } from './person/person.module';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { NavigationModule } from './navigation/navigation.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     BlogModule,
     HomepageModule,
     PersonModule,
+    NavigationModule,
   ],
   providers: [{
     provide:LocationStrategy,

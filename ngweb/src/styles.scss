@@ -8,6 +8,15 @@ html, body, app-root, mat-sidenav-container, .site {
     // min-height: 100vh;
     min-height: calc(100vh + 64px)
 }
+ul{
+  padding:0;
+  margin:0;
+  li{
+      padding:0;
+      margin:0;
+      list-style: none;
+  }
+}
 .site{
   display: flex;
   flex-direction: column;
@@ -21,11 +30,10 @@ html, body, app-root, mat-sidenav-container, .site {
   }
 
   main{
-    padding-top: 84px;
     padding-bottom: 3rem;
     flex: 1 1 auto;
     display: flex;
-
+    margin-top:1rem;
     .container{
       width: 1000px;
     }
@@ -81,7 +89,12 @@ html, body, app-root, mat-sidenav-container, .site {
   display: flex;
   justify-content: center;
 }
-
+//=============
+.ico-img{
+  width:1rem;
+  height:1rem;
+  margin-right:.5rem;
+}
 //================
 @media screen and (max-width: 700px){
   .container{

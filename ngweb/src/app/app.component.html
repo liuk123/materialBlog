@@ -7,6 +7,9 @@
       <header>
         <app-header (toggle)="sidenav.toggle()" (switchTheme)="switchTheme($event)"></app-header>
       </header>
+      <!-- <app-search></app-search> -->
+      <div style="height:64px;"></div>
+      <router-outlet name="popup"></router-outlet>
       <main>
         <span class="fill-remaining-space"></span>
         <div class="container">

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,13 @@ const routes: Routes = [
     redirectTo: '/person-center',
     pathMatch: 'full',
     // canActivate: [AuthGuardService]
-  }
+  },
+  { 
+    path: 'nav',
+    redirectTo: '/navigation-home',
+    pathMatch: 'full',
+  },
+  { path: 'searchbox', component: SearchComponent, outlet: 'popup' }
 ];
 
 @NgModule({

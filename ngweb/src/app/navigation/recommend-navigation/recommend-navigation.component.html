@@ -1,0 +1,60 @@
+<mat-card>
+<div class="grid">
+  <div class="column">
+    <div class="tile" *ngFor="let navigation of data">
+      <div class="nav-header">{{navigation.title}}</div>
+      <ul>
+        <li *ngFor="let item of navigation.data" class="nav-list">
+          <img [src]="item.url" alt="" class="ico-img">
+          <div>
+            <span class="nav-name">{{item.name}}</span> 
+            <span class="nav-desc">- {{item.desc}}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="column">
+    <div class="tile" *ngFor="let navigation of data">
+      <div class="tile-header">{{navigation.title}}</div>
+      <ul>
+        <li *ngFor="let item of navigation.data" class="nav-list">
+          <img [src]="item.url" alt="" class="ico-img">
+          <div>
+            <span class="nav-name">{{item.name}}</span> 
+            <span class="nav-desc">- {{item.desc}}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="column">
+    <div class="tile" *ngFor="let navigation of data">
+      <div class="tile-header">{{navigation.title}}</div>
+      <ul>
+        <li *ngFor="let item of navigation.data" class="nav-list">
+          <img [src]="item.url" alt="" class="ico-img">
+          <div>
+            <span class="nav-name">{{item.name}}</span> 
+            <span class="nav-desc">- {{item.desc}}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="column">
+    <div class="tile" *ngFor="let navigation of data">
+      <div class="tile-header">{{navigation.title}}</div>
+      <ul>
+        <li *ngFor="let item of navigation.data" class="nav-list">
+          <img [src]="item.url" alt="" class="ico-img">
+          <div>
+            <span class="nav-name">{{item.name}}</span> 
+            <span class="nav-desc">- {{item.desc}}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</mat-card>

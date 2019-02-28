@@ -6,6 +6,7 @@ import * as actions from '../../actions/article.action';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-article-list',
@@ -24,7 +25,7 @@ export class ArticleListComponent implements OnInit {
 
   articles$: Observable<Article[]>
 
-  constructor(private store$: Store<fromRoot.State>, private routInfo: ActivatedRoute) {
+  constructor(private store$: Store<fromRoot.State>, private routInfo: ActivatedRoute,private snackBar: MatSnackBar) {
     this.store$.pipe(select(fromRoot.getUserState)).subscribe(v=>{
       this.collect = v.collect
     })
@@ -35,6 +36,10 @@ export class ArticleListComponent implements OnInit {
       this.id = v.get('authId')
       this.category = v.get('category')
       this.isCollect = v.get('collect') == '1'
+      if(this.isCollect&&this.collect.length == 0){
+        this.snackBar.open('收藏为空', '关闭', {duration: 4000})
+        return false
+      }
       this.condition = {id: this.id, category: this.category, collect: this.isCollect?this.collect:[], pageSize: this.pageSize, current: 0}
       this.store$.dispatch(new actions.ArticleListAction(this.condition))
       this.articles$ = this.store$.pipe(select(fromRoot.getArticleListState))
