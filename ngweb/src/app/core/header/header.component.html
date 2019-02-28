@@ -4,7 +4,6 @@
   </button>
   <span class="auth-name">{{auth.userName}}</span>
   <span class="fill-remaining-space"></span>
-  <!-- { outlets: { popup: ['compose'] } } -->
   <button mat-button
     [routerLink]="[{ outlets: { primary: 'navigation-home', popup: ['searchbox'] } }]">导航</button>
   <button
@@ -12,7 +11,7 @@
     [routerLink]="['/index-home', {outlets: { primary: 'blog-list' }}]">广场</button>
   <button
     mat-button
-    [routerLink]="['/blog-home', {outlets: { primary: 'blog-list', aux: ['blog-user', '']}}]"
+    [routerLink]="['/blog-home', {outlets: { primary: 'blog-list', aux: ['blog-user', ''] }}]"
     [queryParams]="{category:'all', authId:''}">主页</button>
   
   <span class="fill-remaining-space"></span>
