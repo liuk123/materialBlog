@@ -15,8 +15,8 @@ const routes: Routes = [
         { path: 'blog-detail', component: ArticleDetailComponent },
         { path: 'blog-user/:authId', component: UserComponent, outlet: "aux" },
     ]},
-    { path: 'edit-article', component: EditArticleComponent, canActivate: [AuthGuardService]}
-    
+    { path: 'edit-article', component: EditArticleComponent, canActivate: [AuthGuardService]},
+
 ];
 
 @NgModule({
