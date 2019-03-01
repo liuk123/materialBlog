@@ -11,12 +11,10 @@ export class NavigationHomeComponent implements OnInit, OnDestroy {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    
   }
   
   ngOnDestroy(){
     console.log(123)
     this.router.navigate([{ outlets: { popup: null }}]);
   }
-
 }
