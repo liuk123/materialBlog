@@ -4,9 +4,15 @@ import { RecommendNavigationComponent } from './recommend-navigation/recommend-n
 import { CollectNavigationComponent } from './collect-navigation/collect-navigation.component';
 import { navigationRoutingModule } from './navigation-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
-  declarations: [NavigationHomeComponent, RecommendNavigationComponent, CollectNavigationComponent],
+  declarations: [
+    NavigationHomeComponent,
+    RecommendNavigationComponent,
+    CollectNavigationComponent,
+    SearchComponent
+  ],
   imports: [
     SharedModule,
     navigationRoutingModule,

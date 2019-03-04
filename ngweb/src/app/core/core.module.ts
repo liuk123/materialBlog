@@ -13,7 +13,6 @@ import { ServicesModule } from '../services/services.module';
 import { AppStoreModule } from '../reducers';
 import { AppEffectsModule } from '../effects';
 import { PageNotFoundComponent } from './page-not-found';
-import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,6 @@ import { SearchComponent } from './search/search.component';
     FooterComponent,
     SidebarComponent,
     PageNotFoundComponent,
-    SearchComponent
   ],
   imports: [
     SharedModule,
@@ -37,7 +35,6 @@ import { SearchComponent } from './search/search.component';
     FooterComponent,
     SidebarComponent,
     AppRoutingModule,
-    SearchComponent
   ],
   providers: [
     {

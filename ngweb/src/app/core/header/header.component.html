@@ -2,7 +2,7 @@
   <button mat-icon-button (click)="openSidebar()">
       <mat-icon svgIcon="menu"></mat-icon>
   </button>
-  <span class="auth-name">{{auth.userName}} {{rla.isActive}}</span>
+  <span class="auth-name">{{auth.userName}}</span>
   <span class="fill-remaining-space"></span>
 
 
@@ -15,7 +15,7 @@
   <span class="btn-nav"
     [routerLink]="['/blog-home', {outlets: { primary: 'blog-list', aux: ['blog-user', ''] }}]"
     [queryParams]="{category:'all', authId:''}">主页</span> -->
-
+  
   <span class="mr-3 btn-nav" [routerLink]="[{ outlets: { primary: 'navigation-home', popup: ['searchbox'] } }]" routerLinkActive #rla="routerLinkActive">导航</span>
   <span class="mr-3 btn-nav" [routerLink]="['/homepage']">广场</span>
   <span class="mr-3 btn-nav" [routerLink]="['/index']">主页</span>

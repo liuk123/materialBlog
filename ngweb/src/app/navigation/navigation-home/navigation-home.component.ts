@@ -15,6 +15,6 @@ export class NavigationHomeComponent implements OnInit, OnDestroy {
   
   ngOnDestroy(){
     console.log(123)
-    this.router.navigate([{ outlets: { popup: null }}]);
+    // this.router.navigate([{ outlets: { popup: null }}]);
   }
 }

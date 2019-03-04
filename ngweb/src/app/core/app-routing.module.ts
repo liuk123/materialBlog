@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SearchComponent } from './search/search.component';
 import { PageNotFoundComponent } from './page-not-found';
 
 const routes: Routes = [
@@ -15,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'index',
-    redirectTo: '/blog-home/(blog-list//aux:blog-user/)?category=all'
+    redirectTo: '/blog-home/(aux:)?category=all',
   },
   {
     path: 'person-center',
@@ -24,17 +23,12 @@ const routes: Routes = [
   },
   {
     path: 'nav',
-    redirectTo: '/navigation-home(popup:searchbox)',
-  },
-  // {
-  //   path: '**',
-  //   redirectTo: '/notfound',
-  // },
-  
+    redirectTo: '/navigation-home',
+    // redirectTo: '/navigation-home(popup:searchbox)',
+  }
 ];
 
 const childRoutes: Routes = [
-  { path: 'searchbox', component: SearchComponent, outlet: 'popup' },
   { path: 'notfound', component:PageNotFoundComponent},
 ]
 

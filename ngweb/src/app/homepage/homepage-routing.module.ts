@@ -6,9 +6,11 @@ import { AuthListComponent } from './auth-list/auth-list.component';
 
 const routes: Routes = [
     { path: 'index-home', component: IndexHomeComponent, children: [
+        { path: '', component: BlogComponent, data: {key: 'recommend'}},
+        
         { path: 'blog-list', component: BlogComponent, data: {key: 'all'}},
         { path: 'auth-list', component: AuthListComponent, data: {key: 'all'}},
-        { path: '', component: BlogComponent, data: {key: 'recommend'}},
+        { path: 'recommend-blog-list', component: BlogComponent, data: {key: 'recommend'}},
         { path: 'recommend-auth-list', component: AuthListComponent, data: {key: 'recommend'}},
     ]}
 ];

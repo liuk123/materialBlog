@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserComponent implements OnInit {
 
-  authId: string //作者id 可以是其他作者
+  authId: string//作者id 可以是其他作者
   isCollected: boolean //是否已经关注
   auth:User
   user:User
