@@ -4,7 +4,6 @@ import * as fromRoot from '../../reducers';
 import { User } from 'src/app/domain';
 import * as actions from '../../actions/auth.action';
 import * as LabelActions from '../../actions/label.action';
-import { RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-header',
