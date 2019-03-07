@@ -1,7 +1,8 @@
 .searchbox{
     display: flex;
     flex-direction: column;
-    width:500px;
+    width:80%;
+    max-width:40rem;
     flex: 0 0 auto;
     .search-input{
         border: 1px solid #ddd;
