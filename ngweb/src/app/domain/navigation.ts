@@ -12,5 +12,6 @@ export interface NavigationItem {
   name: string;
   desc: string;
   url: string;
+  ico: string;
   visitName?: number;
 }

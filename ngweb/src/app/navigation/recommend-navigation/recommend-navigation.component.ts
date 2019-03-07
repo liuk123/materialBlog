@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Navigation } from 'src/app/domain/navigation';
+import { Store, select } from '@ngrx/store';
+import * as fromRoot from '../../reducers';
 
 @Component({
   selector: 'app-recommend-navigation',
@@ -10,282 +12,20 @@ export class RecommendNavigationComponent implements OnInit {
 
   columns:Navigation[][] = [[],[],[]]
 
-  data:Navigation[]=[
-    
-    {
-      title:'小鱼笔记资源1',
-      data:[
-        {
-          name:'一个sp',
-          desc:'一个很有趣的笔记',
-          url:'http://lackk.com/nav/img/top/creativemass.png'
-        },
-        {
-          name:'一个sp',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-        {
-          name:'一个sp',
-          desc:'一个很有趣的笔记',
-          url:'http://lackk.com/nav/img/top/creativemass.png'
-        },
-        {
-          name:'一个sp',
-          desc:'一个很有趣的笔记',
-          url:'http://lackk.com/nav/img/top/creativemass.png'
-        },
-        {
-          name:'一个sp',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-        {
-          name:'一个sp',
-          desc:'一个很有趣的笔记',
-          url:'http://lackk.com/nav/img/top/creativemass.png'
-        }
-      
-      ]
-    },
-    {
-      title:'小鱼笔记资源2',
-      data:[
-        {
-          name:'一个sp',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      
-        {
-          name:'一个yy',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-        {
-          name:'一个web',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      ]
-    },
-    {
-      title:'小鱼笔记资源3',
-      data:[
-        {
-          name:'一个sp',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      
-        {
-          name:'一个yy',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-        {
-          name:'一个web',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      ]
-    },
-    {
-      title:'小鱼笔记资源4',
-      data:[
-        {
-          name:'一个sp',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      
-        {
-          name:'一个yy',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-        {
-          name:'一个web',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      ]
-    },
-    {
-      title:'小鱼笔记资源5',
-      data:[
-        {
-          name:'一个sp',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      
-        {
-          name:'一个yy',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-        {
-          name:'一个web',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      ]
-    },
-    {
-      title:'小鱼笔记资源6',
-      data:[
-        {
-          name:'一个sp',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      
-        {
-          name:'一个yy',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-        {
-          name:'一个web',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      ]
-    },
-    {
-      title:'小鱼笔记资源7',
-      data:[
-        {
-          name:'一个sp',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      
-        {
-          name:'一个yy',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-        {
-          name:'一个web',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      ]
-    },
-    {
-      title:'小鱼笔记资源8',
-      data:[
-        {
-          name:'一个sp',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      
-        {
-          name:'一个yy',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-        {
-          name:'一个web',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      ]
-    },
-    {
-      title:'小鱼笔记资源9',
-      data:[
-        {
-          name:'一个sp',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      
-        {
-          name:'一个yy',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-        {
-          name:'一个web',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      ]
-    },
-    {
-      title:'小鱼笔记资源10',
-      data:[
-        {
-          name:'一个sp',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      
-        {
-          name:'一个yy',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-        {
-          name:'一个web',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      ]
-    },
-    {
-      title:'小鱼笔记资源11',
-      data:[
-        {
-          name:'一个sp',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      
-        {
-          name:'一个yy',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-        {
-          name:'一个web',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      ]
-    },
-    {
-      title:'小鱼笔记资源6',
-      data:[
-        {
-          name:'一个sp',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      
-        {
-          name:'一个yy',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-        {
-          name:'一个web',
-          desc:'一个很有趣的笔记',
-          url:'https://www.google.cn/s2/favicons?domain=www.digitalartsonline.co.uk'
-        },
-      ]
-    }
-    
-  ]
-  constructor() { }
+  constructor(private store$: Store<fromRoot.State>) {
+    this.store$.pipe(select(fromRoot.getRemmendNavState)).subscribe(res=>{
+      this.columnsArr(res,this.columns)
+    })
+  }
 
   ngOnInit() {
-    //把data分为4列
-    this.columns = this.data.reduce((columns, item)=>{
+    
+  }
+
+  //把data分为4列
+  //data为原始数组，columns为需要填充的数组 [[],[],[]]
+  columnsArr(data,columns){
+    this.columns = data.reduce((columns, item)=>{
       let minH = columns[0].reduce((s,v) => s += v.data.length + 1, 0)
       let n = 0
 
@@ -298,7 +38,11 @@ export class RecommendNavigationComponent implements OnInit {
       }
       columns[n].push(item)
       return columns 
-    },this.columns)
+    },columns)
   }
 
+
+  open(url){
+    window.open(url,'_blank');
+  }
 }

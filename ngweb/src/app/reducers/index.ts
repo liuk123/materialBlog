@@ -11,11 +11,12 @@ import * as fromArticleList from './article-list.reducer';
 import * as fromCommentList from './comment-list.reducer';
 import * as fromArticleOp from './article.reducer';
 import * as fromLabel from './label.reducer';
+import * as fromNavigation from './navigation.reducer';
 
 import * as fromRouter from '@ngrx/router-store';
 
 import { createSelector } from '@ngrx/store';
-import { User, Article, Comment, Label } from '../domain';
+import { User, Article, Comment, Label, Navigation } from '../domain';
 
 export interface State {
     quote: fromQuote.State
@@ -27,7 +28,8 @@ export interface State {
     articleOp: fromArticleOp.State
     routerReducer: fromRouter.RouterReducerState
     label: Label[],
-    userList: User[]
+    userList: User[],
+    remmendNav: Navigation[],
    
 };
 
@@ -44,7 +46,8 @@ const reducers = {
     routerReducer: fromRouter.routerReducer,
 
     label: fromLabel.reducer,
-    userList: fromUser.userListReducer
+    userList: fromUser.userListReducer,
+    remmendNav: fromNavigation.reducer,
     
 }
 
@@ -60,6 +63,7 @@ export const getCommentListState = (state: State) => state.commentList;
 
 export const getArticleOpState = (state: State) => state.articleOp;
 export const getLabelState = (state: State) => state.label;
+export const getRemmendNavState = (state: State) => state.remmendNav;
 
 export const getQuote = createSelector(getQuoteState, fromQuote.getQuote);
 export const getLike = createSelector(getArticleOpState, fromArticleOp.getLike);

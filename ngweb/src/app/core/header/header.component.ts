@@ -5,6 +5,8 @@ import { User } from 'src/app/domain';
 import * as actions from '../../actions/auth.action';
 import * as LabelActions from '../../actions/label.action';
 
+import * as NavigationActions from '../../actions/navigation.action';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -27,6 +29,8 @@ export class HeaderComponent implements OnInit {
 
     this.store$.dispatch(new actions.AuthCardAction(''))
     this.store$.dispatch(new LabelActions.LabelAction(null))
+
+    this.store$.dispatch(new NavigationActions.RemmendNavAction(null))
   }
 
   ngOnInit() {

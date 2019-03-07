@@ -3,7 +3,7 @@
 * @ 逻辑层实现 /controllers/frontend/*
 */
 
-import { UserController, ArticleController } from '../controllers/frontend.export'
+import { UserController, ArticleController, NavigationController } from '../controllers/frontend.export'
 // import upload from '../middlewares/upload'
 const router = require('koa-router')()
 
@@ -18,7 +18,6 @@ router
     .get('/api/article/get_detail', ArticleController.get_detail)                        // 获取详情
     .get('/api/article/get_comment', ArticleController.get_comment) 
     .post('/api/article/comment', ArticleController.comment)                             // 发表评论
-    // .get('/api/article/label', ArticleController.label)
     .post('/api/article/collectArticle', ArticleController.collect)                             // 收藏文章
     .post('/api/article/collectUser', ArticleController.collectUser)                             // 关注人
 
@@ -37,7 +36,13 @@ router
 
     
     .post('/api/uploadpic',ArticleController.upload_pic)                             // 编辑时上传照片
-    // .post('/api/user/put_avatar', upload.alioss, UserController.put_avatar)           // 上传用户头像
+   
+
+    .get('/api/navigation/get_recommend_navigation',NavigationController.get_recommend_navigation)
+    .post('/api/navigation/create_recommend_navigation',NavigationController.create_recommend_navigation)
+
+
+     // .post('/api/user/put_avatar', upload.alioss, UserController.put_avatar)           // 上传用户头像
     // .put('/api/user/put_userinfo',UserController.put_userinfo)
 
 module.exports = router;

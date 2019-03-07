@@ -1,20 +1,18 @@
 <mat-card>
-<div class="grid">
-  <div class="column" *ngFor="let columndata of columns">
-    <div class="tile" *ngFor="let navigation of columndata">
-      <div class="nav-header">{{navigation.title}}</div>
-      <ul>
-        <li *ngFor="let item of navigation.data" class="nav-list">
-          <img [src]="item.url" alt="" class="ico-img">
-          <div>
-            <span class="nav-name">{{item.name}}</span> 
-            <span class="nav-desc">- {{item.desc}}</span>
-          </div>
-        </li>
-      </ul>
+  <div class="grid">
+    <div class="column" *ngFor="let columndata of columns">
+      <div class="tile" *ngFor="let navigation of columndata">
+        <div class="nav-header">{{navigation.title}}</div>
+        <ul>
+          <li *ngFor="let item of navigation.data" class="nav-list" (click)="open(item.url)">
+            <img [src]="item.ico" alt="" class="ico-img">
+            <div>
+              <span class="nav-name">{{item.name}}</span> 
+              <span class="nav-desc">&nbsp;-&nbsp;{{item.desc}}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-
-
-</div>
 </mat-card>
