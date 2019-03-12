@@ -5,12 +5,12 @@ const UserSchema=new Schema({
 	userName:{ unique:true, type:String },
 	introduce:String,
 	password:String,
-	categories:[],
 	avatar:String,
-	collect:[],
-	collectUser:[],
-	theme:String,
+	categories:[],
+	collect:[],		//收藏
+	collectUser:[],	//关注
 	label:[],
+	theme:String,
 	role:{ type:Number, default:0 },
 	phone:Number,
 	meta:{
