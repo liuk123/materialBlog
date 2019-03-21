@@ -22,7 +22,6 @@ class NavigationController {
                         name: data.name,
                         desc: data.desc,
                         url: data.url,
-                        ico: data.ico,
                     })
             const resultNav = await NavigationModel.update(
                     {_id: data._id},

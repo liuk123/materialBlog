@@ -35,6 +35,7 @@ import { PageNotFoundComponent } from './page-not-found';
     FooterComponent,
     SidebarComponent,
     AppRoutingModule,
+    SharedModule,
   ],
   providers: [
     {

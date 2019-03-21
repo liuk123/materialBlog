@@ -29,9 +29,7 @@ export class ArticleListComponent implements OnInit {
     this.store$.pipe(select(fromRoot.getUserState)).subscribe(v=>{
       this.collect = v.collect
     })
-  }
 
-  ngOnInit() {
     this.routInfo.queryParamMap.subscribe(v => {
       this.id = v.get('authId')
       this.category = v.get('category')
@@ -44,6 +42,10 @@ export class ArticleListComponent implements OnInit {
       this.store$.dispatch(new actions.ArticleListAction(this.condition))
       this.articles$ = this.store$.pipe(select(fromRoot.getArticleListState))
     })
+  }
+
+  ngOnInit() {
+    
   }
 
   onPage(ev){

@@ -26,6 +26,14 @@ export class SearchComponent implements OnInit {
   empty(){
     this.searchValue = '';
   }
+  goSearch(ev){
+    if(ev.keyCode == 13){
+      this.search('https://www.baidu.com/s?wd=')
+    }else if(ev.keyCode == 46){
+      this.empty()
+    }
+    
+  }
 }
 
 // https://www.baidu.com/s?wd=huo%20ying%20花

@@ -4,20 +4,8 @@
         display: flex;
         flex-direction: column;
         flex: 1 1 auto;
-        border-left: 1px solid #ddd;
-        border-top: 1px solid #ddd;
-        padding:0 .5rem;
-        &:last-child{
-            border-right: 1px solid #ddd;
-        }
-    }
-}
-.tile{
-    border-bottom:1px solid #ddd;
-    padding:1rem 0;
-    // width: max-content;
-    .tile-header{
-        line-height: 36px;
+        padding:0 .25rem;
+     
     }
 }
 
@@ -34,18 +22,4 @@
        border-radius: .3rem;
        background-image: linear-gradient(to right,#f2f2f2,rgba(222,222,222,0));
    }
-}
-.nav-header{
-    line-height: 32px;
-    margin-bottom:.5rem;
-    background-image: linear-gradient(to right,#f2f2f2,rgba(222,222,222,0));
-    &::before{
-        content: '';
-        display: inline-block;
-        width:0;
-        height:1.2rem;
-        border-left:.3rem solid #78be40;
-        margin-right:.5rem;
-        vertical-align: middle;
-    }
 }

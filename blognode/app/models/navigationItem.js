@@ -5,7 +5,6 @@ const NavigationItemSchema=new Schema({
 	name: String,
 	desc: String,
 	url: String,
-	ico: String,
 	meta:{
 		createAt:{ type:Date, default:Date.now() },
 		updateAt:{ type:Date, default:Date.now() }

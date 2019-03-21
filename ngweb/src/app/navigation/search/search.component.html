@@ -2,27 +2,33 @@
 <div class="m-contaiber">
     <div class="searchbox">
         <div class="search">
-            <input type="text" class="search-input" [(ngModel)]="_searchValue">
+            <input type="text" class="search-input" [(ngModel)]="_searchValue" (keydown)="goSearch($event)">
             <div class="search-close" (click)="empty()" title="清空搜索条件">X</div>
         </div>
         <div class="searchbar mt-2">
             <div class="item">
                 <span class="item-cell" (click)="search('https://www.baidu.com/s?wd=')">百度</span>
                 <ul class="item-cell-list">
-                    <li>图片</li>
+                    <!-- <li>图片</li> -->
                 </ul>
             </div>
             <div class="item">
                 <span class="item-cell" (click)="search('https://www.google.com/search?q=')">谷歌</span>
                 <ul class="item-cell-list">
-                    <li>学术</li>
-                    <li>图片</li>
+                    <!-- <li>学术</li>
+                    <li>图片</li> -->
                 </ul>
             </div>
             <div class="item">
                 <span class="item-cell" (click)="search('https://cn.bing.com/search?q=')">必应</span>
                 <ul class="item-cell-list">
-                    <li>图片</li>
+                    <!-- <li>图片</li> -->
+                </ul>
+            </div>
+            <div class="item">
+                <span class="item-cell" (click)="search('https://www.zhihu.com/search?q=')">知乎</span>
+                <ul class="item-cell-list">
+                    <!-- <li>图片</li> -->
                 </ul>
             </div>
         </div>

@@ -25,18 +25,18 @@ export class AuthListComponent implements OnInit {
     this.store$.pipe(select(fromRoot.getUserState)).subscribe(v=>{
       this.collect = v.collectUser
     })
-  }
-
-  ngOnInit() {
-
 
     if(this.collect.length == 0){
       this.snackBar.open('没有关注的人', '关闭', {duration: 4000})
-      return false
+    }else{
+      this.condition = {collect: this.collect, pageSize: this.pageSize, current: 0}
+      this.store$.dispatch(new actions.UserListAction(this.condition))
+      this.userlist$ = this.store$.pipe(select(fromRoot.getUserListState))
     }
-    this.condition = {collect: this.collect, pageSize: this.pageSize, current: 0}
-    this.store$.dispatch(new actions.UserListAction(this.condition))
-    this.userlist$ = this.store$.pipe(select(fromRoot.getUserListState))
+  }
+
+  ngOnInit() {
+  
   }
   onPage(ev){
     this.condition = {collect: this.collect, pageSize: ev.pageSize, current: ev.pageIndex}

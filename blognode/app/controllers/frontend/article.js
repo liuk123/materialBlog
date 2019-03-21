@@ -275,19 +275,18 @@ class ArticleController {
                 { _id: ctx.session.user._id },
                 { $pull: {collect: id}},
                 { new: true })
-    
-            const articleResult = await ArticleModel.update(
-                { _id: id},
-                { $pull: {collect: ctx.session.user._id}})
+            // const articleResult = await ArticleModel.update(
+            //     { _id: id},
+            //     { $pull: {collect: ctx.session.user._id}})
             return ctx.success({ msg:'取消收藏成功!', data: result })
         }else{
             const result = await UserModel.findOneAndUpdate(
                 { _id: ctx.session.user._id },
                 { $addToSet: {collect: id}},
                 { new: true })
-            const articleResult = await ArticleModel.update(
-                { _id: id},
-                { $addToSet: {collect: ctx.session.user._id}})
+            // const articleResult = await ArticleModel.update(
+            //     { _id: id},
+            //     { $addToSet: {collect: ctx.session.user._id}})
             return ctx.success({ msg:'收藏成功!', data: result })
         }
         
