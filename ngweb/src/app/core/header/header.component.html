@@ -18,13 +18,13 @@
   
   <span class="mr-3 btn-nav" [routerLink]="[{ outlets: { primary: 'navigation-home', popup: ['searchbox'] } }]" routerLinkActive #rla="routerLinkActive">导航</span>
   <span class="mr-3 btn-nav" [routerLink]="['/homepage']">广场</span>
-  <span class="mr-3 btn-nav" [routerLink]="['/index']" *ngIf="auth._id">主页</span>
+  <span class="mr-3 btn-nav" [routerLink]="['/index']" *ngIf="auth?._id">主页</span>
 
   <span class="fill-remaining-space"></span>
 
   <button mat-icon-button [matMenuTriggerFor]="userManage" ><mat-icon svgIcon="ellipsis"></mat-icon></button>
   <mat-menu #userManage="matMenu">
-      <div *ngIf="auth._id else elseBlock">
+      <div *ngIf="auth?._id else elseBlock">
           <button mat-menu-item [routerLink]="['/person-center']"><mat-icon svgIcon="genius"></mat-icon>个人</button>
           <button mat-menu-item [routerLink]="['/edit-article']"><mat-icon svgIcon="genius"></mat-icon>编写</button>
           <button mat-menu-item [matMenuTriggerFor]="theme"><mat-icon svgIcon="genius"></mat-icon>主题</button> 

@@ -1,17 +1,18 @@
 import * as actions from '../actions/article.action';
+import { CollectObj } from '../domain';
 
 export interface State {
     like: number;
     delete: boolean;
-    collectArticle: boolean;
-    collectUser:boolean
+    collectArticle: CollectObj;
+    collectUser:CollectObj
 
 };
 export const initialState: State = {
     like:0,
     delete:false,
-    collectArticle:false,
-    collectUser:false
+    collectArticle:{},
+    collectUser:{}
 };
 
 export function reducer(state = initialState, action: actions.Actions ): State {
@@ -35,14 +36,14 @@ export function reducer(state = initialState, action: actions.Actions ): State {
             return Object.assign(state, {collectArticle: action.payload});
         }
         case actions.ActionTypes.COLLECT_ARTICLE_FAIL: {
-            return action.payload;
+            return Object.assign(state, {collectArticle: action.payload});
         }
         // 关注
         case actions.ActionTypes.COLLECT_USER_SCCESS: {
             return Object.assign(state, {collectUser: action.payload});
         }
         case actions.ActionTypes.COLLECT_USER_FAIL: {
-            return action.payload;
+            return Object.assign(state, {collectUser: action.payload});
         }
         default: {
             return state;

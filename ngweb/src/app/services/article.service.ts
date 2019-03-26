@@ -36,12 +36,12 @@ export class ArticleService {
 
     collectArticle(data){
         const uri=`${this.config.uri}/${this.domain}/collectArticle`;
-        return this.http.post<Result<null>>(uri, data );
+        return this.http.post<Result<number>>(uri, data );
     }
     
     collectUser(data){
         const uri=`${this.config.uri}/${this.domain}/collectUser`;
-        return this.http.post<Result<null>>(uri, data );
+        return this.http.post<Result<number>>(uri, data );
     }
 
     get_list(data:ArticleListParam){

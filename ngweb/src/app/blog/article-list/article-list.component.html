@@ -1,7 +1,4 @@
 <mat-card class="mb-2" *ngFor="let article of articles$ | async">
-  <!-- <mat-card-header
-    [routerLink]="['/blog-home', {outlets: { primary: 'blog-detail', aux: ['blog-user', article?.author]}}]"
-    [queryParams]="{id: article?._id, authId: article?.author}"> -->
   <mat-card-header>
 
     <mat-card-title>{{article?.title}}</mat-card-title>
@@ -10,7 +7,7 @@
         标签：<span *ngFor='let label of article?.label'>{{label}}&nbsp;</span> 、
         发布于：{{article?.meta.updateAt | date:'yyyy-MM-dd'}} 、
         {{article?.commentNum}} 人评论、
-        {{article?.like.likeNum}}人喜欢
+        {{article?.like?.likeNum}} 人喜欢
     </mat-card-subtitle>
 
   </mat-card-header>
@@ -25,14 +22,6 @@
       [routerLink]="['/blog-home', {outlets: { primary: 'blog-detail'}}]"
       [queryParams]="{id: article?._id, authId: article?.author}">查看详情</button>
     </mat-card-actions>
-  <!-- <mat-card-footer>
-    <mat-grid-list cols="4" rowHeight="2.5rem" class="text-muted">
-      <mat-grid-tile><mat-icon svgIcon="badge"></mat-icon>：{{article?.category}}</mat-grid-tile>
-      <mat-grid-tile><mat-icon svgIcon="edit"></mat-icon>：{{article?.commentNum}}</mat-grid-tile>
-      <mat-grid-tile><mat-icon svgIcon="eye"></mat-icon>：{{article?.visitNum}}</mat-grid-tile>
-      <mat-grid-tile><mat-icon svgIcon="heart"></mat-icon>：{{article?.like.likeNum}}</mat-grid-tile>
-    </mat-grid-list>
-  </mat-card-footer> -->
 </mat-card>
 
 <mat-paginator

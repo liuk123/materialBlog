@@ -5,8 +5,8 @@ export interface User {
   introduce?: string;
   avatar?: string;
   categories?: Category[];
-  collect?: string[],
-  collectUser?:string[],
+  collect?: CollectObj,
+  collectUser?:CollectObj,
   theme?:string,
   label?: string[];
   role?: number;
@@ -21,4 +21,8 @@ export interface Category {
 export interface Meta {
   createAt:Date;
   updateAt:Date;
+}
+export interface CollectObj{
+  _id?:string;
+  collect?:string[];
 }

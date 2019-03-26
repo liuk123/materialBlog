@@ -8,7 +8,7 @@
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-button [color]="liked==1?'accent':''" (click)="like(article?._id)">喜欢</button>
+    <button mat-button [color]="liked==1?'accent':''" (click)="like(article?.like?._id)">喜欢</button>
     <button mat-button color="accent" (click)="openNewCommentDialog()">评论</button>
     <button mat-button color="accent" (click)="collect(article?._id)">{{isCollected?'取消收藏':'收藏'}}</button>
     
@@ -37,7 +37,7 @@
           <mat-icon [svgIcon]="comment?.from?.avatar"></mat-icon>
           <div class="media-body">
             <strong>{{comment.from.userName}}</strong>
-            <button mat-button color="accent" (click)="openNewCommentDialog(comment._id,comment?.from?._id)">回复</button>
+            <button mat-button color="accent" (click)="openNewCommentDialog(comment?._id,comment?.from?._id)">回复</button>
             <div [innerHTML] = "comment?.content" class="nopad"></div>
         
             <div *ngFor="let subComment of comment.reply" class="media">
@@ -46,7 +46,7 @@
                   <mat-icon [svgIcon]="subComment?.from?.avatar"></mat-icon>{{subComment?.from?.userName}} @ 
                   <mat-icon [svgIcon]="subComment?.to?.avatar"></mat-icon>{{subComment?.to?.userName}}
                 </strong>
-                <button mat-button color="accent" (click)="openNewCommentDialog(comment._id,comment?.from?._id)">回复</button>
+                <button mat-button color="accent" (click)="openNewCommentDialog(comment?._id,comment?.from?._id)">回复</button>
                 <div [innerHTML] = "subComment?.content" class="nopad"></div>
               </div>
             </div>

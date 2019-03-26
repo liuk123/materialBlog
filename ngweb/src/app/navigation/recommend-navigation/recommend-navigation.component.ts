@@ -25,11 +25,11 @@ export class RecommendNavigationComponent implements OnInit {
   //把data分为4列
   //data为原始数组，columns为需要填充的数组 [[],[],[]]
   columnsArr(data,columns){
-    this.columns = data.reduce((columns, item)=>{
+    columns = data.reduce((columns, item)=>{
       let minH = columns[0].reduce((s,v) => s += v.data.length + 2, 0)
       let n = 0
 
-      for(let j = 1; j < this.columns.length; j++){
+      for(let j = 1; j < columns.length; j++){
         let jh = columns[j].reduce((s,v) => s += v.data.length + 2, 0)
         if(minH>jh){
           minH=jh

@@ -8,7 +8,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 
 
@@ -20,13 +20,17 @@ export class InterceptorService implements HttpInterceptor {
     
     let req = request.clone();
     return next.handle(req).pipe( 
+      tap(
+        event => {},
+        error => this.handleData(error)
+      )
       // mergeMap((event: any) => {
          
       //     if (event instanceof HttpResponse && event.status === 200)
       //         return this.handleData(event);//具体处理请求返回数据
       //         return of(event);
       // }),
-      catchError((err: HttpErrorResponse) => this.handleData(err))
+      // catchError((err: HttpErrorResponse) => this.handleData(err))
     )
   }
 

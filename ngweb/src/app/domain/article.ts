@@ -18,12 +18,13 @@ export interface Article {
 export interface Like {
   likeNum:number;
   likeUser:string[];
+  _id:string;
 }
 
 export interface ArticleListParam {
   id: string,
   category?: string,
-  collect?: string[],
+  collect?: string,
   label?: string,
   pageSize: number,
   current: number

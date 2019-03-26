@@ -3,6 +3,8 @@ import md5 from 'md5'
 const UserModel = require('../../models/user')
 const InviteModel =  require('../../models/invite')
 const ArticleModel =  require('../../models/article')
+const CollectUserModel =  require('../../models/collectUser')
+const CollectArticleModel =  require('../../models/collectArticle')
 
 class UserController {
     //注册
@@ -52,6 +54,7 @@ class UserController {
         );
         if(!result)
             return ctx.error({ msg: '更新失败!' });
+            ctx.session.user = result
             return ctx.success({ msg:'更新成功',data: result });
 
     }
@@ -97,7 +100,10 @@ class UserController {
     static async user_card(ctx) {
         const { id } = ctx.request.query;
         if( !id && !ctx.session.user ) return ctx.error({ msg: '请登录' });
-        const result = await UserModel.findById( id || ctx.session.user._id);
+        const result = await UserModel
+                            .findById( id || ctx.session.user._id)
+                            .populate({path: 'collect', select:{collect:1}})
+                            .populate({path: 'collectUser', select:{collect:1}});
         if(!result) return ctx.error({ msg: '获取用户信息失败!' });
         return ctx.success({ msg:'获取成功',data: result });
     }
@@ -108,13 +114,18 @@ class UserController {
         const { collect='',label='0', current=0, pageSize=10 } = ctx.query
         const skip = Number(current)*Number(pageSize)
         if(collect != ''){
+            const collectUsers = await CollectUserModel
+                .findById(collect)
+                .select('collect')
+                
             const result = await UserModel
-                .find({'_id': { $in: collect.split(',')}})
+                .find({'_id': { $in: collectUsers.collect}})
                 .skip(skip)
                 .limit(Number(pageSize))
                 .select('userName introduce avatar label categories');
                 return ctx.success({ msg:'获取成功', data: result });
         }else if(label == '1'){
+            if(!ctx.session.user) return ctx.error({ msg: '请登录' })
             const result = await UserModel
                 .find({'label': { $in: ctx.session.user.label}})
                 .skip(skip)
@@ -148,20 +159,6 @@ class UserController {
             return ctx.error({ msg: '删除分类失败' })
             return ctx.success({ msg:'删除分类成功', data: result });
     }
-    // 更新用户个人信息
-    static async put_userinfo(ctx) {   
-        const fields = ctx.request.body;
-        if(!fields.id) return ctx.error({ msg: '用户id不存在!' });
-
-        const id = fields.id;
-        delete fields.id;
-        const result = await UserModel.findByIdAndUpdate(id,fields);
-        if(!result) return ctx.error({ msg: '更新失败!' });
-        
-        const user = await UserModel.findById(id).select({ password:0 });
-        if(!user) return ctx.error({ msg: '返回用户失败!' });
-        return ctx.success({ msg:'修改成功',data: { user } });
-    }
 
     // 上传用户头像
     /*
@@ -177,7 +174,7 @@ class UserController {
 
     //midware for user
     static async signinRequired(ctx,next) {
-        var user=ctx.session.user
+        let user=ctx.session.user
         if(!user){
             return ctx.error({ msg: '请登录' })
         }
@@ -185,7 +182,7 @@ class UserController {
     }
     //midware for user
     static async adminRequired(ctx,next) {
-        var user=ctx.session.user
+        let user=ctx.session.user
         if(user.role<=100||!user.role){
             return ctx.error({ msg: '没有权限' })
         }

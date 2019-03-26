@@ -1,16 +1,14 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+var ObjectId=Schema.Types.ObjectId
 
 const ArticleSchema=new Schema({
 	title:String,
     abstract:String,
-	author:String,
+	author:{type:ObjectId, ref:'User'},
 	category:String,
 	label:[],
-	like:{
-		likeNum:{ type:Number, default:0 },
-		likeUser:[]
-	},
+	like:{type:ObjectId, ref:'Like'},
 	commentNum:{ type:Number, default:0 },
 	visitNum:{ type:Number, default:0 },
 	content:String,

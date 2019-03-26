@@ -18,21 +18,24 @@ export class AuthListComponent implements OnInit {
   length = 100
   pageSize = 10
   userlist$: Observable<User[]>
-  collect: string[] = []
-  condition
+  collect: string
+  condition: Object
 
   constructor(private store$: Store<fromRoot.State>, private routInfo: ActivatedRoute,private snackBar: MatSnackBar) {
-    this.store$.pipe(select(fromRoot.getUserState)).subscribe(v=>{
-      this.collect = v.collectUser
+
+    this.routInfo.queryParamMap.subscribe( v=> {
+
+      this.collect = v.get('collect')
+      
+      if(this.collect){
+        this.condition = {collect: this.collect, pageSize: this.pageSize, current: 0}
+        this.store$.dispatch(new actions.UserListAction(this.condition))
+        this.userlist$ = this.store$.pipe(select(fromRoot.getUserListState))
+      }else{
+        this.snackBar.open('没有关注的人', '关闭', {duration: 3000})
+      }
     })
 
-    if(this.collect.length == 0){
-      this.snackBar.open('没有关注的人', '关闭', {duration: 4000})
-    }else{
-      this.condition = {collect: this.collect, pageSize: this.pageSize, current: 0}
-      this.store$.dispatch(new actions.UserListAction(this.condition))
-      this.userlist$ = this.store$.pipe(select(fromRoot.getUserListState))
-    }
   }
 
   ngOnInit() {

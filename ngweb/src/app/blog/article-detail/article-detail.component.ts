@@ -10,6 +10,7 @@ import { ReplayDialogComponent } from 'src/app/shared/replay-dialog/replay-dialo
 import { ArticleService } from 'src/app/services/article.service';
 import { Subscription } from 'rxjs';
 import * as RouterActions from '../../actions/router.action';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-article-detail',
@@ -44,7 +45,7 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     ).subscribe(v => {
       this.article = v
       //初始化喜欢
-      if(this.article.like.likeUser.find( id => this.authId == id )){
+      if(this.article.like && this.article.like.likeUser.find( id => this.authId == id )){
         this.store$.dispatch(new actions.LikeSuccessAction(1))
       }else{
         this.store$.dispatch(new actions.LikeSuccessAction(0))
@@ -53,14 +54,22 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     this.store$.pipe(select(fromRoot.getCommentListState)).subscribe(v => this.comments = v)
     this.store$.pipe(select(fromRoot.getAuthCardState)).subscribe(v => {
       this.authId = v._id
-      if(v.collect&&v.collect instanceof Array){
-        this.isCollected = v.collect.find(v =>v==this.id)?true:false
+      if(v.collect&&v.collect.collect&&v.collect.collect.length>0){
+        this.isCollected = v.collect.collect.find(v=>this.id ==v)?true:false
       }
     })
 
-    //喜欢
+    //点击喜欢
     this.store$.pipe(select(v=>v.articleOp.like)).subscribe(v => {
       this.liked = v
+    })
+    //点击收藏
+    this.store$.pipe(select(v=>v.articleOp.collectArticle)).subscribe(v => {
+      if(v.collect&&v.collect.length>0){
+        this.isCollected = v.collect.find(v=>this.id == v)?true:false
+      }else if(v.collect){
+        this.isCollected=false
+      }
     })
 
     //删除
@@ -83,11 +92,15 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     this.delSubscription.unsubscribe();
   }
 
-  like(titleId){
-    this.store$.dispatch(new actions.LikeAction({id: titleId, liked: this.liked}))
+  like(likeId){
+    if(this.article&&this.article.like){
+      this.store$.dispatch(new actions.LikeAction({id: likeId, liked: this.liked}))
+    }else{//如果article中的like为空时
+      this.store$.dispatch(new actions.LikeAction({id: likeId, liked: 2}))
+    }
   }
 
-  collect(id){
+  collect(id){ //文章id
     this.store$.dispatch(new actions.CollectArticleAction({id, isCollected: this.isCollected}))
   }
 

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+var ObjectId=Schema.Types.ObjectId
 
 const UserSchema=new Schema({
 	userName:{ unique:true, type:String },
@@ -7,8 +8,8 @@ const UserSchema=new Schema({
 	password:String,
 	avatar:String,
 	categories:[],
-	collect:[],		//收藏
-	collectUser:[],	//关注
+	collect:{type:ObjectId, ref:'CollectArticle'},	//收藏
+	collectUser:{type:ObjectId, ref:'CollectUser'},	//关注
 	label:[],
 	theme:String,
 	role:{ type:Number, default:0 },

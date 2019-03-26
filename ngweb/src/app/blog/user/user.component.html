@@ -5,7 +5,7 @@
     </div>
     <mat-card-title>
       {{user?.userName}}
-      <button mat-button (click)="collectUser()" *ngIf="authId&&authId !=auth._id">{{isCollected?'取消关注':'关注'}}</button>
+      <button mat-button (click)="collectUser()" *ngIf="authId&&authId !=auth?._id">{{isCollected?'取消关注':'关注'}}</button>
     </mat-card-title>
     <mat-card-subtitle>{{user?.introduce}}</mat-card-subtitle>
   </mat-card-header>
@@ -13,12 +13,13 @@
 
 <button mat-button
       [routerLink]="['/blog-home', { outlets: { primary: 'blog-list'} }]"
-      [queryParams]="{collect:1, authId: user._id}">
-  {{authId&&authId !=auth._id?'他的收藏':'我的收藏'}}
+      [queryParams]="{collect:user?.collect?._id, authId: user?._id}">
+  {{authId&&authId !=auth?._id?'他的收藏':'我的收藏'}}
 </button>
 <button mat-button
-      [routerLink]="['/blog-home', { outlets: { primary: 'auth-list'} }]">
-  {{authId&&authId !=auth._id?'他的关注':'我的关注'}}
+      [routerLink]="['/blog-home', { outlets: { primary: 'auth-list'} }]"
+      [queryParams]="{collect:user?.collectUser?._id}">
+  {{authId&&authId !=auth?._id?'他的关注':'我的关注'}}
 </button>
 
 
@@ -33,14 +34,14 @@
     <button
       mat-list-item
       [routerLink]="['/blog-home', { outlets: { primary: 'blog-list'} }]"
-      [queryParams]="{category:'all',authId: user._id}">
-      {{authId&&authId !=auth._id?'他的分类':'我的分类'}}
+      [queryParams]="{category:'all',authId: user?._id}">
+      {{authId&&authId !=auth?._id?'他的分类':'我的分类'}}
     </button>
     <button
       mat-list-item
       *ngFor="let category of user?.categories"
       [routerLink]="['/blog-home', { outlets: { primary: 'blog-list'} }]"
-      [queryParams]="{category:category.title, authId: user._id}">
+      [queryParams]="{category:category.title, authId: user?._id}">
 
       <span
         [matBadge]="category.number"
@@ -51,7 +52,7 @@
     <button
       mat-list-item
       [routerLink]="['/blog-home', { outlets: { primary: 'blog-list'} }]"
-      [queryParams]="{category:'', authId: user._id}">
+      [queryParams]="{category:'', authId: user?._id}">
       未分组
     </button>
 </mat-action-list>

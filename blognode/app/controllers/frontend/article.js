@@ -1,9 +1,12 @@
 const UserModel = require('../../models/user')
 const ArticleModel = require('../../models/article')
 const CommentModel = require('../../models/comment')
+const CollectArticleModel = require('../../models/collectArticle')
+const CollectUserModel = require('../../models/collectUser')
+const LikeModel = require('../../models/like')
 
-var fs = require('fs');
-var path = require('path');
+const fs = require('fs');
+const path = require('path');
 
 class ArticleController {
     // 获取文章列表
@@ -13,9 +16,14 @@ class ArticleController {
         const skip = Number(current)*Number(pageSize)
 
         if(collect != ''){//查看收藏的文章
-            
+            const collectArticles = await CollectArticleModel
+                            .findById(collect)
+                            .select('collect')
+            if(!collectArticles) return ctx.error({ msg: '收藏文章为空' })
+
             const result = await ArticleModel
-                            .find({'_id': {$in: collect.split(',')}})
+                            .find({'_id': {$in: collectArticles.collect}})
+                            .populate({path:'like',select:{likeUser:0}})
                             .sort({ 'meta.createAt': -1 })
                             .skip(skip)
                             .limit(Number(pageSize))
@@ -26,6 +34,7 @@ class ArticleController {
         }else if(label == '1'){
             const result = await ArticleModel
                             .find({'label': {$in: ctx.session.user.label}})
+                            .populate({path:'like',select:{likeUser:0}})
                             .sort({ 'meta.createAt': -1 })
                             .skip(skip)
                             .limit(Number(pageSize))
@@ -42,6 +51,7 @@ class ArticleController {
             }
             const result = await ArticleModel
                             .find(condition)
+                            .populate({path:'like',select:{likeUser:0}})
                             .sort({ 'meta.createAt': -1 })
                             .skip(skip)
                             .limit(Number(pageSize))
@@ -109,8 +119,7 @@ class ArticleController {
                     { _id: ctx.session.user._id, 'categories.title': data.oldCategory },
                     { $inc: {'categories.$.number': -1} })
             }
-           
-                
+                       
             await UserModel.updateOne(
                 { _id: ctx.session.user._id, 'categories.title': data.newCategory },
                 { $inc: {'categories.$.number': +1} })
@@ -150,21 +159,26 @@ class ArticleController {
         if( !ctx.session.user ) return ctx.error({ msg: '请登录' })
 
         const { id, liked } = ctx.request.body
-        const { userName, _id } = ctx.session.user
+        const { _id } = ctx.session.user
 
         let condition={}
         if(liked==1){
             condition = { 
-                $pull: { 'like.likeUser': _id },
-                $inc: { 'like.likeNum': -1 }
+                $pull: { 'likeUser': _id },
+                $inc: { 'likeNum': -1 }
             }
         }else{
             condition = { 
-                $push: { 'like.likeUser': _id },
-                $inc: { 'like.likeNum': +1 }
+                $push: { 'likeUser': _id },
+                $inc: { 'likeNum': +1 }
             }
         }
-        const result = await ArticleModel.updateOne({ _id: id },condition)
+        if(liked == 2){//当article中没有like字段时
+            const like = await LikeModel.create({likeNum:1,likeUser:_id})
+            const result = await ArticleModel.updateOne({ _id: id },{like:like._id})
+        }else{
+            const result = await LikeModel.updateOne({ _id: id },condition)
+        }
         
         return ctx.success({ msg:'点赞成功!', data: (liked == 1 ? 0:1) })
         
@@ -173,21 +187,11 @@ class ArticleController {
     // 获取
     static async get_detail(ctx){
         const { id } = ctx.query
-        let liked = 0
-        const result = await ArticleModel.findById(id).select('title abstract content category like commentNum visitNum author label')
-        if( ctx.session.user &&
-            ctx.session.user._id &&
-            result &&
-            result.like &&
-            result.like.likeUser &&
-            result.like.likeUser.find(v=>v == ctx.session.user._id)) liked = 1
 
-        const commentResult = await CommentModel
-            .find({ title: id})
-            .populate({path:'from',select:{_id:1,userName:1}})
-            .populate({path:'reply.from',select:{_id:1,userName:1}})
-            .populate({path:'reply.to',select:{_id:1,userName:1}})
-            .sort({_id:-1})
+        const result = await ArticleModel
+                            .findById(id)
+                            .populate({path:'like',select:{likeNum:1,likeUser:1}})
+                            .select('title abstract content category like commentNum visitNum author label')
 
         await ArticleModel.updateOne({_id: id}, {$inc:{visitNum:+1}})
 
@@ -254,61 +258,58 @@ class ArticleController {
         }
     }
 
-//    static async label(ctx){
-//         return ctx.success({ msg:'标签成功!', data: [
-//                 {name: '前端开发', items: ['前端开发','js','html/css','react','vue','angular','小程序','nodejs',]},
-//                 {name: '后端开发', items: ['后端开发','java','python','爬虫','Go','c','c++']},
-//                 {name: '数据库', items: ['数据库','mongodb','mySQL','redis']},
-//                 {name: '个人', items: ['个人']},
-//                 {name: '互联网', items: ['互联网']},
-//                 {name: '资源', items: ['音乐','视频','软件','壁纸']},
 
-//             ]
-//         })
-//    }
     static async collect(ctx){
         if(!ctx.session.user) return ctx.error({ msg:'请登录' })
         const {id, isCollected} = ctx.request.body
-
-        if(isCollected){
+        if(!ctx.session.user.collect){
+            const collectArticle = await CollectArticleModel.create({collect:[id]})
             const result = await UserModel.findOneAndUpdate(
-                { _id: ctx.session.user._id },
+                {_id:ctx.session.user._id},
+                {collect:collectArticle._id},
+                {new: true})
+            ctx.session.user.collect = collectArticle._id
+            return ctx.success({ msg:'收藏成功!', data: result })
+        }else if(isCollected){
+            const result = await CollectArticleModel.findOneAndUpdate(
+                { _id: ctx.session.user.collect },
                 { $pull: {collect: id}},
-                { new: true })
-            // const articleResult = await ArticleModel.update(
-            //     { _id: id},
-            //     { $pull: {collect: ctx.session.user._id}})
+                {new: true})
             return ctx.success({ msg:'取消收藏成功!', data: result })
         }else{
-            const result = await UserModel.findOneAndUpdate(
-                { _id: ctx.session.user._id },
+            const result = await CollectArticleModel.findOneAndUpdate(
+                { _id: ctx.session.user.collect },
                 { $addToSet: {collect: id}},
-                { new: true })
-            // const articleResult = await ArticleModel.update(
-            //     { _id: id},
-            //     { $addToSet: {collect: ctx.session.user._id}})
+                {new: true})
             return ctx.success({ msg:'收藏成功!', data: result })
         }
-        
-
     }
+
     static async collectUser(ctx){
         if(!ctx.session.user) return ctx.error({ msg:'请登录' })
         const { id, isCollected } = ctx.request.body
         
-        if(isCollected){
+        if(!ctx.session.user.collectUser){
+            const collectUser = await CollectUserModel.create({collect:[id]})
             const result = await UserModel.findOneAndUpdate(
-                { _id: ctx.session.user._id },
-                { $pull: {collectUser: id}},
-                { new: true })
-    
+                {_id:ctx.session.user._id},
+                {collectUser:collectUser._id},
+                {new: true})
+            ctx.session.user.collectUser = collectUser._id
+            return ctx.success({ msg:'关注成功!', data: result})
+        }else if(isCollected){
+            const result = await CollectUserModel.findOneAndUpdate(
+                { _id: ctx.session.user.collectUser },
+                { $pull: {collect: id}},
+                {new: true})
+
             return ctx.success({ msg:'取消关注成功!', data: result })
         }else{
-            const result = await UserModel.findOneAndUpdate(
-                { _id: ctx.session.user._id },
-                { $addToSet: {collectUser: id}},
-                { new: true })
-    
+            const result = await CollectUserModel.findOneAndUpdate(
+                { _id: ctx.session.user.collectUser },
+                { $addToSet: {collect: id}},
+                {new: true})
+
             return ctx.success({ msg:'关注成功!', data: result })
         }
         
@@ -322,7 +323,7 @@ export default ArticleController;
 
 function mkdirsSync(dirpath, mode) {
     if (!fs.existsSync(dirpath)) {
-        var pathtmp;
+        let pathtmp;
         dirpath.split(path.sep).forEach(function (dirname) {
             if (dirname == "") {
                 dirname = "/"

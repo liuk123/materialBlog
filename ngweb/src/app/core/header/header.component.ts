@@ -18,18 +18,22 @@ export class HeaderComponent implements OnInit {
   @Output() switchTheme=new EventEmitter<string>();
 
   auth: User
-  // label
   constructor(private store$: Store<fromRoot.State>) {
     this.store$.pipe(select(fromRoot.getAuthCardState)).subscribe(res => {
-      this.switchTheme.emit(res.theme)
-      this.auth = res})
+      if(res.theme){
+        this.switchTheme.emit(res.theme)
+      }
+      this.auth = res
+    })
     this.store$.pipe(select(fromRoot.getAuthState)).subscribe(res => {
-      this.switchTheme.emit(res.theme)
-      this.auth = res})
+      if(res.theme){
+        this.switchTheme.emit(res.theme)
+      }
+      this.auth = res
+    })
 
     this.store$.dispatch(new actions.AuthCardAction(''))
     this.store$.dispatch(new LabelActions.LabelAction(null))
-
     this.store$.dispatch(new NavigationActions.RemmendNavAction(null))
   }
 

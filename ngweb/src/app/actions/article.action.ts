@@ -26,6 +26,7 @@ export enum ActionTypes {
     COLLECT_ARTICLE = '[Collect] Collect article',
     COLLECT_ARTICLE_SCCESS = '[Collect] Collect article success',
     COLLECT_ARTICLE_FAIL = '[Collect] Collect article fail',
+
    
     //关注
     COLLECT_USER = '[Collect] Collect user',
@@ -153,7 +154,7 @@ export class CollectArticleAction implements Action {
 export class CollectArticleSuccessAction implements Action {
     readonly type = ActionTypes.COLLECT_ARTICLE_SCCESS;
 
-    constructor(public payload: null) { }
+    constructor(public payload: number) { }
 }
 export class CollectArticleFailAction implements Action {
     readonly type = ActionTypes.COLLECT_ARTICLE_FAIL;
@@ -169,7 +170,7 @@ export class CollectUserAction implements Action {
 export class CollectUserSuccessAction implements Action {
     readonly type = ActionTypes.COLLECT_USER_SCCESS;
 
-    constructor(public payload: null) { }
+    constructor(public payload: number) { }
 }
 export class CollectUserFailAction implements Action {
     readonly type = ActionTypes.COLLECT_USER_FAIL;
