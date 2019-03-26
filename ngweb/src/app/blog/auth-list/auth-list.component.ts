@@ -32,7 +32,7 @@ export class AuthListComponent implements OnInit {
         this.store$.dispatch(new actions.UserListAction(this.condition))
         this.userlist$ = this.store$.pipe(select(fromRoot.getUserListState))
       }else{
-        this.snackBar.open('没有关注的人', '关闭', {duration: 3000})
+        this.snackBar.open('没有关注的人', '关闭', {duration: 1000})
       }
     })
 

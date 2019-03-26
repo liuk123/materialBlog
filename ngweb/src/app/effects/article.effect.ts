@@ -46,7 +46,7 @@ export class ArticleEffects {
         ofType(actions.ActionTypes.LIKE),
         mergeMap((u:actions.LikeAction) => this.service$.like(u.payload).pipe(
             map(v => {
-                this.snackBar.open(v.msg, '关闭', {duration: 4000})
+                this.snackBar.open(v.msg, '关闭', {duration: 1000})
                 return new actions.LikeSuccessAction(v.data)}),
             catchError(err => of(new actions.LikeFailAction(err)))
         ))
@@ -56,7 +56,7 @@ export class ArticleEffects {
         ofType(actions.ActionTypes.COLLECT_ARTICLE),
         mergeMap((u:actions.CollectArticleAction) => this.service$.collectArticle(u.payload).pipe(
             map(v => {
-                this.snackBar.open(v.msg, '关闭', {duration: 4000})
+                this.snackBar.open(v.msg, '关闭', {duration: 1000})
                 // return new authActions.AuthCardSuccessAction(v.data)
                 return new actions.CollectArticleSuccessAction(v.data)
             }),
@@ -69,7 +69,7 @@ export class ArticleEffects {
         ofType(actions.ActionTypes.COLLECT_USER),
         mergeMap((u:actions.CollectUserSuccessAction) => this.service$.collectUser(u.payload).pipe(
             map(v => {
-                this.snackBar.open(v.msg, '关闭', {duration: 4000})
+                this.snackBar.open(v.msg, '关闭', {duration: 1000})
                 return new actions.CollectUserSuccessAction(v.data)
             }),
             catchError(err => of(new actions.CollectUserFailAction(err)))

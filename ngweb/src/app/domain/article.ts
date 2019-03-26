@@ -4,7 +4,7 @@ export interface Article {
   _id?: string;
   title: string;
   abstract?: string;
-  author: string;
+  author: any;
   category: string;
   label?:[];
   like: Like;

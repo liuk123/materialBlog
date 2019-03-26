@@ -24,6 +24,8 @@ class ArticleController {
             const result = await ArticleModel
                             .find({'_id': {$in: collectArticles.collect}})
                             .populate({path:'like',select:{likeUser:0}})
+                            
+                            .populate({path:'author',select:{userName: 1}})
                             .sort({ 'meta.createAt': -1 })
                             .skip(skip)
                             .limit(Number(pageSize))
@@ -35,6 +37,7 @@ class ArticleController {
             const result = await ArticleModel
                             .find({'label': {$in: ctx.session.user.label}})
                             .populate({path:'like',select:{likeUser:0}})
+                            .populate({path:'author',select:{userName: 1}})
                             .sort({ 'meta.createAt': -1 })
                             .skip(skip)
                             .limit(Number(pageSize))
@@ -52,6 +55,7 @@ class ArticleController {
             const result = await ArticleModel
                             .find(condition)
                             .populate({path:'like',select:{likeUser:0}})
+                            .populate({path:'author',select:{userName: 1}})
                             .sort({ 'meta.createAt': -1 })
                             .skip(skip)
                             .limit(Number(pageSize))
@@ -62,6 +66,7 @@ class ArticleController {
         
         
     }
+
     // 新建
     static async create(ctx){
 
@@ -92,9 +97,7 @@ class ArticleController {
         return ctx.success({ msg:'新建成功!' })
     }
 
-   
-
-    // 更新 -分类待优化
+    // 更新
     static async update(ctx){
 
         if( !ctx.session.user ) return ctx.error({ msg: '请登录' })
@@ -129,7 +132,7 @@ class ArticleController {
 
     }
 
-    // 删除
+    // 删除 -修改
     static async delete(ctx){
 
         if( !ctx.session.user ) return ctx.error({ msg: '请登录' })
@@ -258,7 +261,7 @@ class ArticleController {
         }
     }
 
-
+    //收藏文章
     static async collect(ctx){
         if(!ctx.session.user) return ctx.error({ msg:'请登录' })
         const {id, isCollected} = ctx.request.body
@@ -269,7 +272,7 @@ class ArticleController {
                 {collect:collectArticle._id},
                 {new: true})
             ctx.session.user.collect = collectArticle._id
-            return ctx.success({ msg:'收藏成功!', data: result })
+            return ctx.success({ msg:'收藏成功!', data: collectArticle })
         }else if(isCollected){
             const result = await CollectArticleModel.findOneAndUpdate(
                 { _id: ctx.session.user.collect },
@@ -284,7 +287,7 @@ class ArticleController {
             return ctx.success({ msg:'收藏成功!', data: result })
         }
     }
-
+    //关注人
     static async collectUser(ctx){
         if(!ctx.session.user) return ctx.error({ msg:'请登录' })
         const { id, isCollected } = ctx.request.body
@@ -296,7 +299,7 @@ class ArticleController {
                 {collectUser:collectUser._id},
                 {new: true})
             ctx.session.user.collectUser = collectUser._id
-            return ctx.success({ msg:'关注成功!', data: result})
+            return ctx.success({ msg:'关注成功!', data: collectUser})
         }else if(isCollected){
             const result = await CollectUserModel.findOneAndUpdate(
                 { _id: ctx.session.user.collectUser },

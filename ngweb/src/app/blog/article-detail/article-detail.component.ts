@@ -10,7 +10,6 @@ import { ReplayDialogComponent } from 'src/app/shared/replay-dialog/replay-dialo
 import { ArticleService } from 'src/app/services/article.service';
 import { Subscription } from 'rxjs';
 import * as RouterActions from '../../actions/router.action';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-article-detail',

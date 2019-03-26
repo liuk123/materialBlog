@@ -5,7 +5,7 @@
       
           <mat-card-subtitle>
               标签：<span *ngFor='let label of article?.label'>{{label}}&nbsp;</span> 、
-              发布于：{{article?.meta.updateAt | date:'yyyy-MM-dd'}} 、
+              {{article?.author?.userName}} 发布于：{{article?.meta.updateAt | date:'yyyy-MM-dd'}} 、
               {{article?.commentNum}} 人评论、
               {{article?.like?.likeNum}}人喜欢
           </mat-card-subtitle>
@@ -17,8 +17,8 @@
         </mat-card-content>
         <mat-card-actions>
           <button mat-button color="accent"
-            [routerLink]="['/blog-home', {outlets: { primary: 'blog-detail', aux: ['blog-user', article?.author]}}]"
-            [queryParams]="{id: article?._id, authId: article?.author}">查看详情</button>
+            [routerLink]="['/blog-home', {outlets: { primary: 'blog-detail', aux: ['blog-user', article?.author?._id]}}]"
+            [queryParams]="{id: article?._id, authId: article?.author?._id}">查看详情</button>
         </mat-card-actions>
       </mat-card>
       
