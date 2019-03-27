@@ -1,4 +1,26 @@
+<mat-card>
+  <div class="grid">
+    <div class="column" *ngFor="let columndata of columns">
+      <div *ngFor="let navigation of columndata" class="mb-3 panel">
+        <div class="panel-header">{{navigation.title}}</div>
+        <div class="panel-body">
+          <ul>
+            <li *ngFor="let item of navigation.data" class="nav-list" (click)="open(item.url)">
+              <img [src]="'https://www.google.cn/s2/favicons?domain='+item.url" alt="" class="ico-img">
+              <div>
+                <span class="nav-name">{{item.name}}</span>
+                <span class="nav-desc">&nbsp;-&nbsp;{{item.desc}}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-card>
 
+
+<!-- 
 <div class="grid">
   <div class="column" *ngFor="let columndata of columns">
     <mat-card *ngFor="let navigation of columndata" class="mb-2">
@@ -18,4 +40,4 @@
       </mat-card-content>
     </mat-card>
   </div>
-</div>
+</div> -->
