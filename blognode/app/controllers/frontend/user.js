@@ -181,12 +181,14 @@ class UserController {
         next()
     }
     //midware for user
-    static async adminRequired(ctx,next) {
+    static vipRequired(ctx,next) {
         let user=ctx.session.user
-        if(user.role<=100||!user.role){
+        console.log(user.role)
+        if(user.role<100||!user.role){
             return ctx.error({ msg: '没有权限' })
         }
         next()
+        
     }
 }
 

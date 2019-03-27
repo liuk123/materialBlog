@@ -25,7 +25,17 @@ const routes: Routes = [
     path: 'nav',
     redirectTo: '/navigation-home',
     // redirectTo: '/navigation-home(popup:searchbox)',
-  }
+  },
+  {
+    path: 'login',
+    redirectTo: '/login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'register',
+    redirectTo: '/register',
+    pathMatch: 'full',
+  },
 ];
 
 const childRoutes: Routes = [

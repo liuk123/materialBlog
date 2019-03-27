@@ -72,7 +72,10 @@ class ArticleController {
     static async create(ctx){
 
         if( !ctx.session.user ) return ctx.error({ msg: '请登录' })
-
+        if(ctx.session.user.role<100){
+            return ctx.error({ msg: '没有权限' })
+        }
+        
         const { userName, _id } = ctx.session.user
         const data = ctx.request.body
         if(!data) return ctx.error({ msg: '发送数据失败!' })
@@ -88,13 +91,12 @@ class ArticleController {
                     { '$push': {categories: { title: data.newCategory, number:1 }} },
                     { new: true })
             
-        }else{// 更新分类
+        }else if(data.category){// 更新分类
             const noCatResult = await UserModel.findOneAndUpdate(
                     { _id, 'categories.title':data.category },
                     { $inc:{'categories.$.number':+1} })
 
         }
-
         return ctx.success({ msg:'新建成功!' })
     }
 
@@ -133,14 +135,13 @@ class ArticleController {
 
     }
 
-    // 删除 -修改
+    // 删除
     static async delete(ctx){
 
         if( !ctx.session.user ) return ctx.error({ msg: '请登录' })
 
         const { id, category } = ctx.query
         if(!id) return ctx.error({ msg: '删除失败' })
-
         
 
         // //删除用户收藏的collect
