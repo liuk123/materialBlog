@@ -37,9 +37,9 @@ export class UserComponent implements OnInit {
       })
       //点击关注
       this.store$.pipe(select(v=>v.articleOp.collectUser)).subscribe(v => {
-        if(v.collect&&v.collect.length>0){
+        if(v&&v.collect&&v.collect.length>0){
           this.isCollected = v.collect.find(v=>this.authId ==v)?true:false
-        }else if(v.collect){
+        }else if(v&&v.collect){
           this.isCollected = false
         }
       })

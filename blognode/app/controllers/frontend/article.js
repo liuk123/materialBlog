@@ -34,6 +34,7 @@ class ArticleController {
             return ctx.success({ msg:'获取成功', data: result });
             
         }else if(label == '1'){
+            if(!ctx.session.user||ctx.session.user.label) return ctx.error({ msg: '推荐为空' })
             const result = await ArticleModel
                             .find({'label': {$in: ctx.session.user.label}})
                             .populate({path:'like',select:{likeUser:0}})
@@ -140,19 +141,19 @@ class ArticleController {
         const { id, category } = ctx.query
         if(!id) return ctx.error({ msg: '删除失败' })
 
-        const result = await ArticleModel.findOneAndDelete({'_id': id})
+        
 
-        //删除用户收藏的collect
-        const collectResult = await UserModel.update(
-            {'_id': {$in: result.collect}},
-            { $pull: {collect: id}},)
+        // //删除用户收藏的collect
+        const collectResult = await CollectArticleModel.updateMany(
+            { 'collect': {$eq:id} },
+            { $pull: {collect: id}})
 
         const userResult = await UserModel.findOneAndUpdate(
             { _id: ctx.session.user._id, 'categories.title': category },
             { $inc: {'categories.$.number': -1} } )
 
         const commentResult = await CommentModel.deleteMany({ 'title': id })
-
+        const result = await ArticleModel.deleteOne({'_id': id})
         return ctx.success({ msg:'删除成功!' })
     }
 
@@ -161,7 +162,7 @@ class ArticleController {
 
         if( !ctx.session.user ) return ctx.error({ msg: '请登录' })
 
-        const { id, liked } = ctx.request.body
+        const { likeId, articleId, liked } = ctx.request.body
         const { _id } = ctx.session.user
 
         let condition={}
@@ -178,9 +179,9 @@ class ArticleController {
         }
         if(liked == 2){//当article中没有like字段时
             const like = await LikeModel.create({likeNum:1,likeUser:_id})
-            const result = await ArticleModel.updateOne({ _id: id },{like:like._id})
+            const result = await ArticleModel.updateOne({ _id: articleId },{like:like._id})
         }else{
-            const result = await LikeModel.updateOne({ _id: id },condition)
+            const result = await LikeModel.updateOne({ _id: likeId },condition)
         }
         
         return ctx.success({ msg:'点赞成功!', data: (liked == 1 ? 0:1) })

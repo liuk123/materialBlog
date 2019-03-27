@@ -133,7 +133,7 @@ export class DeleteArticleFailAction implements Action {
 export class LikeAction implements Action {
     readonly type = ActionTypes.LIKE;
 
-    constructor(public payload: { id: string, liked: number}) { }
+    constructor(public payload: { articleId: string, likeId: string, liked: number}) { }
 }
 export class LikeSuccessAction implements Action {
     readonly type = ActionTypes.LIKE_SCCESS;

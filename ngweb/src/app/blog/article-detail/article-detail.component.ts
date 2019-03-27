@@ -64,9 +64,9 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     })
     //点击收藏
     this.store$.pipe(select(v=>v.articleOp.collectArticle)).subscribe(v => {
-      if(v.collect&&v.collect.length>0){
+      if(v&&v.collect&&v.collect.length>0){
         this.isCollected = v.collect.find(v=>this.id == v)?true:false
-      }else if(v.collect){
+      }else if(v&&v.collect){
         this.isCollected=false
       }
     })
@@ -91,11 +91,11 @@ export class ArticleDetailComponent implements OnInit, OnDestroy {
     this.delSubscription.unsubscribe();
   }
 
-  like(likeId){
+  like(articleId,likeId){
     if(this.article&&this.article.like){
-      this.store$.dispatch(new actions.LikeAction({id: likeId, liked: this.liked}))
+      this.store$.dispatch(new actions.LikeAction({likeId, articleId, liked: this.liked}))
     }else{//如果article中的like为空时
-      this.store$.dispatch(new actions.LikeAction({id: likeId, liked: 2}))
+      this.store$.dispatch(new actions.LikeAction({likeId, articleId, liked: 2}))
     }
   }
 
