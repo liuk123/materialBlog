@@ -15,25 +15,32 @@ export class BlogComponent implements OnInit {
 
   length = 100
   pageSize = 10
-  label: string = '1'
   articles$: Observable<Article[]>
+  pageLabel:string;
   constructor(private store$: Store<fromRoot.State>, private routerInfo: ActivatedRoute) { }
 
   ngOnInit() {
     this.articles$ = this.store$.pipe(select(fromRoot.getArticleListState))
   
     this.routerInfo.data.subscribe(v=>{
+
+      this.pageLabel = v.key;
+
       if(v.key == 'all'){
         this.store$.dispatch(new actions.ArticleListAction({id:'all', category: 'all', pageSize: this.pageSize, current: 0}))
       }else if(v.key == 'recommend'){
-        this.store$.dispatch(new actions.ArticleListAction({id:'all', category: 'all', label: this.label, pageSize: this.pageSize, current: 0}))
+        this.store$.dispatch(new actions.ArticleListAction({id:'all', category: 'all', label: '1', pageSize: this.pageSize, current: 0}))
       }
       
     })
   }
 
   onPage(ev){
-    this.store$.dispatch(new actions.ArticleListAction({id:'all', category: 'all', pageSize: ev.pageSize, current: ev.pageIndex}))
+    if(this.pageLabel == 'all'){
+      this.store$.dispatch(new actions.ArticleListAction({id:'all', category: 'all', pageSize: ev.pageSize, current: ev.pageIndex}))
+    }else if(this.pageLabel == 'recommend'){
+      this.store$.dispatch(new actions.ArticleListAction({id:'all', category: 'all', label: '1', pageSize: ev.pageSize, current: ev.pageIndex}))
+    }
   }
 
 }

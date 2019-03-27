@@ -34,7 +34,7 @@ class ArticleController {
             return ctx.success({ msg:'获取成功', data: result });
             
         }else if(label == '1'){
-            if(!ctx.session.user||ctx.session.user.label) return ctx.error({ msg: '推荐为空' })
+            if(!ctx.session.user||!ctx.session.user.label) return ctx.error({ msg: '推荐为空' })
             const result = await ArticleModel
                             .find({'label': {$in: ctx.session.user.label}})
                             .populate({path:'like',select:{likeUser:0}})
