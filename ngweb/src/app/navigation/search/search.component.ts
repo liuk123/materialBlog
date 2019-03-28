@@ -21,7 +21,15 @@ export class SearchComponent implements OnInit {
   }
 
   search(uri){
-    window.open(uri + this.searchValue, '_blank')
+    if(this.searchValue){
+      window.open(uri + this.searchValue, '_blank')
+    }else{
+      const reg = /(http(s)?:\/\/)?(www\.)?[a-zA-Z0-9]+\.[a-zA-Z0-9]+(\.com)?/
+      uri.replace(reg,(keyword)=>{
+        window.open(keyword, '_blank')
+      })
+    }
+    
   }
   empty(){
     this.searchValue = '';
@@ -35,7 +43,3 @@ export class SearchComponent implements OnInit {
     
   }
 }
-
-// https://www.baidu.com/s?wd=huo%20ying%20花
-// 'https://cn.bing.com/search?q=huo+ying+%E8%B4%A7%E5%8F%B7'
-// https://www.google.com/search?q=123+huo+火影&oq=123+huo+火影
