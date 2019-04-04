@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/domain';
 import { Store, select } from '@ngrx/store';
@@ -16,13 +16,15 @@ import { MatSnackBar } from '@angular/material';
 export class AuthListComponent implements OnInit {
 
   length = 100
-  pageSize = 9
+  pageSize
   userlist$: Observable<User[]>
   collect: string
   condition: Object
 
-  constructor(private store$: Store<fromRoot.State>, private routInfo: ActivatedRoute,private snackBar: MatSnackBar) {
+  constructor(private store$: Store<fromRoot.State>, private routInfo: ActivatedRoute,private snackBar: MatSnackBar,@Inject('BASE_CONFIG') private config) {
 
+    this.pageSize = this.config.pageSize
+    
     this.routInfo.queryParamMap.subscribe( v=> {
 
       this.collect = v.get('collect')

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Article, ArticleListParam } from 'src/app/domain';
 
 import * as fromRoot from '../../reducers';
@@ -16,7 +16,7 @@ import { MatSnackBar } from '@angular/material';
 export class ArticleListComponent implements OnInit {
 
   length = 100
-  pageSize = 9
+  pageSize
   id: string
   category: string
   collect: string
@@ -24,8 +24,10 @@ export class ArticleListComponent implements OnInit {
 
   articles$: Observable<Article[]>
 
-  constructor(private store$: Store<fromRoot.State>, private routInfo: ActivatedRoute,private snackBar: MatSnackBar) {
+  constructor(private store$: Store<fromRoot.State>, private routInfo: ActivatedRoute,private snackBar: MatSnackBar,@Inject('BASE_CONFIG') private config) {
 
+    this.pageSize = this.config.pageSize
+    
     this.routInfo.queryParamMap.subscribe(v => {
       this.id = v.get('authId')
       this.category = v.get('category')

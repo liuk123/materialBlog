@@ -1,10 +1,10 @@
-<div class="p-1 flex-grid">
-    <mat-card class="mb-2 flex-title" *ngFor="let article of articles$ | async">
+<div class="p-1">
+    <mat-card class="mb-2" *ngFor="let article of articles$ | async">
         <mat-card-header>
           <mat-card-title>{{article?.title}}</mat-card-title>
       
           <mat-card-subtitle>
-              {{article?.author?.userName}} 发布于：{{article?.meta.updateAt | date:'yyyy-MM-dd'}}<br>
+              {{article?.author?.userName}} 发布于：{{article?.meta.updateAt | date:'yyyy-MM-dd'}}、
               标签：<span *ngFor='let label of article?.label'>{{label}}&nbsp;</span>、
               
           </mat-card-subtitle>

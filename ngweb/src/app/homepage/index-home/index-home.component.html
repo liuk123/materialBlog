@@ -1,33 +1,52 @@
 <div class="main">
     <span class="fill-remaining-space"></span>  
     <div class="container">
-        <nav mat-tab-nav-bar>
-            <a mat-tab-link
-                [routerLink]="[{outlets: { primary: 'blog-list' }}]"
-                routerLinkActive #rla="routerLinkActive"
-                [active]="rla.isActive">
-                笔记
-            </a>
-            <a mat-tab-link
-                [routerLink]="[{outlets: { primary: 'auth-list' }}]"
-                routerLinkActive #rlb="routerLinkActive"
-                [active]="rlb.isActive">
-                用户
-            </a>
-            <a mat-tab-link
-                [routerLink]="[{outlets: { primary: 'recommend-blog-list' }}]"
-                routerLinkActive #rlc="routerLinkActive"
-                [active]="rlc.isActive">
-                推荐笔记
-            </a>
-            <a mat-tab-link
-                [routerLink]="[{outlets: { primary: 'recommend-auth-list' }}]"
-                routerLinkActive #rld="routerLinkActive"
-                [active]="rld.isActive">
-                推荐用户
-            </a>
-        </nav>
-        <router-outlet></router-outlet>
+        
+        <div class="grid-list">
+            <div class="grid-tile">
+                <!-- <app-banner></app-banner> -->
+                <!-- <div>
+                    <div class="flex-grid">
+                        <div class="flex-tile">1</div>
+                        <div class="flex-tile">1</div>
+                        <div class="flex-tile">1</div>
+                        <div class="flex-tile">1</div>
+                        <div class="flex-tile">1</div>
+                    </div>
+                </div> -->
+                <nav mat-tab-nav-bar>
+                    <a mat-tab-link
+                        [routerLink]="[{outlets: { primary: 'blog-list' }}]"
+                        routerLinkActive #rla="routerLinkActive"
+                        [active]="rla.isActive">
+                        笔记
+                    </a>
+                    <a mat-tab-link
+                        [routerLink]="[{outlets: { primary: 'auth-list' }}]"
+                        routerLinkActive #rlb="routerLinkActive"
+                        [active]="rlb.isActive">
+                        用户
+                    </a>
+                    <a mat-tab-link
+                        [routerLink]="[{outlets: { primary: 'recommend-blog-list' }}]"
+                        routerLinkActive #rlc="routerLinkActive"
+                        [active]="rlc.isActive">
+                        推荐笔记
+                    </a>
+                    <a mat-tab-link
+                        [routerLink]="[{outlets: { primary: 'recommend-auth-list' }}]"
+                        routerLinkActive #rld="routerLinkActive"
+                        [active]="rld.isActive">
+                        推荐用户
+                    </a>
+                </nav>
+                <router-outlet></router-outlet>
+            </div>
+            <div class="grid-tile" style="flex: 0 0 16rem">
+                <app-notice></app-notice>
+            </div>
+        </div>
+        
     </div>
     <span class="fill-remaining-space"></span>
 </div>

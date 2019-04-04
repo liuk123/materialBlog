@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 import * as fromRoot from '../../reducers';
 import * as actions from '../../actions/auth.action';
@@ -15,10 +15,12 @@ import { ActivatedRoute } from '@angular/router';
 export class AuthListComponent implements OnInit {
 
   length = 100
-  pageSize = 9
+  pageSize
   label: string = '1'
   userlist$: Observable<User[]>
-  constructor(private store$: Store<fromRoot.State>, private routerInfo: ActivatedRoute) { }
+  constructor(private store$: Store<fromRoot.State>, private routerInfo: ActivatedRoute,@Inject('BASE_CONFIG') private config) {
+    this.pageSize = this.config.pageSize
+  }
 
   ngOnInit() {
     

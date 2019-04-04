@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import * as fromRoot from '../../reducers';
 import * as actions from '../../actions/article.action';
 import { Observable } from 'rxjs';
@@ -17,7 +17,9 @@ export class BlogComponent implements OnInit {
   pageSize = 9
   articles$: Observable<Article[]>
   pageLabel:string;
-  constructor(private store$: Store<fromRoot.State>, private routerInfo: ActivatedRoute) { }
+  constructor(private store$: Store<fromRoot.State>, private routerInfo: ActivatedRoute,@Inject('BASE_CONFIG') private config) {
+    this.pageSize = this.config.pageSize
+  }
 
   ngOnInit() {
     this.articles$ = this.store$.pipe(select(fromRoot.getArticleListState))

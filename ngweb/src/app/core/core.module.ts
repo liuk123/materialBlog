@@ -41,7 +41,8 @@ import { PageNotFoundComponent } from './page-not-found';
     {
       provide:'BASE_CONFIG', useValue: {
         // uri:'http://localhost:3200'
-        uri:''
+        uri:'',
+        pageSize: 10
       }
     }
   ]

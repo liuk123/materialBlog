@@ -54,7 +54,10 @@ ul{
 .text-muted{
   color: rgba(0, 0, 0, 0.54);
 }
-.flex-title{
+.text-small{
+  font-size: .9rem;
+}
+.flex-tile{
   flex: 0 0 18rem;
   margin: .25rem;
 }
@@ -62,14 +65,10 @@ ul{
   display: flex;
   flex-wrap: wrap;
 }
-.text-small{
-  font-size: .9rem;
-}
-.text-article p{
+.text-article{
   text-indent: 2rem;
-}
-.mat-card-header .mat-card-subtitle{
-  font-size: .9rem;
+  font-size:16px;
+  line-height:1.5rem;
 }
 //文章css
 .article-contaiter img{
