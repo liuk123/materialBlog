@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-search',
@@ -185,9 +185,11 @@ export class SearchComponent implements OnInit {
     },
   ]
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {
+    
+  }
 
   search(searchUri:string,indexUri:string = ''){
     if(this.searchValue){
@@ -195,18 +197,5 @@ export class SearchComponent implements OnInit {
     }else{
       window.open(indexUri, '_blank')
     }
-  }
-
-  
-  empty(){
-    this.searchValue = '';
-  }
-  goSearch(ev){
-    if(ev.keyCode == 13){
-      this.search('https://www.baidu.com/s?wd=')
-    }else if(ev.keyCode == 46){
-      this.empty()
-    }
-    
   }
 }

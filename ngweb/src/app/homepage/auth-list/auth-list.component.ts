@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 export class AuthListComponent implements OnInit {
 
   length = 100
-  pageSize = 10
+  pageSize = 9
   label: string = '1'
   userlist$: Observable<User[]>
   constructor(private store$: Store<fromRoot.State>, private routerInfo: ActivatedRoute) { }

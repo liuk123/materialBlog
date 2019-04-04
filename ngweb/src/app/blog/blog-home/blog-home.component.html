@@ -1,11 +1,17 @@
 
 
-<div class="grid-list">
-    <div class="grid-tile" style="flex: 0 0 15rem">
-        <router-outlet name="aux"></router-outlet>
+
+<div class="main">
+    <span class="fill-remaining-space"></span>  
+    <div class="container">
+            <div class="grid-list">
+                <div class="grid-tile" style="flex: 0 0 15rem">
+                    <router-outlet name="aux"></router-outlet>
+                </div>
+                <div class="grid-tile">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
     </div>
-    <div class="grid-tile">
-        <router-outlet></router-outlet>
-    </div>
+    <span class="fill-remaining-space"></span>
 </div>
- 

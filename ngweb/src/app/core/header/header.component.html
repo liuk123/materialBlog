@@ -16,7 +16,7 @@
     [routerLink]="['/blog-home', {outlets: { primary: 'blog-list', aux: ['blog-user', ''] }}]"
     [queryParams]="{category:'all', authId:''}">主页</span> -->
   
-  <span class="mr-3 btn-nav" [routerLink]="[{ outlets: { primary: 'navigation-home', popup: ['searchbox'] } }]" routerLinkActive #rla="routerLinkActive">导航</span>
+  <span class="mr-3 btn-nav" [routerLink]="['/navigation-home']" routerLinkActive #rla="routerLinkActive">导航</span>
   <span class="mr-3 btn-nav" [routerLink]="['/homepage']">广场</span>
   <span class="mr-3 btn-nav" [routerLink]="['/index']" *ngIf="auth?._id">主页</span>
 

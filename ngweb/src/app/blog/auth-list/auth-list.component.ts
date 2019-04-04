@@ -16,7 +16,7 @@ import { MatSnackBar } from '@angular/material';
 export class AuthListComponent implements OnInit {
 
   length = 100
-  pageSize = 10
+  pageSize = 9
   userlist$: Observable<User[]>
   collect: string
   condition: Object

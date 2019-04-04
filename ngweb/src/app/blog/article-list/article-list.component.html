@@ -3,11 +3,11 @@
 
     <mat-card-title>{{article?.title}}</mat-card-title>
     <mat-card-subtitle>
-        分类：{{article?.category}} 、
-        标签：<span *ngFor='let label of article?.label'>{{label}}&nbsp;</span> 、
-        {{article?.author?.userName}} 发布于：{{article?.meta.updateAt | date:'yyyy-MM-dd'}} 、
-        {{article?.commentNum}} 人评论、
-        {{article?.like?.likeNum}} 人喜欢
+        {{article?.author?.userName}} 发布于：{{article?.meta.updateAt | date:'yyyy-MM-dd'}}、
+        分类：{{article?.category}}、
+        标签：<span *ngFor='let label of article?.label'>{{label}}&nbsp;</span>、
+        <!-- {{article?.commentNum}} 人评论、
+        {{article?.like?article?.like?.likeNum:0}}人喜欢 -->
     </mat-card-subtitle>
 
   </mat-card-header>
@@ -18,10 +18,15 @@
   </mat-card-content>
 
   <mat-card-actions>
-      <button mat-button color="accent"
-      [routerLink]="['/blog-home', {outlets: { primary: 'blog-detail'}}]"
-      [queryParams]="{id: article?._id, authId: article?.author?._id}">查看详情</button>
-    </mat-card-actions>
+    <button mat-button color="accent"
+    [routerLink]="['/blog-home', {outlets: { primary: 'blog-detail'}}]"
+    [queryParams]="{id: article?._id, authId: article?.author?._id}">查看详情</button>
+
+    <span class="text-muted text-small">
+        {{article?.commentNum}} 人评论、
+        {{article?.like?article?.like?.likeNum:0}}人喜欢
+    </span>
+  </mat-card-actions>
 </mat-card>
 
 <mat-paginator

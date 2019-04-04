@@ -1,4 +1,5 @@
 import { HttpParams } from '@angular/common/http';
+import { Navigation } from '../domain';
 
 export const deepClone = (values)=>{
     let copy;
@@ -26,7 +27,7 @@ export const deepClone = (values)=>{
 
 //把一个对象数组分成三分
 // columns:Navigation[][] = [[],[],[]]
-export const columnsArr = (data:[],columns)=>{
+export const columnsArr = (data:Navigation[],columns)=>{
     columns = data.reduce((columns, item)=>{
       let minH = columns[0].reduce((s,v) => s += v.data.length + 2, 0)
       let n = 0

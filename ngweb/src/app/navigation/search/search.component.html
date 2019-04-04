@@ -2,8 +2,8 @@
 <div class="m-contaiber">
     <div class="searchbox">
         <div class="search">
-            <input type="text" class="search-input" [(ngModel)]="_searchValue" (keydown)="goSearch($event)">
-            <div class="search-close" (click)="empty()" title="清空搜索条件">X</div>
+            <input type="text" class="search-input" [(ngModel)]="_searchValue" (keydown.enter)="search('https://www.baidu.com/s?wd=')">
+            <div class="search-close" (click)="searchValue=''" title="清空搜索条件">X</div>
         </div>
         <div class="searchbar mt-2">
             <div class="item" *ngFor="let item of searchUriData">

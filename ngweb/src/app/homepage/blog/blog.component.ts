@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 export class BlogComponent implements OnInit {
 
   length = 100
-  pageSize = 10
+  pageSize = 9
   articles$: Observable<Article[]>
   pageLabel:string;
   constructor(private store$: Store<fromRoot.State>, private routerInfo: ActivatedRoute) { }

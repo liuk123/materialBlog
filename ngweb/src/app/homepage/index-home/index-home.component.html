@@ -1,29 +1,6 @@
-<!-- <div class="grid-list">
-    <div class="grid-tile">
-        <app-banner></app-banner>
-    </div>
-</div> -->
-<!-- <div class="grid-list mb-3">
-    <div class="grid-tile">
-        <mat-chip-list>
-            <mat-chip>ngrx</mat-chip>
-            <mat-chip>es6</mat-chip>
-            <mat-chip>angular</mat-chip>
-            <mat-chip selected>react</mat-chip>
-        </mat-chip-list>
-    </div>
-</div> -->
-
-<div class="grid-list">
-    <div class="grid-tile">
-        <!-- <mat-tab-group dynamicHeight>
-            <mat-tab label="笔记">
-                <ng-template matTabContent><app-blog></app-blog></ng-template>
-            </mat-tab>
-            <mat-tab label="用户">
-                <ng-template matTabContent><app-auth-list></app-auth-list></ng-template>
-            </mat-tab>
-        </mat-tab-group> -->
+<div class="main">
+    <span class="fill-remaining-space"></span>  
+    <div class="container">
         <nav mat-tab-nav-bar>
             <a mat-tab-link
                 [routerLink]="[{outlets: { primary: 'blog-list' }}]"
@@ -50,10 +27,8 @@
                 推荐用户
             </a>
         </nav>
-        
         <router-outlet></router-outlet>
     </div>
-    <div class="grid-tile" style="flex: 0 0 15rem">
-        <app-notice></app-notice>
-    </div>
+    <span class="fill-remaining-space"></span>
 </div>
+

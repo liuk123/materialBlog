@@ -16,7 +16,7 @@ import { MatSnackBar } from '@angular/material';
 export class ArticleListComponent implements OnInit {
 
   length = 100
-  pageSize = 10
+  pageSize = 9
   id: string
   category: string
   collect: string

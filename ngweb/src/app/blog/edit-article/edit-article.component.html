@@ -1,49 +1,54 @@
 
-
-<form class="form" [formGroup]="form" (ngSubmit)="onSubmit(form,$event)">
-  <input type="hidden" formControlName="_id">
-  <mat-card class="card">
-    <mat-card-title>新建or编辑</mat-card-title>
-    <mat-card-content>
-      <div class="grid-list" style="max-width:30rem">
-        <div class="grid-tile">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="标题" formControlName="title">
-            </mat-form-field>
-        </div>
-        <div class="grid-tile">
-            <mat-form-field class="full-width">
-              <textarea matInput placeholder="简介" formControlName="abstract"></textarea>
-            </mat-form-field>
-        </div>
-        <div class="grid-tile">
-            <mat-form-field class="full-width">
-              <mat-select placeholder="分类" formControlName="category">
-                <mat-option *ngFor="let category of categories$ | async" [value]="category.title">
-                  {{category.title}}
-                </mat-option>
+<div class="main">
+  <span class="fill-remaining-space"></span>  
+  <div class="container">
+    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit(form,$event)">
+      <input type="hidden" formControlName="_id">
+      <mat-card class="card">
+        <mat-card-title>新建or编辑</mat-card-title>
+        <mat-card-content>
+          <div class="grid-list" style="max-width:30rem">
+            <div class="grid-tile">
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="标题" formControlName="title">
+                </mat-form-field>
+            </div>
+            <div class="grid-tile">
+                <mat-form-field class="full-width">
+                  <textarea matInput placeholder="简介" formControlName="abstract"></textarea>
+                </mat-form-field>
+            </div>
+            <div class="grid-tile">
+                <mat-form-field class="full-width">
+                  <mat-select placeholder="分类" formControlName="category">
+                    <mat-option *ngFor="let category of categories$ | async" [value]="category.title">
+                      {{category.title}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="grid-tile">
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="新建分类" formControlName="newCategory">
+                </mat-form-field>
+            </div>
+            <div class="grid-tille">
+              <mat-select placeholder="标签" formControlName="label" multiple>
+                <mat-optgroup *ngFor="let labelGroup of label$ | async" [label]="labelGroup.name">
+                  <mat-option *ngFor="let item of labelGroup.items" [value]="item">
+                    {{item}}
+                  </mat-option>
+                </mat-optgroup>
               </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="grid-tile">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="新建分类" formControlName="newCategory">
-            </mat-form-field>
-        </div>
-        <div class="grid-tille">
-          <mat-select placeholder="标签" formControlName="label" multiple>
-            <mat-optgroup *ngFor="let labelGroup of label$ | async" [label]="labelGroup.name">
-              <mat-option *ngFor="let item of labelGroup.items" [value]="item">
-                {{item}}
-              </mat-option>
-            </mat-optgroup>
-          </mat-select>
-        </div>
-      </div>
-      <app-ckeditor formControlName="content"></app-ckeditor>
-    </mat-card-content>
-    <mat-card-actions class="text-right">
-      <button mat-button color="accent">保存</button>
-    </mat-card-actions>
-  </mat-card>
-</form>
+            </div>
+          </div>
+          <app-ckeditor formControlName="content"></app-ckeditor>
+        </mat-card-content>
+        <mat-card-actions class="text-right">
+          <button mat-button color="accent">保存</button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>
+  <span class="fill-remaining-space"></span>
+</div>
