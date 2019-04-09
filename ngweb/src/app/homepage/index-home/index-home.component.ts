@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AdItem } from 'src/app/domain';
+import { adService } from 'src/app/services/ad.service';
 
 @Component({
   selector: 'app-index-home',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexHomeComponent implements OnInit {
 
-  constructor() { }
+  ads: AdItem[]
+
+  constructor(private adService: adService) { }
 
   ngOnInit() {
+    this.ads = this.adService.getBanner()
   }
 
 }

@@ -108,6 +108,12 @@ export class SearchComponent implements OnInit {
       type:'get',
       content:[
         {
+          name:'简书',
+          searchUri:'https://www.jianshu.com/search?q=',
+          indexUri:'https://www.jianshu.com',
+          type:'get'
+        },
+        {
           name:'豆瓣',
           searchUri:'https://www.douban.com/search?q=',
           indexUri:'https://www.douban.com',
@@ -152,6 +158,12 @@ export class SearchComponent implements OnInit {
           searchUri:'https://cn.bing.com/images/search?FORM=HDRSC2&q=',
           indexUri:'https://cn.bing.com/images/search?FORM=HDRSC2',
           type:'get'
+        },
+        {
+          name:'花瓣',
+          searchUri:'https://huaban.com/search/?q=',
+          indexUri:'https://huaban.com/',
+          type:'get'
         }
       ]
     },
@@ -165,6 +177,18 @@ export class SearchComponent implements OnInit {
           name:'磁力猫',
           searchUri:'https://www.cilimao.cc/search?word=',
           indexUri:'https://www.cilimao.cc',
+          type:'get'
+        },
+        {
+          name:'磁力站',
+          searchUri:'http://oabt004.com/index?k=',
+          indexUri:'http://oabt004.com/index',
+          type:'get'
+        },
+        {
+          name:'谷歌镜像',
+          searchUri:'https://g.netis.io/search?q=',
+          indexUri:'https://g.netis.io',
           type:'get'
         }
       ]

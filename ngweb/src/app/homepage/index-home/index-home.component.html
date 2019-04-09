@@ -1,19 +1,26 @@
 <div class="main">
     <span class="fill-remaining-space"></span>  
     <div class="container">
-        
+        <div class="grid-list mb-3">
+            <div class="grid-tile">
+                <app-ad-banner [ads]="ads"></app-ad-banner>
+            </div>
+            <div class="grid-tile" style="flex: 0 0 16rem">
+                <app-notice></app-notice>
+            </div>
+        </div>
+      
+        <div class="flex-grid">
+            <div class="flex-tile">1</div>
+            <div class="flex-tile">2</div>
+            <div class="flex-tile">3</div>
+            <div class="flex-tile">4</div>
+            <div class="flex-tile">5</div>
+        </div>
+         
         <div class="grid-list">
             <div class="grid-tile">
-                <!-- <app-banner></app-banner> -->
-                <!-- <div>
-                    <div class="flex-grid">
-                        <div class="flex-tile">1</div>
-                        <div class="flex-tile">1</div>
-                        <div class="flex-tile">1</div>
-                        <div class="flex-tile">1</div>
-                        <div class="flex-tile">1</div>
-                    </div>
-                </div> -->
+                
                 <nav mat-tab-nav-bar>
                     <a mat-tab-link
                         [routerLink]="[{outlets: { primary: 'blog-list' }}]"
@@ -42,9 +49,7 @@
                 </nav>
                 <router-outlet></router-outlet>
             </div>
-            <div class="grid-tile" style="flex: 0 0 16rem">
-                <app-notice></app-notice>
-            </div>
+            <div class="grid-tile" style="flex: 0 0 16rem"></div>
         </div>
         
     </div>

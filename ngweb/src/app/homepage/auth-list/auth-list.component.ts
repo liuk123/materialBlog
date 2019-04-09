@@ -25,9 +25,7 @@ export class AuthListComponent implements OnInit {
   ngOnInit() {
     
     this.userlist$ = this.store$.pipe(select(fromRoot.getUserListState))
-    // this.store$.pipe(select(fromRoot.getAuthCardState)).subscribe(v => {
-    //   this.label = v.label
-    // })
+    
     this.routerInfo.data.subscribe(v=>{
       if(v.key == 'all'){
         this.store$.dispatch(new actions.UserListAction({user:'', pageSize: this.pageSize, current: 0}))

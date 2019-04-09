@@ -34,6 +34,10 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { CkeditorComponent } from './ckeditor/ckeditor.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ReplayDialogComponent } from './replay-dialog/replay-dialog.component';
+import { AdDirective } from './ad/ad.directive';
+import { AdBannerComponent } from './ad/ad-banner.component';
+import { adListComponent } from './ad/b-1.component';
+import { adCardComponent } from './ad/b-2.component';
 
 
 @NgModule({
@@ -102,17 +106,24 @@ import { ReplayDialogComponent } from './replay-dialog/replay-dialog.component';
 
     ImageListSelectComponent,
     CKEditorModule,
-    CkeditorComponent
+    CkeditorComponent,
+    AdBannerComponent
   ],
   declarations: [
     ImageListSelectComponent,
     ConfirmDialogComponent,
     CkeditorComponent,
-    ReplayDialogComponent
+    ReplayDialogComponent,
+    AdDirective,
+    AdBannerComponent,
+    adListComponent,
+    adCardComponent
   ],
   entryComponents:[
     ConfirmDialogComponent,
-    ReplayDialogComponent
+    ReplayDialogComponent,
+    adListComponent,
+    adCardComponent
   ]
 })
 export class SharedModule { }

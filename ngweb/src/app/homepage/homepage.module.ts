@@ -4,7 +4,6 @@ import { SharedModule } from '../shared/shared.module';
 import { IndexHomeComponent } from './index-home/index-home.component';
 import { BlogComponent } from './blog/blog.component';
 import { NoticeComponent } from './notice/notice.component';
-import { BannerComponent } from './banner/banner.component';
 import { AuthListComponent } from './auth-list/auth-list.component';
 
 @NgModule({
@@ -12,12 +11,11 @@ import { AuthListComponent } from './auth-list/auth-list.component';
     IndexHomeComponent,
     BlogComponent,
     NoticeComponent,
-    BannerComponent,
-    AuthListComponent
+    AuthListComponent,
   ],
   imports: [
     homepageRoutingModule,
     SharedModule
-  ]
+  ],
 })
 export class HomepageModule { }

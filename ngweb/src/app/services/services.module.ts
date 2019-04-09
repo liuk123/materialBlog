@@ -8,6 +8,7 @@ import { InterceptorService } from './Interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LabelService } from './label.service';
 import { NavigationService } from './navigation.service';
+import { adService } from './ad.service';
 
 export {
   AuthGuardService
@@ -24,6 +25,7 @@ export class ServicesModule {
         ArticleService,
         AuthGuardService,
         LabelService,
+        adService,
         NavigationService,
         { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
       ]
