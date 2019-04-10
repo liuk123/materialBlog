@@ -24,4 +24,7 @@ export const loadSvgResources=(ir:MatIconRegistry, ds:DomSanitizer)=>{
     ir.addSvgIcon('document',ds.bypassSecurityTrustResourceUrl(`${iconDir}/document.svg`));
     ir.addSvgIcon('badge',ds.bypassSecurityTrustResourceUrl(`${iconDir}/badge.svg`));
 
+    ir.addSvgIcon('angle-left',ds.bypassSecurityTrustResourceUrl(`${iconDir}/angle-left.svg`));
+    ir.addSvgIcon('angle-right',ds.bypassSecurityTrustResourceUrl(`${iconDir}/angle-right.svg`));
+
 }

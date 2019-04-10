@@ -8,7 +8,7 @@ import { AdComponent } from 'src/app/domain';
 
       <p>{{data.body}}</p>
 
-      <strong>Hire this hero today!</strong>
+      <strong>Happy every day</strong>
     </div>
   `,
   styleUrls:['./ad-banner.component.scss']
