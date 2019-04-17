@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AdItem } from '../domain';
 import { adCardComponent } from '../shared/ad/b-2.component';
 import { adListComponent } from '../shared/ad/b-1.component';
+import { advideoComponent } from '../shared/ad/b-3.component';
 
 @Injectable()
 export class adService {
@@ -15,6 +16,7 @@ export class adService {
             new AdItem(adCardComponent,{name:'2、不速之客',body:'形容节假日期间，堵在高速公路上的人。没有速度，成为了公路上的旅客。'}),
             new AdItem(adCardComponent,{name:'3、保温杯',body:'一种特殊的杯具，可以让任何使用者进入中年危机。'}),
             new AdItem(adCardComponent,{name:'4、草皮',body:'影响国足发挥的关键因素。'}),
+            new AdItem(advideoComponent,{src:'https://nowness-brightcove-com-edgesuite-net.nowness.cn/rtmp/2385340575001/201904/3017/2385340575001_6024549988001_6024251386001.mp4?pubId=2385340575001&videoId=6024251386001'}),
             
         ]
     }

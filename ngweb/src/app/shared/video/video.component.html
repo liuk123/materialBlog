@@ -1,0 +1,47 @@
+<div class="playerbox">
+    <video
+        class='player'
+        [src]='src'
+        [autoplay]='autoplay'
+        [loop]='loop'
+        [muted]="muted"
+        preload
+        (timeupdate) = 'timeupdate($event)'
+        (volumechange) = 'volumeupdate($event)'
+        (canplay)= 'canplay($event)'
+        (ended) = 'ended()'>
+        您的浏览器不支持 video 标签。
+    </video>
+    <div class="controls">
+        <span (click)="player.play()" class="controls-cell hover" *ngIf='player.paused'>开始</span>
+        <span (click)="player.pause()" class="controls-cell hover" *ngIf='!player.paused'>暂停</span>
+        <div class="controls-cell progressbar">
+            <mat-slider
+                class="progress"
+                thumbLabel
+                tickInterval="auto"
+                [(ngModel)]="timevalue"
+                [vertical]="false"
+                (change) = "timeChange($event)"
+                [step]=".5"
+                [min]="0"
+                [max]="timetotal"></mat-slider>
+            <span class="progressvalue">{{timevalue}}/{{timetotal}}</span>
+        </div>
+        <div class="controls-cell volumebar hover">
+            <span>声音</span>
+            <mat-slider
+                class="volume"
+                thumbLabel
+                [displayWith]="volumeLabel"
+                tickInterval="auto"
+                [value]="volumevalue"
+                (change) = "volumeChange($event)"
+                [vertical]="true"
+                [step]="0.1"
+                min="0"
+                max="1"></mat-slider>
+        </div>
+        <span class="controls-cell hover" (click)='fullScreen()'>全屏</span>
+    </div>
+</div>

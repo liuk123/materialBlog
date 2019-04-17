@@ -11,6 +11,8 @@ export class IndexHomeComponent implements OnInit {
 
   ads: AdItem[]
 
+  playersrc='https://nowness-brightcove-com-edgesuite-net.nowness.cn/rtmp/2385340575001/201904/3017/2385340575001_6024549988001_6024251386001.mp4?pubId=2385340575001&videoId=6024251386001'
+
   constructor(private adService: adService) { }
 
   ngOnInit() {

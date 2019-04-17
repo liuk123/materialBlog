@@ -28,7 +28,7 @@ import { AdDirective } from './ad.directive';
       position:absolute;
       top:50%;
       margin-top:-33px;
-      background-color:rgba(0,0,0,.1);
+      
       color:#fff;
       cursor:pointer;
       opacity: 0;

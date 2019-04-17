@@ -26,7 +26,8 @@ import {
   MatPaginatorModule,
   MatChipsModule,
   MatSnackBarModule,
-  MatTabsModule
+  MatTabsModule,
+  MatSliderModule
 
 } from "@angular/material";
 import { ImageListSelectComponent } from './image-list-select/image-list-select.component';
@@ -38,6 +39,8 @@ import { AdDirective } from './ad/ad.directive';
 import { AdBannerComponent } from './ad/ad-banner.component';
 import { adListComponent } from './ad/b-1.component';
 import { adCardComponent } from './ad/b-2.component';
+import { VideoComponent } from './video/video.component';
+import { advideoComponent } from './ad/b-3.component';
 
 
 @NgModule({
@@ -70,6 +73,7 @@ import { adCardComponent } from './ad/b-2.component';
     MatChipsModule,
     MatSnackBarModule,
     MatTabsModule,
+    MatSliderModule,
 
     CKEditorModule
 
@@ -103,11 +107,14 @@ import { adCardComponent } from './ad/b-2.component';
     MatChipsModule,
     MatSnackBarModule,
     MatTabsModule,
+    MatSliderModule,
 
     ImageListSelectComponent,
     CKEditorModule,
     CkeditorComponent,
-    AdBannerComponent
+    AdBannerComponent,
+    VideoComponent,
+    advideoComponent
   ],
   declarations: [
     ImageListSelectComponent,
@@ -117,13 +124,17 @@ import { adCardComponent } from './ad/b-2.component';
     AdDirective,
     AdBannerComponent,
     adListComponent,
-    adCardComponent
+    adCardComponent,
+    VideoComponent,
+    advideoComponent
   ],
   entryComponents:[
     ConfirmDialogComponent,
     ReplayDialogComponent,
     adListComponent,
-    adCardComponent
+    adCardComponent,
+    advideoComponent,
+    VideoComponent,
   ]
 })
 export class SharedModule { }

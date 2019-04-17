@@ -1,10 +1,9 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import * as fromRoot from '../../reducers';
 import { User } from 'src/app/domain';
+import * as fromRoot from '../../reducers';
 import * as actions from '../../actions/auth.action';
 import * as LabelActions from '../../actions/label.action';
-
 import * as NavigationActions from '../../actions/navigation.action';
 
 @Component({
