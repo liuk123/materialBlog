@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input,  } from '@angular/core';
+import { Component, OnInit, ElementRef, Input } from '@angular/core';
 
 @Component({
     selector: 'app-video',
@@ -19,7 +19,14 @@ export class VideoComponent implements OnInit {
     @Input() muted:boolean = false
     @Input() preload:string = 'metadata'
 
-    constructor(private el:ElementRef) {}
+    constructor(private el:ElementRef) {
+        if(!isNaN(Number.parseFloat(window.localStorage.getItem('volumevalue')))){
+            this.volumevalue = Number.parseFloat(window.localStorage.getItem('volumevalue'))
+        }else{
+            this.volumevalue = 1
+        }
+        
+    }
 
     ngOnInit() {
         this.player = this.el.nativeElement.querySelector('.player')
@@ -48,6 +55,7 @@ export class VideoComponent implements OnInit {
     }
     volumeupdate(ev){
         this.volumevalue = this.player.volume
+        window.localStorage.setItem('volumevalue',this.volumevalue.toString())
     }
 
     fullScreen(){

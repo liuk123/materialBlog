@@ -23,7 +23,7 @@
                 [(ngModel)]="timevalue"
                 [vertical]="false"
                 (change) = "timeChange($event)"
-                [step]=".5"
+                [step]="1"
                 [min]="0"
                 [max]="timetotal"></mat-slider>
             <span class="progressvalue">{{timevalue}}/{{timetotal}}</span>
@@ -42,6 +42,10 @@
                 min="0"
                 max="1"></mat-slider>
         </div>
-        <span class="controls-cell hover" (click)='fullScreen()'>全屏</span>
+        <div class="controls-cell hover" >
+            <span (click)='fullScreen()'>全屏</span>
+            <span (click)='fullScreen()'>弹出</span>
+        </div>
+        
     </div>
 </div>

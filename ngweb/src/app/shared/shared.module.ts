@@ -110,7 +110,6 @@ import { advideoComponent } from './ad/b-3.component';
     MatSliderModule,
 
     ImageListSelectComponent,
-    CKEditorModule,
     CkeditorComponent,
     AdBannerComponent,
     VideoComponent,
