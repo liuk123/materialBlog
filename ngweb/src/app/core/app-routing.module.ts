@@ -24,7 +24,6 @@ const routes: Routes = [
   {
     path: 'nav',
     redirectTo: '/navigation-home',
-    // redirectTo: '/navigation-home(popup:searchbox)',
   },
   {
     path: 'login',
@@ -39,7 +38,7 @@ const routes: Routes = [
 ];
 
 const childRoutes: Routes = [
-  { path: 'notfound', component:PageNotFoundComponent},
+  { path: '**', component:PageNotFoundComponent},
 ]
 
 @NgModule({

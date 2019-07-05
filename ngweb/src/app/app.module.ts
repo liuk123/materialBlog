@@ -16,12 +16,12 @@ import { NavigationModule } from './navigation/navigation.module';
   ],
   imports: [
     BrowserModule,
-    CoreModule,
     LoginModule,
     BlogModule,
     HomepageModule,
     PersonModule,
     NavigationModule,
+    CoreModule,
   ],
   providers: [{
     provide:LocationStrategy,
