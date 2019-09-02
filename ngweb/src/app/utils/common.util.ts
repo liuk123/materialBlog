@@ -75,3 +75,19 @@ export const search=(uri,v)=>{
       })
     }
 }
+//对象去除空值
+
+export const encodeParams1 = (obj:Object) => {
+    let temObj = {};
+    for(let k in obj){
+      if(obj[k] instanceof Object){
+        if(Object.keys(this.encodeParams(obj[k])).length>0)
+        temObj[k] = this.encodeParams(obj[k])
+      }else if(obj[k] == ''||obj[k] == undefined){
+
+      }else if(typeof obj[k] == 'string' || typeof obj[k] == 'number'){
+        temObj[k] = obj[k]
+      }
+    }
+    return temObj
+}
