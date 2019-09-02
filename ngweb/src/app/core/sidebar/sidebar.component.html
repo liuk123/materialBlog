@@ -1,4 +1,4 @@
-<mat-nav-list>
+<!-- <mat-nav-list>
   <h3 mat-subheader>组件</h3>
   <mat-list-item >
     <mat-icon mat-list-icon svgIcon="angle-right"></mat-icon>
@@ -12,13 +12,22 @@
   </mat-list-item>
   <mat-divider></mat-divider>
   <h3 mat-subheader>其他</h3>
-  <mat-list-item (click)="goBack()">
+  <mat-list-item>
     <mat-icon mat-list-icon svgIcon="angle-right"></mat-icon>
     <h4 mat-line>敬请期待</h4>
     <p mat-line>还在开发中</p>
   </mat-list-item>
-</mat-nav-list>
-
+  <mat-list-item (click)="goBack()">
+    <mat-icon mat-list-icon svgIcon="angle-right"></mat-icon>
+    <h4 mat-line>返回</h4>
+  </mat-list-item>
+</mat-nav-list> -->
+<mat-menu [hasBackdrop]="true" [overlapTrigger]="true">
+  <ng-template matMenuContent>
+    <button mat-menu-item>Settings</button>
+    <button mat-menu-item>Help</button>
+  </ng-template>
+</mat-menu>
 
 <!-- <p>
   空空如也 ~
